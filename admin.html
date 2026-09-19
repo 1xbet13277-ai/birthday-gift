@@ -24,7 +24,7 @@ button{font-family:inherit}.btn{width:100%;padding:13px 15px;border:0;border-rad
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>من هنا تقدر تعدّل كل النصوص والصور والتواريخ والألوان بدون لمس الكود.</p></div>
+  <div class="top"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>من هنا تقدر تعدّل كل النصوص والصور والتواريخ والألوان بباسورد فقط، بدون Token.</p></div>
 
   <div id="loginBox" class="login">
     <div class="card">
@@ -37,22 +37,16 @@ button{font-family:inherit}.btn{width:100%;padding:13px 15px;border:0;border-rad
 
   <div id="dashboard" class="hidden">
     <div class="card">
-      <h2>اتصال GitHub</h2>
-      <div class="row">
-        <div class="field"><label>GitHub username</label><input id="owner" class="input"></div>
-        <div class="field"><label>Repository</label><input id="repo" class="input" value="birthday-gift"></div>
+      <h2>لوحة التعديل</h2>
+      <p class="hint">عدّل كل شيء من هنا، وبعدها اضغط "تحميل config.json" وارفع الملف مكان config.json القديم على GitHub.</p>
+      <div class="field">
+        <label>تحميل ملف config.json الحالي من جهازك (اختياري)</label>
+        <input id="configFileInput" class="input" type="file" accept=".json,application/json">
       </div>
-      <div class="row">
-        <div class="field"><label>Branch</label><input id="branch" class="input" value="main"></div>
-        <div class="field"><label>Fine-grained token</label><input id="token" class="input" type="password" placeholder="github_pat_..."></div>
-      </div>
-      <label class="switchline"><input id="rememberToken" type="checkbox"> حفظ التوكن على هذا الجهاز فقط</label>
-      <button id="connectBtn" class="btn" onclick="connectRepo()">اتصال وجلب بيانات الموقع</button>
+      <button class="btn secondary" onclick="loadLocalConfig()">تحميل الإعدادات من الملف</button>
       <div id="connectStatus" class="status"></div>
-      <div class="hint">فعّل حفظ التوكن فقط على جهازك الشخصي. التوكن يعطي صلاحية تعديل هذا الريبو.</div>
     </div>
-
-    <div id="editor" class="hidden">
+<div id="editor" class="hidden">
       <div class="card">
         <div class="tabs" id="tabs">
           <button class="tab active" data-tab="general">عام</button>
@@ -154,7 +148,7 @@ button{font-family:inherit}.btn{width:100%;padding:13px 15px;border:0;border-rad
       </div>
 
       <div class="toolbar">
-        <button id="saveAllBtn" class="btn" onclick="saveAll()">حفظ كل التعديلات</button>
+        <button id="saveAllBtn" class="btn" onclick="saveAll()">تحميل config.json</button>
         <button class="btn dark" onclick="openSite()">فتح الموقع للمراجعة</button>
       </div>
       <div id="saveStatus" class="status"></div>
@@ -169,12 +163,9 @@ let gh={owner:'',repo:'',branch:'main',token:''};
 const $=id=>document.getElementById(id);
 function adminLogin(){
   if($('adminPass').value!==ADMIN_PASSWORD){$('loginStatus').textContent='الباسورد غير صحيح';$('loginStatus').className='status err';return}
-  $('loginBox').classList.add('hidden');$('dashboard').classList.remove('hidden');
-  $('owner').value=localStorage.getItem('gift_owner')||'1xbet13277-ai';
-  $('repo').value=localStorage.getItem('gift_repo')||'birthday-gift';
-  $('branch').value=localStorage.getItem('gift_branch')||'main';
-  const saved=localStorage.getItem('gift_token')||'';
-  if(saved){$('token').value=saved;$('rememberToken').checked=true}
+  $('loginBox').classList.add('hidden');
+  $('dashboard').classList.remove('hidden');
+  loadDefaultConfig();
 }
 $('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')adminLogin()});
 
@@ -184,28 +175,44 @@ document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
   b.classList.add('active');$('panel-'+b.dataset.tab).classList.add('active');
 });
 
-function headers(){return {'Accept':'application/vnd.github+json','Authorization':'Bearer '+gh.token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'}}
-function api(path){return `https://api.github.com/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${path}`}
-function decodeB64(s){const bin=atob(s.replace(/\n/g,''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
-function encodeB64(s){const bytes=new TextEncoder().encode(s);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
-async function ghGet(path){const r=await fetch(api(path)+'?ref='+encodeURIComponent(gh.branch)+'&t='+Date.now(),{headers:headers()});if(r.status===404)return null;if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('GitHub error '+r.status));return r.json()}
-async function ghPut(path,contentBase64,message,sha){const body={message,content:contentBase64,branch:gh.branch};if(sha)body.sha=sha;const r=await fetch(api(path),{method:'PUT',headers:headers(),body:JSON.stringify(body)});if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('GitHub error '+r.status));return r.json()}
 
-async function connectRepo(){
-  gh.owner=$('owner').value.trim();gh.repo=$('repo').value.trim();gh.branch=$('branch').value.trim()||'main';gh.token=$('token').value.trim();
-  if(!gh.owner||!gh.repo||!gh.token){$('connectStatus').textContent='اكتب اسم الحساب والريبو والتوكن';$('connectStatus').className='status err';return}
-  const btn=$('connectBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الاتصال';
+async function loadDefaultConfig(){
   try{
-    const file=await ghGet('config.json');
-    if(!file||!file.content)throw new Error('config.json غير موجود');
-    cfg=JSON.parse(decodeB64(file.content));
-    localStorage.setItem('gift_owner',gh.owner);localStorage.setItem('gift_repo',gh.repo);localStorage.setItem('gift_branch',gh.branch);
-    if($('rememberToken').checked)localStorage.setItem('gift_token',gh.token);else localStorage.removeItem('gift_token');
-    renderAll();$('editor').classList.remove('hidden');$('connectStatus').textContent='تم الاتصال. كل أقسام الموقع جاهزة للتعديل.';$('connectStatus').className='status ok';
-  }catch(e){$('connectStatus').textContent='فشل الاتصال: '+e.message;$('connectStatus').className='status err'}
-  finally{btn.disabled=false;btn.textContent='اتصال وجلب بيانات الموقع'}
+    const r=await fetch('config.json?v='+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error('تعذر تحميل config.json');
+    cfg=await r.json();
+    renderAll();
+    document.getElementById('editor').classList.remove('hidden');
+    document.getElementById('connectStatus').textContent='تم تحميل إعدادات الموقع الحالية.';
+    document.getElementById('connectStatus').className='status ok';
+  }catch(e){
+    document.getElementById('connectStatus').textContent='اختار config.json من جهازك أو افتح اللوحة من رابط الموقع المنشور.';
+    document.getElementById('connectStatus').className='status err';
+  }
 }
-
+function loadLocalConfig(){
+  const input=document.getElementById('configFileInput');
+  const f=input.files[0];
+  if(!f){
+    document.getElementById('connectStatus').textContent='اختار ملف config.json أولًا.';
+    document.getElementById('connectStatus').className='status err';
+    return;
+  }
+  const fr=new FileReader();
+  fr.onload=()=>{
+    try{
+      cfg=JSON.parse(fr.result);
+      renderAll();
+      document.getElementById('editor').classList.remove('hidden');
+      document.getElementById('connectStatus').textContent='تم تحميل الإعدادات من الملف.';
+      document.getElementById('connectStatus').className='status ok';
+    }catch(e){
+      document.getElementById('connectStatus').textContent='ملف JSON غير صالح.';
+      document.getElementById('connectStatus').className='status err';
+    }
+  };
+  fr.readAsText(f);
+}
 function val(id,v=''){if($(id))$(id).value=v??''}
 function renderAll(){
   const site=cfg.site||{};
@@ -229,7 +236,7 @@ function renderReasons(items){
   const root=$('reasonItems');root.innerHTML='';
   for(let i=0;i<4;i++){root.innerHTML+=`<div class="field"><label>السبب ${i+1}</label><textarea id="rs${i}" class="input" style="min-height:75px">${items[i]||''}</textarea></div>`}
 }
-function previewUrl(src){return src?`https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${src}?v=${Date.now()}`:''}
+function previewUrl(src){return src||''}
 function renderGallery(){
   if(!Array.isArray(cfg.gallery))cfg.gallery=[];
   while(cfg.gallery.length<3)cfg.gallery.push({src:'',caption:''});
@@ -251,11 +258,38 @@ async function compressImage(file){
   const data=await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(blob)});return data.split(',')[1]
 }
 async function uploadPhoto(i,btn){
-  const file=$('file'+i).files[0];if(!file){$('slotStatus'+i).textContent='اختار صورة أولًا';$('slotStatus'+i).className='status err';return}
-  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الرفع';
-  try{const b64=await compressImage(file);const path=`images/photo-${i+1}-${Date.now()}.jpg`;await ghPut(path,b64,`Upload birthday photo ${i+1}`);cfg.gallery[i].src=path;$('slotStatus'+i).textContent='تم رفع الصورة. اضغط حفظ كل التعديلات.';$('slotStatus'+i).className='status ok';renderGallery()}
-  catch(e){$('slotStatus'+i).textContent='خطأ: '+e.message;$('slotStatus'+i).className='status err'}
-  finally{btn.disabled=false;btn.textContent='رفع الصورة'}
+  const file=$('file'+i).files[0];
+  if(!file){
+    $('slotStatus'+i).textContent='اختار صورة أولًا';
+    $('slotStatus'+i).className='status err';
+    return;
+  }
+  btn.disabled=true;btn.textContent='جاري تجهيز الصورة';
+  try{
+    const dataUrl=await fileToDataURLCompressed(file);
+    cfg.gallery[i].src=dataUrl;
+    $('slotStatus'+i).textContent='تم إضافة الصورة داخل الإعدادات. اضغط تحميل config.json.';
+    $('slotStatus'+i).className='status ok';
+    renderGallery();
+  }catch(e){
+    $('slotStatus'+i).textContent='خطأ: '+e.message;
+    $('slotStatus'+i).className='status err';
+  }finally{
+    btn.disabled=false;btn.textContent='إضافة الصورة';
+  }
+}
+async function fileToDataURLCompressed(file){
+  const bmp=await createImageBitmap(file);
+  const max=1200;
+  let w=bmp.width,h=bmp.height;
+  if(Math.max(w,h)>max){
+    const r=max/Math.max(w,h);
+    w=Math.round(w*r);h=Math.round(h*r);
+  }
+  const canvas=document.createElement('canvas');
+  canvas.width=w;canvas.height=h;
+  canvas.getContext('2d').drawImage(bmp,0,0,w,h);
+  return canvas.toDataURL('image/jpeg',0.78);
 }
 function removePhoto(i){cfg.gallery[i].src='';renderGallery()}
 
@@ -272,12 +306,22 @@ function collect(){
   cfg.final={heading:$('finalHeadingF').value,text:$('finalTextF').value,birthdayLine:$('finalBirthdayF').value};
   cfg.theme={sky:$('skyColorF').value,pink:$('pinkColorF').value};
 }
-async function saveAll(){
-  collect();const btn=$('saveAllBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الحفظ';$('saveStatus').textContent='';
-  try{const old=await ghGet('config.json');await ghPut('config.json',encodeB64(JSON.stringify(cfg,null,2)),'Update birthday website content',old&&old.sha);$('saveStatus').textContent='تم الحفظ بنجاح ✅ انتظر ثوانٍ وافتح الموقع للمراجعة.';$('saveStatus').className='status ok'}
-  catch(e){$('saveStatus').textContent='حصل خطأ: '+e.message;$('saveStatus').className='status err'}
-  finally{btn.disabled=false;btn.textContent='حفظ كل التعديلات'}
+function saveAll(){
+  collect();
+  const blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download='config.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  $('saveStatus').textContent='تم تجهيز config.json ✅ ارفعه على GitHub مكان الملف القديم.';
+  $('saveStatus').className='status ok';
 }
-function openSite(){window.open(`https://${gh.owner}.github.io/${gh.repo}/?v=${Date.now()}`,'_blank')}
+function openSite(){
+  window.open('../birthday-gift/','_blank');
+}.github.io/${gh.repo}/?v=${Date.now()}`,'_blank')}
 </script>
 </body></html>
