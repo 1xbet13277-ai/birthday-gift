@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#edf8ff">
+<title>For My Love</title>
+<style>
+:root{
+  --sky:#78c8ff;
+  --sky-2:#dff3ff;
+  --pink:#ff92b9;
+  --pink-2:#ffd6e5;
+  --ink:#273e54;
+  --muted:#71869a;
+  --white:rgba(255,255,255,.78);
+  --stroke:rgba(255,255,255,.95);
+  --line:rgba(109,184,238,.28);
+  --shadow:0 18px 45px rgba(65,129,178,.15);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Tahoma,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%,rgba(255,146,185,.26),transparent 23%),
+    radial-gradient(circle at 88% 16%,rgba(120,200,255,.32),transparent 27%),
+    linear-gradient(180deg,#fbfeff 0%,#eff9ff 56%,#fff8fb 100%);
+  overflow-x:hidden;
+}
+svg{display:block}
+.icon{
+  width:22px;height:22px;
+  stroke:currentColor;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.icon.sm{width:17px;height:17px}
+.icon.md{width:26px;height:26px}
+.icon.lg{width:32px;height:32px}
+.emoji{font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.app{width:min(100%,520px);margin:auto;min-height:100vh;position:relative;overflow:hidden}
+.blur{position:fixed;border-radius:50%;filter:blur(62px);z-index:-1;opacity:.26}
+.blur.a{width:230px;height:230px;background:#7fcdff;right:-80px;top:110px}
+.blur.b{width:220px;height:220px;background:#ff9cbc;left:-80px;top:500px}
+
+/* iPhone-style status bar */
+.statusbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 7px 0;color:#3d5b74;font-size:13px;font-weight:700;direction:ltr;
+}
+.status-icons{display:flex;align-items:center;gap:7px}
+.signal{display:flex;align-items:flex-end;gap:2px;height:13px}
+.signal i{display:block;width:3px;border-radius:2px;background:#3d5b74}
+.signal i:nth-child(1){height:4px}.signal i:nth-child(2){height:7px}.signal i:nth-child(3){height:10px}.signal i:nth-child(4){height:13px}
+.wifi{width:15px;height:12px;border-top:2px solid #3d5b74;border-radius:50%;position:relative;transform:scaleX(1.15)}
+.wifi:before{content:"";position:absolute;left:3px;right:3px;top:3px;height:6px;border-top:2px solid #3d5b74;border-radius:50%}
+.wifi:after{content:"";position:absolute;width:3px;height:3px;border-radius:50%;background:#3d5b74;left:6px;bottom:0}
+.battery{width:22px;height:10px;border:1.8px solid #3d5b74;border-radius:3px;position:relative;padding:1px}
+.battery:after{content:"";position:absolute;width:2px;height:5px;border-radius:1px;background:#3d5b74;right:-4px;top:1px}
+.battery span{display:block;width:75%;height:100%;border-radius:1px;background:#3d5b74}
+
+.hero{min-height:100svh;padding:16px 18px 26px;display:flex;flex-direction:column;position:relative}
+.hero-card{
+  margin-top:auto;position:relative;overflow:hidden;
+  padding:26px 22px;border-radius:34px;
+  background:linear-gradient(155deg,rgba(255,255,255,.84),rgba(255,255,255,.56));
+  border:1px solid var(--stroke);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);
+}
+.hero-card:before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(120,200,255,.17),transparent 40%,rgba(255,146,185,.15));
+}
+.hero-badge{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;
+  background:rgba(255,255,255,.72);border:1px solid #fff;
+  color:#64809a;font-size:12px;font-weight:700
+}
+.hero-badge .icon{color:#ef7ca7}
+.hero h1{
+  position:relative;margin:18px 0 12px;
+  font-family:"Segoe Script","Brush Script MT",cursive;
+  font-weight:500;font-size:44px;line-height:1.06;color:#4d7fac;
+}
+.hero p{position:relative;margin:0;color:#61778c;font-size:16px;line-height:1.9}
+.cta{
+  position:relative;margin-top:22px;width:100%;border:0;border-radius:18px;
+  padding:16px 18px;color:#fff;font-size:17px;font-weight:800;
+  background:linear-gradient(135deg,#67bfff,#ff8fb9);
+  box-shadow:0 14px 30px rgba(92,173,232,.22);
+  display:flex;align-items:center;justify-content:center;gap:9px
+}
+.note{position:relative;text-align:center;margin-top:12px;color:#8498aa;font-size:12px}
+.scroll{position:relative;text-align:center;margin-top:14px;color:#7aa9ce}
+.scroll .icon{margin:auto;animation:bounce 1.55s infinite}
+@keyframes bounce{50%{transform:translateY(6px)}}
+
+section{padding:30px 18px}
+.sep{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0 18px}
+.section-head{text-align:center;margin-bottom:20px}
+.section-head h2{
+  margin:0 0 6px;color:#4c7da8;font-size:31px;
+  font-family:"Segoe Script","Brush Script MT",cursive;font-weight:500
+}
+.section-head p{margin:0;color:var(--muted);font-size:13px}
+
+.timeline{position:relative}
+.timeline:before{
+  content:"";position:absolute;right:22px;top:12px;bottom:10px;width:2px;border-radius:2px;
+  background:linear-gradient(var(--sky),var(--pink))
+}
+.event{position:relative;padding:0 62px 26px 0}
+.event:last-child{padding-bottom:0}
+.event-icon{
+  position:absolute;right:3px;top:0;width:40px;height:40px;border-radius:50%;
+  display:grid;place-items:center;color:#4b83b0;
+  background:rgba(255,255,255,.92);border:1px solid #fff;box-shadow:0 8px 22px rgba(69,137,188,.13)
+}
+.event-card{
+  padding:15px 16px;border-radius:21px;background:rgba(255,255,255,.69);
+  border:1px solid rgba(255,255,255,.96);box-shadow:0 10px 26px rgba(64,137,191,.09)
+}
+.event h3{margin:0 0 5px;font-size:16px}
+.event .date{font-size:12px;color:#e47ca4;margin-bottom:7px}
+.event p{margin:0;color:var(--muted);font-size:14px;line-height:1.7}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.love-card{
+  min-height:145px;padding:17px;border-radius:24px;
+  background:linear-gradient(160deg,rgba(255,255,255,.84),rgba(226,245,255,.64));
+  border:1px solid #fff;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;justify-content:space-between
+}
+.love-card:nth-child(even){background:linear-gradient(160deg,rgba(255,255,255,.86),rgba(255,228,239,.67))}
+.love-icon{
+  width:42px;height:42px;border-radius:14px;display:grid;place-items:center;
+  background:rgba(255,255,255,.75);border:1px solid #fff;color:#4f8fbe
+}
+.love-card:nth-child(even) .love-icon{color:#e178a0}
+.love-card b{font-size:15px;line-height:1.5}
+
+.gallery{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}
+.polaroid{
+  background:#fff;padding:8px;border-radius:21px;
+  box-shadow:0 18px 35px rgba(77,134,177,.13);
+  transform:rotate(-1.1deg)
+}
+.polaroid:nth-child(2){transform:rotate(1.4deg)}
+.pic{
+  min-height:206px;border-radius:14px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(180deg,transparent 30%,rgba(40,80,110,.32)),
+    radial-gradient(circle at 70% 18%,#ffc0d7,transparent 26%),
+    linear-gradient(145deg,#dff4ff,#fdf7fb 62%)
+}
+.pic:before{
+  content:"";position:absolute;inset:0;display:grid;place-items:center;
+  background:
+    linear-gradient(135deg,transparent 49%,rgba(255,255,255,.24) 50%,transparent 51%);
+  opacity:.45
+}
+.photo-placeholder{
+  position:absolute;inset:0;display:grid;place-items:center;color:rgba(63,113,151,.42)
+}
+.big .pic{min-height:430px}
+.caption{padding:9px 6px 3px;text-align:center;font-size:12px;color:#6f8498}
+
+.surprise-card{
+  padding:18px;border-radius:24px;background:rgba(255,255,255,.73);
+  border:1px solid #fff;box-shadow:var(--shadow)
+}
+.surprise-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.surprise-title{display:flex;align-items:center;gap:9px}
+.surprise-icon{
+  width:38px;height:38px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#e6f6ff,#fff0f6);color:#568db8;border:1px solid #fff
+}
+.surprise-card b{font-size:15px}
+.surprise-card p{margin:9px 0 14px;color:var(--muted);font-size:12px;line-height:1.6}
+.small-btn{
+  width:100%;border:0;border-radius:14px;padding:12px 14px;
+  color:#426d91;font-weight:800;background:linear-gradient(135deg,#d5f0ff,#ffd8e6);
+  display:flex;align-items:center;justify-content:center;gap:7px
+}
+
+.count-wrap{
+  padding:18px;border-radius:28px;background:linear-gradient(160deg,rgba(255,255,255,.85),rgba(255,255,255,.62));
+  border:1px solid #fff;box-shadow:var(--shadow)
+}
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.c{text-align:center;padding:14px 4px;border-radius:18px;background:rgba(255,255,255,.69);border:1px solid #fff}
+.c strong{display:block;color:#4c7da8;font-size:23px}
+.c small{font-size:10px;color:var(--muted)}
+
+.letter{
+  position:relative;overflow:hidden;padding:24px 20px;border-radius:28px;
+  background:linear-gradient(165deg,#fff,#f6fbff);border:1px solid #fff;
+  box-shadow:0 20px 45px rgba(82,139,184,.14)
+}
+.letter-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;color:#e37ba3}
+.letter-head .letter-icon{
+  width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:#fff0f5;border:1px solid #fff
+}
+.letter-head b{color:#4f799c}
+.letter p{margin:0;color:#536b82;font-size:15px;line-height:2}
+.sign{margin-top:16px;color:#e17ba2;font-family:"Segoe Script","Brush Script MT",cursive;font-size:18px}
+
+.final{min-height:82svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
+.final-card{
+  width:100%;padding:30px 22px;border-radius:34px;
+  background:linear-gradient(160deg,rgba(255,255,255,.84),rgba(255,255,255,.58));
+  border:1px solid #fff;box-shadow:var(--shadow)
+}
+.final-mark{
+  margin:auto;width:70px;height:70px;border-radius:24px;display:grid;place-items:center;
+  color:#e27da4;background:linear-gradient(145deg,#eef9ff,#fff0f6);border:1px solid #fff;
+  animation:pulse 1.7s infinite
+}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.final h2{margin:14px 0 7px;color:#4c7da8;font-size:32px;font-family:"Segoe Script","Brush Script MT",cursive;font-weight:500}
+.final p{margin:0;color:var(--muted);line-height:1.8}
+
+/* Lock screen */
+#lockScreen{
+  position:fixed;inset:0;z-index:9999;padding:22px;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 14% 14%,rgba(255,146,185,.28),transparent 24%),
+    radial-gradient(circle at 86% 20%,rgba(120,200,255,.34),transparent 28%),
+    linear-gradient(180deg,#f9fdff,#eef8ff 60%,#fff8fb)
+}
+.lock-card{
+  width:min(100%,420px);padding:28px 22px;text-align:center;border-radius:32px;
+  background:rgba(255,255,255,.78);border:1px solid #fff;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 24px 60px rgba(76,139,188,.19)
+}
+.lock-symbol{
+  width:68px;height:68px;border-radius:24px;margin:0 auto 12px;
+  display:grid;place-items:center;color:#d9759a;
+  background:linear-gradient(145deg,#e8f7ff,#fff0f5);border:1px solid #fff;
+  box-shadow:0 12px 30px rgba(81,146,195,.12)
+}
+.lock-card h2{margin:3px 0 8px;color:#4c7da8;font-size:29px;font-family:"Segoe Script","Brush Script MT",cursive;font-weight:500}
+.lock-card p{margin:0 0 20px;color:#6f8498;font-size:14px;line-height:1.7}
+.lock-input{
+  width:100%;padding:15px 16px;border-radius:16px;border:1px solid rgba(132,195,240,.45);
+  outline:none;text-align:center;background:rgba(255,255,255,.9);color:#2f4e69;font-size:18px;letter-spacing:5px
+}
+.lock-input:focus{border-color:#7fc9f8;box-shadow:0 0 0 4px rgba(126,200,249,.12)}
+.lock-btn{
+  margin-top:12px;width:100%;border:0;border-radius:16px;padding:15px;
+  background:linear-gradient(135deg,#76c7ff,#ff91bb);color:white;font-weight:800;font-size:16px;
+  display:flex;align-items:center;justify-content:center;gap:8px
+}
+#lockError{min-height:21px;margin-top:10px;color:#df5d86;font-size:13px;font-weight:700}
+.lock-hint{margin-top:5px;color:#98a8b8;font-size:11px}
+.lock-shake{animation:shake .34s ease}
+@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+.lock-out{animation:fadeOut .38s ease forwards}
+@keyframes fadeOut{to{opacity:0;transform:scale(1.03);visibility:hidden}}
+
+.modal{
+  position:fixed;inset:0;z-index:500;display:none;align-items:flex-end;justify-content:center;padding:14px;
+  background:rgba(43,70,93,.24);backdrop-filter:blur(10px)
+}
+.modal.show{display:flex}
+.sheet{
+  width:min(100%,500px);padding:22px;border-radius:28px;background:#fff;
+  box-shadow:0 26px 60px rgba(39,92,133,.24);animation:up .28s ease
+}
+@keyframes up{from{transform:translateY(30px);opacity:0}}
+.sheet-icon{
+  width:48px;height:48px;border-radius:16px;display:grid;place-items:center;
+  color:#e17aa2;background:linear-gradient(145deg,#e9f8ff,#fff0f6);border:1px solid #fff
+}
+.sheet h3{margin:12px 0 6px;color:#4d7eaa}
+.sheet p{margin:0;color:var(--muted);line-height:1.8}
+.close{
+  margin-top:16px;width:100%;border:0;border-radius:15px;padding:13px 14px;
+  background:linear-gradient(135deg,#83cfff,#ff9fc1);color:#fff;font-weight:800
+}
+.float-heart{
+  position:fixed;bottom:-30px;pointer-events:none;z-index:10;opacity:.75;
+  color:#ec82a9;animation:rise linear forwards
+}
+@keyframes rise{to{transform:translateY(-115vh) rotate(20deg);opacity:0}}
+
+@media(max-width:370px){
+  .hero h1{font-size:38px}
+  .grid2{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .big .pic{min-height:280px}
+}
+</style>
+
+<style id="intro-hearts-style">
+#introSplash{
+  position:fixed;inset:0;z-index:10000;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,170,200,.42), transparent 24%),
+    radial-gradient(circle at 80% 18%, rgba(150,220,255,.35), transparent 26%),
+    linear-gradient(180deg,#fff8fc 0%, #f7fcff 45%, #fff4f9 100%);
+}
+#introSplash.hide{animation:introFadeOut .9s ease forwards}
+@keyframes introFadeOut{
+  to{opacity:0;visibility:hidden}
+}
+.intro-center{
+  position:relative;
+  text-align:center;
+  z-index:2;
+  padding:28px 22px;
+}
+.intro-ring{
+  width:126px;height:126px;border-radius:50%;
+  margin:0 auto 18px;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 30% 30%, #ffffff, #ffe3ee 60%, #dff5ff 100%);
+  box-shadow:0 18px 55px rgba(237,121,164,.26);
+  animation:introPulse 1.6s ease-in-out infinite;
+}
+@keyframes introPulse{
+  50%{transform:scale(1.06)}
+}
+.intro-heart-main{
+  width:48px;height:48px;color:#ef7ea8;
+}
+.intro-title{
+  font-family:"Segoe Script","Brush Script MT",cursive;
+  font-size:38px;
+  color:#d96f9a;
+  margin:0 0 8px;
+  animation:introFloat 2s ease-in-out infinite;
+}
+.intro-sub{
+  margin:0;
+  color:#7992a8;
+  font-size:14px;
+  letter-spacing:.3px;
+}
+@keyframes introFloat{
+  50%{transform:translateY(-4px)}
+}
+.intro-heart{
+  position:absolute;
+  color:#f08ab1;
+  opacity:.78;
+  animation:introRise linear forwards;
+  filter:drop-shadow(0 8px 15px rgba(240,138,177,.18));
+}
+.intro-heart.blue{color:#8ecfff}
+@keyframes introRise{
+  0%{transform:translateY(0) scale(.7) rotate(0deg);opacity:0}
+  10%{opacity:.9}
+  100%{transform:translateY(-120vh) scale(1.15) rotate(20deg);opacity:0}
+}
+.intro-spark{
+  position:absolute;
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.95);
+  box-shadow:0 0 14px rgba(255,255,255,.95);
+  animation:introTwinkle 1.8s ease-in-out infinite;
+}
+@keyframes introTwinkle{
+  50%{transform:scale(1.6);opacity:.35}
+}
+</style>
+
+
+<style id="dynamic-gallery-style">
+.pic.has-image{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}
+.pic.has-image .photo-placeholder{display:none}
+</style>
+</head>
+<body>
+
+<div id="introSplash" aria-hidden="true">
+  <div class="intro-spark" style="top:16%;left:18%"></div>
+  <div class="intro-spark" style="top:24%;right:16%;animation-delay:.4s"></div>
+  <div class="intro-spark" style="top:68%;left:14%;animation-delay:.7s"></div>
+  <div class="intro-spark" style="top:74%;right:20%;animation-delay:1s"></div>
+
+  <div class="intro-center">
+    <div class="intro-ring">
+      <svg class="icon intro-heart-main" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.8 4.6c-2-2-5.3-1.8-7.3.3L12 6.4l-1.5-1.5C8.5 2.8 5.2 2.6 3.2 4.6c-2.3 2.3-2.2 6 .2 8.3L12 21l8.6-8.1c2.4-2.3 2.5-6 .2-8.3Z"/>
+      </svg>
+    </div>
+    <h1 class="intro-title">For My Love</h1>
+    <p class="intro-sub">A little surprise is waiting for you</p>
+  </div>
+</div>
+
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6c-2-2-5.3-1.8-7.3.3L12 6.4l-1.5-1.5C8.5 2.8 5.2 2.6 3.2 4.6c-2.3 2.3-2.2 6 .2 8.3L12 21l8.6-8.1c2.4-2.3 2.5-6 .2-8.3Z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></symbol>
+  <symbol id="i-gift" viewBox="0 0 24 24"><path d="M4 10h16v10H4z"/><path d="M3 7h18v3H3z"/><path d="M12 7v13"/><path d="M12 7H8.8C7.3 7 6 5.8 6 4.3 6 3 7 2 8.3 2 10.5 2 12 7 12 7Z"/><path d="M12 7h3.2C16.7 7 18 5.8 18 4.3 18 3 17 2 15.7 2 13.5 2 12 7 12 7Z"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 11.5A8.5 8.5 0 0 1 12.5 20H5l-2 2v-7.5A8.5 8.5 0 1 1 21 11.5Z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 7h4l1.2-2h5.6L16 7h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M4 8h13v6a6 6 0 0 1-6 6H10a6 6 0 0 1-6-6V8Z"/><path d="M17 10h2a3 3 0 0 1 0 6h-2"/><path d="M8 4v2M12 3v3"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 2l1.2 3.8L17 7l-3.8 1.2L12 12l-1.2-3.8L7 7l3.8-1.2L12 2Z"/><path d="M19 13l.8 2.2L22 16l-2.2.8L19 19l-.8-2.2L16 16l2.2-.8L19 13Z"/><path d="M5 14l.7 1.8L7.5 16.5l-1.8.7L5 19l-.7-1.8-1.8-.7 1.8-.7L5 14Z"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 10h.01M16 10h.01"/><path d="M8.5 14.5c1.8 2 5.2 2 7 0"/></symbol>
+  <symbol id="i-flower" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 4c-2-3-5-1-4 2 .5 1.5 2 2.6 4 4 2-1.4 3.5-2.5 4-4 1-3-2-5-4-2Z"/><path d="M20 12c3-2 1-5-2-4-1.5.5-2.6 2-4 4 1.4 2 2.5 3.5 4 4 3 1 5-2 2-4Z"/><path d="M12 20c2 3 5 1 4-2-.5-1.5-2-2.6-4-4-2 1.4-3.5 2.5-4 4-1 3 2 5 4 2Z"/><path d="M4 12c-3 2-1 5 2 4 1.5-.5 2.6-2 4-4-1.4-2-2.5-3.5-4-4-3-1-5 2-2 4Z"/></symbol>
+  <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M18.5 8c-3 0-4.5 4-6.5 4s-3.5-4-6.5-4a4 4 0 0 0 0 8c3 0 4.5-4 6.5-4s3.5 4 6.5 4a4 4 0 0 0 0-8Z"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M6 18h11a4 4 0 0 0 .8-7.9A6 6 0 0 0 6.3 8.7 4.7 4.7 0 0 0 6 18Z"/></symbol>
+  <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="7" rx="2"/><rect x="17" y="13" width="4" height="7" rx="2"/></symbol>
+  <symbol id="i-envelope" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m15 8 4 4-4 4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+</svg>
+
+<div class="blur a"></div><div class="blur b"></div>
+
+<!-- Password -->
+<div id="lockScreen">
+  <div class="lock-card" id="lockCard">
+    <div class="lock-symbol">
+      <svg class="icon lg"><use href="#i-lock"></use></svg>
+    </div>
+    <h2>Just For You</h2>
+    <p>الموقع ده معمول لشخص واحد بس.<br>اكتبي الباسورد علشان تبدأ المفاجأة.</p>
+    <input id="passwordInput" class="lock-input" type="password" inputmode="numeric" placeholder="••••" autocomplete="off">
+    <button class="lock-btn" onclick="unlockSite()">
+      <svg class="icon sm"><use href="#i-gift"></use></svg>
+      فتح الهدية
+    </button>
+    <div id="lockError"></div>
+    <div class="lock-hint">Private birthday surprise</div>
+  </div>
+</div>
+
+<div class="app">
+
+<section class="hero">
+  <div class="statusbar">
+    <span>9:41</span>
+    <div class="status-icons">
+      <div class="signal"><i></i><i></i><i></i><i></i></div>
+      <div class="wifi"></div>
+      <div class="battery"><span></span></div>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-badge">
+      <svg class="icon sm"><use href="#i-heart"></use></svg>
+      Birthday surprise
+    </div>
+    <h1>Happy Birthday<br>My Love ♡</h1>
+    <p>في يومك الحلو، حبيت أسيب لكِ مكان صغير على الإنترنت… مليان ذكريات، رسائل، ومفاجآت كلها ليكِ أنتِ.</p>
+    <button class="cta" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
+      ابدئي المفاجأة
+      <svg class="icon sm"><use href="#i-gift"></use></svg>
+    </button>
+    <div class="note">مصنوع بحب… ليكِ وحدك <span class="emoji">🩷</span></div>
+    <div class="scroll"><svg class="icon"><use href="#i-chevron-down"></use></svg></div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section id="story">
+  <div class="section-head">
+    <h2>Our Story</h2>
+    <p>كل لحظة صغيرة… عملت حكاية كبيرة</p>
+  </div>
+
+  <div class="timeline">
+    <div class="event">
+      <div class="event-icon"><svg class="icon"><use href="#i-message"></use></svg></div>
+      <div class="event-card">
+        <h3>أول مرة اتكلمنا</h3>
+        <div class="date">ضع التاريخ هنا</div>
+        <p>كلام بسيط جدًا… لكنه كان بداية حاجة ما كنتش أعرف قد إيه هتبقى غالية.</p>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-icon"><svg class="icon"><use href="#i-camera"></use></svg></div>
+      <div class="event-card">
+        <h3>أول صورة</h3>
+        <div class="date">ضع التاريخ هنا</div>
+        <p>صورة واحدة بس، وفيها ذكرى كل ما أشوفها أبتسم من غير ما أحس.</p>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-icon"><svg class="icon"><use href="#i-coffee"></use></svg></div>
+      <div class="event-card">
+        <h3>أول خروجة</h3>
+        <div class="date">ضع التاريخ هنا</div>
+        <p>ضحك، كلام، وتفاصيل صغيرة خلت اليوم ده يفضل مميز.</p>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="event-icon"><svg class="icon"><use href="#i-sparkles"></use></svg></div>
+      <div class="event-card">
+        <h3>وما زال القادم أجمل</h3>
+        <div class="date">Always</div>
+        <p>لأن أجمل جزء في الحكاية… لسه بيتكتب.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section>
+  <div class="section-head">
+    <h2>Reasons I Love You</h2>
+    <p>وده مجرد جزء صغير من الأسباب</p>
+  </div>
+
+  <div class="grid2">
+    <div class="love-card">
+      <div class="love-icon"><svg class="icon md"><use href="#i-heart"></use></svg></div>
+      <b>لأن قلبك طيب، ووجودك بيخلّي كل حاجة أهدى.</b>
+    </div>
+    <div class="love-card">
+      <div class="love-icon"><svg class="icon md"><use href="#i-smile"></use></svg></div>
+      <b>لأن ضحكتك من الحاجات اللي بتغيّر يوم كامل.</b>
+    </div>
+    <div class="love-card">
+      <div class="love-icon"><svg class="icon md"><use href="#i-flower"></use></svg></div>
+      <b>لأنك جميلة في التفاصيل اللي يمكن أنتِ مش واخدة بالك منها.</b>
+    </div>
+    <div class="love-card">
+      <div class="love-icon"><svg class="icon md"><use href="#i-infinity"></use></svg></div>
+      <b>ولأنك ببساطة… أنتِ، وده سبب كفاية.</b>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section>
+  <div class="section-head">
+    <h2>Our Gallery</h2>
+    <p>هنبدّل الأماكن دي بصوركم الحقيقية</p>
+  </div>
+
+  <div class="gallery">
+    <div class="polaroid big">
+      <div class="pic" id="galleryPic0">
+        <div class="photo-placeholder" id="galleryPlaceholder0"><svg class="icon lg"><use href="#i-camera"></use></svg></div>
+      </div>
+      <div class="caption" id="galleryCaption0">الصورة المفضلة عندي <span class="emoji">🩷</span></div>
+    </div>
+    <div>
+      <div class="polaroid" style="margin-bottom:12px">
+        <div class="pic" id="galleryPic1" style="min-height:196px"><div class="photo-placeholder" id="galleryPlaceholder1"><svg class="icon lg"><use href="#i-camera"></use></svg></div></div>
+        <div class="caption" id="galleryCaption1">ذكرى مستحيل أنساها</div>
+      </div>
+      <div class="polaroid">
+        <div class="pic" id="galleryPic2" style="min-height:196px"><div class="photo-placeholder" id="galleryPlaceholder2"><svg class="icon lg"><use href="#i-camera"></use></svg></div></div>
+        <div class="caption" id="galleryCaption2">أحلى لحظة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section>
+  <div class="section-head">
+    <h2>Little Surprises</h2>
+    <p>اضغطي على أي واحدة</p>
+  </div>
+
+  <div class="grid2">
+    <div class="surprise-card">
+      <div class="surprise-top">
+        <div class="surprise-title">
+          <div class="surprise-icon"><svg class="icon"><use href="#i-cloud"></use></svg></div>
+          <b>لما تكوني زعلانة</b>
+        </div>
+      </div>
+      <p>رسالة صغيرة مخصوص علشان اليوم التقيل.</p>
+      <button class="small-btn" onclick="showMsg('heart','لما تكوني زعلانة','افتكري إن في حد شايفك أجمل جزء في يومه، ومهما اليوم كان صعب… ابتسامتك تستاهل ترجع تاني. 🩷')">
+        افتحي الرسالة
+        <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
+      </button>
+    </div>
+
+    <div class="surprise-card">
+      <div class="surprise-top">
+        <div class="surprise-title">
+          <div class="surprise-icon"><svg class="icon"><use href="#i-heart"></use></svg></div>
+          <b>لما تشتاقيلي</b>
+        </div>
+      </div>
+      <p>ودي تتفتح وقت الاشتياق بس.</p>
+      <button class="small-btn" onclick="showMsg('heart','وأنا كمان','لو فتحتي دي لأنك مشتاقالي… غالبًا في نفس اللحظة أنا مشتاق لك أكتر. 🩷')">
+        افتحي الرسالة
+        <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
+      </button>
+    </div>
+
+    <div class="surprise-card">
+      <div class="surprise-top">
+        <div class="surprise-title">
+          <div class="surprise-icon"><svg class="icon"><use href="#i-gift"></use></svg></div>
+          <b>صندوق المفاجأة</b>
+        </div>
+      </div>
+      <p>في حاجة حلوة مستخبية جواه.</p>
+      <button class="small-btn" onclick="showMsg('gift','Surprise!','المفاجأة الحقيقية مش مكتوبة هنا… دي هتاخديها مني بنفسك. 😉')">
+        افتحي الصندوق
+        <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
+      </button>
+    </div>
+
+    <div class="surprise-card">
+      <div class="surprise-top">
+        <div class="surprise-title">
+          <div class="surprise-icon"><svg class="icon"><use href="#i-headphones"></use></svg></div>
+          <b>أغنيتنا</b>
+        </div>
+      </div>
+      <p>هنا نحط الأغنية اللي بينكم.</p>
+      <button class="small-btn" onclick="showMsg('headphones','Our Song','هنضيف هنا الأغنية بتاعتكم ونخليها تبدأ بعد الضغط علشان المتصفح يسمح بالصوت.')">
+        تشغيل
+        <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section>
+  <div class="section-head">
+    <h2>Still Counting</h2>
+    <p>من يوم ما بدأت الحكاية</p>
+  </div>
+
+  <div class="count-wrap">
+    <div style="display:flex;justify-content:center;margin-bottom:12px;color:#5f91b9">
+      <svg class="icon md"><use href="#i-calendar"></use></svg>
+    </div>
+    <div class="counter">
+      <div class="c"><strong id="days">000</strong><small>يوم</small></div>
+      <div class="c"><strong id="hours">00</strong><small>ساعة</small></div>
+      <div class="c"><strong id="mins">00</strong><small>دقيقة</small></div>
+      <div class="c"><strong id="secs">00</strong><small>ثانية</small></div>
+    </div>
+    <p style="text-align:center;color:#7d93a7;font-size:12px;margin:14px 0 0">هنحط تاريخ بداية علاقتكم الحقيقي هنا</p>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<section>
+  <div class="section-head">
+    <h2>A Birthday Letter</h2>
+    <p>من قلبي… لقلبك</p>
+  </div>
+
+  <div class="letter">
+    <div class="letter-head">
+      <div class="letter-icon"><svg class="icon"><use href="#i-envelope"></use></svg></div>
+      <b>رسالة مخصوص ليكِ</b>
+    </div>
+    <p>
+      حبيبتي…<br><br>
+      كل سنة وأنتِ أجمل حاجة حصلت في حياتي. وجودك مش مجرد جزء من يومي، أنتِ من الحاجات اللي خلت الأيام نفسها يبقى ليها طعم مختلف.<br><br>
+      أتمنى السنة الجديدة من عمرك تكون مليانة راحة، ضحك، نجاح، وحاجات حلوة كتير تستاهليها. وأتمنى أفضل موجود في كل لحظة فرح جاية لكِ، وأكون أول حد مبسوط علشانك.<br><br>
+      مهما كتبت، مش هعرف أوصف مكانتك عندي بالكامل… لكن أتمنى الموقع ده يفضل يذكّرك بحاجة واحدة: إنك غالية جدًا عليّ.
+    </p>
+    <div class="sign">Forever yours ♡</div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="final-card">
+    <div class="final-mark"><svg class="icon lg"><use href="#i-heart"></use></svg></div>
+    <h2>This website ends here…</h2>
+    <p>but our story doesn’t.<br><br><b style="color:#4b7fac">Happy Birthday, My Love</b> <span class="emoji">🩷</span></p>
+  </div>
+</section>
+
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="sheet">
+    <div class="sheet-icon" id="sheetIcon"><svg class="icon md"><use href="#i-heart"></use></svg></div>
+    <h3 id="mt">رسالة</h3>
+    <p id="mp"></p>
+    <button class="close" onclick="closeModal()">إغلاق</button>
+  </div>
+</div>
+
+<script>
+const SITE_PASSWORD="1234";
+
+function unlockSite(){
+  const input=document.getElementById("passwordInput");
+  const error=document.getElementById("lockError");
+  const card=document.getElementById("lockCard");
+  const screen=document.getElementById("lockScreen");
+  if(input.value===SITE_PASSWORD){
+    sessionStorage.setItem("birthdayUnlocked","yes");
+    error.textContent="";
+    screen.classList.add("lock-out");
+    setTimeout(()=>screen.style.display="none",380);
+  }else{
+    error.textContent="الباسورد مش صح، جرّبي مرة تانية";
+    card.classList.remove("lock-shake");
+    void card.offsetWidth;
+    card.classList.add("lock-shake");
+    input.value="";
+    input.focus();
+  }
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const screen=document.getElementById("lockScreen");
+  const input=document.getElementById("passwordInput");
+  if(sessionStorage.getItem("birthdayUnlocked")==="yes") screen.style.display="none";
+  else setTimeout(()=>input.focus(),250);
+  input.addEventListener("keydown",e=>{if(e.key==="Enter")unlockSite()});
+});
+
+const iconMap={
+  heart:"i-heart",
+  gift:"i-gift",
+  headphones:"i-headphones"
+};
+
+function showMsg(type,title,text){
+  document.querySelector("#sheetIcon use").setAttribute("href","#"+(iconMap[type]||"i-heart"));
+  document.getElementById("mt").textContent=title;
+  document.getElementById("mp").textContent=text;
+  document.getElementById("modal").classList.add("show");
+}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+
+const start=new Date("2024-01-01T00:00:00");
+function tick(){
+  let d=Math.max(0,Date.now()-start.getTime());
+  let D=Math.floor(d/86400000);d%=86400000;
+  let H=Math.floor(d/3600000);d%=3600000;
+  let M=Math.floor(d/60000);d%=60000;
+  let S=Math.floor(d/1000);
+  days.textContent=String(D).padStart(3,"0");
+  hours.textContent=String(H).padStart(2,"0");
+  mins.textContent=String(M).padStart(2,"0");
+  secs.textContent=String(S).padStart(2,"0");
+}
+tick();setInterval(tick,1000);
+
+function floatingHeart(){
+  const e=document.createElement("div");
+  e.className="float-heart";
+  e.innerHTML='<svg class="icon sm"><use href="#i-heart"></use></svg>';
+  e.style.left=(Math.random()*94)+"vw";
+  e.style.animationDuration=(7+Math.random()*5)+"s";
+  e.style.transform="scale("+(0.75+Math.random()*.55)+")";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),12000);
+}
+setInterval(floatingHeart,1600);
+</script>
+
+<script id="intro-hearts-script">
+(function(){
+  const splash = document.getElementById("introSplash");
+  if(!splash) return;
+
+  function makeHeart(){
+    const heart = document.createElement("div");
+    heart.className = "intro-heart" + (Math.random() > .72 ? " blue" : "");
+    heart.style.left = (Math.random()*92 + 2) + "vw";
+    heart.style.bottom = (-20 - Math.random()*40) + "px";
+    heart.style.animationDuration = (2.8 + Math.random()*2.4) + "s";
+    heart.style.animationDelay = (Math.random()*.15) + "s";
+    heart.style.transform = "scale(" + (0.7 + Math.random()*0.8) + ")";
+    heart.innerHTML = `
+      <svg width="${16 + Math.random()*20}" height="${16 + Math.random()*20}" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 21s-6.6-4.35-9.24-8.05C.3 9.5 1.03 5.86 4.08 4.4c2.2-1.06 4.54-.3 5.92 1.37 1.38-1.67 3.72-2.43 5.92-1.37 3.05 1.46 3.78 5.1 1.32 8.55C18.6 16.65 12 21 12 21Z"/>
+      </svg>`;
+    splash.appendChild(heart);
+    setTimeout(()=>heart.remove(), 6500);
+  }
+
+  for(let i=0;i<22;i++){
+    setTimeout(makeHeart, i*120);
+  }
+  const timer = setInterval(makeHeart, 180);
+
+  setTimeout(()=>{
+    clearInterval(timer);
+    splash.classList.add("hide");
+    setTimeout(()=>splash.remove(), 950);
+  }, 2400);
+})();
+</script>
+
+\n<script id="site-config-script">\n(async function loadSiteConfig(){\n  try{\n    const res=await fetch('config.json?v='+Date.now(),{cache:'no-store'});\n    if(!res.ok) return;\n    const cfg=await res.json();\n    const gallery=Array.isArray(cfg.gallery)?cfg.gallery:[];\n    for(let i=0;i<3;i++){\n      const item=gallery[i]||{};\n      const pic=document.getElementById('galleryPic'+i);\n      const cap=document.getElementById('galleryCaption'+i);\n      if(pic && item.src){\n        pic.style.backgroundImage=`linear-gradient(180deg,transparent 45%,rgba(31,62,88,.24)),url("${encodeURI(item.src)}")`;\n        pic.classList.add('has-image');\n      }\n      if(cap && item.caption) cap.textContent=item.caption;\n    }\n  }catch(e){console.warn('Config not loaded',e)}\n})();\n</script>\n
+</body>
+</html>
