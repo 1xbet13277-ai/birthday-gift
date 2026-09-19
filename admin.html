@@ -7,14 +7,24 @@
 <title>لوحة إدارة الهدية</title>
 <style>
 :root{--sky:#75c8ff;--pink:#ff91ba;--ink:#274158;--muted:#70869a;--shadow:0 18px 45px rgba(65,129,178,.14)}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,rgba(255,145,186,.25),transparent 24%),radial-gradient(circle at 90% 12%,rgba(117,200,255,.32),transparent 26%),linear-gradient(180deg,#fbfeff,#eef8ff 60%,#fff8fb);min-height:100vh}
-.wrap{max-width:720px;margin:auto;padding:22px 16px 50px}.top{text-align:center;padding:18px 0 8px}.mark{width:68px;height:68px;border-radius:24px;margin:auto;display:grid;place-items:center;background:linear-gradient(145deg,#e8f7ff,#fff0f5);border:1px solid #fff;box-shadow:var(--shadow);font-size:30px}.top h1{font-size:27px;margin:12px 0 5px}.top p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}.card{background:rgba(255,255,255,.78);border:1px solid #fff;border-radius:26px;padding:18px;box-shadow:var(--shadow);margin-top:14px;backdrop-filter:blur(16px)}.card h2{font-size:18px;margin:0 0 12px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field label{display:block;font-size:12px;color:#617b92;margin:0 0 6px}.input{width:100%;padding:13px 14px;border:1px solid rgba(105,177,229,.3);border-radius:14px;background:#fff;color:#2d4962;outline:none;font-size:15px}.input:focus{border-color:#76c8ff;box-shadow:0 0 0 4px rgba(118,200,255,.11)}button{font-family:inherit}.btn{width:100%;padding:13px 15px;border:0;border-radius:14px;font-weight:800;color:white;background:linear-gradient(135deg,var(--sky),var(--pink));cursor:pointer}.btn.secondary{background:#e9f6ff;color:#4b789c}.btn.danger{background:#fff0f4;color:#cf5d86}.hint{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}.status{margin-top:10px;min-height:20px;font-size:13px;font-weight:700}.ok{color:#3d9a73}.err{color:#d45e83}.slots{display:grid;gap:12px}.slot{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px;border-radius:20px;background:rgba(255,255,255,.62);border:1px solid #fff}.preview{width:110px;height:135px;border-radius:16px;background:linear-gradient(145deg,#dff4ff,#fff1f6);display:grid;place-items:center;overflow:hidden;color:#7ba2bf}.preview img{width:100%;height:100%;object-fit:cover}.slot-actions{display:flex;gap:8px;margin-top:8px}.slot-actions button{flex:1;padding:10px;border:0;border-radius:12px;font-weight:750}.hidden{display:none!important}.login{min-height:76vh;display:flex;align-items:center}.login .card{width:100%}.small{font-size:11px;color:#8c9baa}.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.45);border-top-color:white;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-left:6px}@keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:520px){.row{grid-template-columns:1fr}.slot{grid-template-columns:92px 1fr}.preview{width:92px;height:122px}}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,rgba(255,145,186,.25),transparent 24%),radial-gradient(circle at 90% 12%,rgba(117,200,255,.32),transparent 26%),linear-gradient(180deg,#fbfeff,#eef8ff 60%,#fff8fb);min-height:100vh}
+.wrap{max-width:820px;margin:auto;padding:22px 16px 60px}.top{text-align:center;padding:18px 0 8px}.mark{width:68px;height:68px;border-radius:24px;margin:auto;display:grid;place-items:center;background:linear-gradient(145deg,#e8f7ff,#fff0f5);border:1px solid #fff;box-shadow:var(--shadow);font-size:30px}.top h1{font-size:27px;margin:12px 0 5px}.top p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.card{background:rgba(255,255,255,.8);border:1px solid #fff;border-radius:26px;padding:18px;box-shadow:var(--shadow);margin-top:14px;backdrop-filter:blur(16px)}.card h2{font-size:18px;margin:0 0 12px}.card h3{font-size:14px;margin:16px 0 10px;color:#4e789b}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field label{display:block;font-size:12px;color:#617b92;margin:0 0 6px}.input{width:100%;padding:13px 14px;border:1px solid rgba(105,177,229,.3);border-radius:14px;background:#fff;color:#2d4962;outline:none;font-size:15px}.input:focus{border-color:#76c8ff;box-shadow:0 0 0 4px rgba(118,200,255,.11)}textarea.input{min-height:105px;resize:vertical;line-height:1.7}
+button{font-family:inherit}.btn{width:100%;padding:13px 15px;border:0;border-radius:14px;font-weight:800;color:white;background:linear-gradient(135deg,var(--sky),var(--pink));cursor:pointer}.btn.secondary{background:#e9f6ff;color:#4b789c}.btn.danger{background:#fff0f4;color:#cf5d86}.btn.dark{background:#385d79}.hint{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}.status{margin-top:10px;min-height:20px;font-size:13px;font-weight:700}.ok{color:#3d9a73}.err{color:#d45e83}.hidden{display:none!important}.login{min-height:76vh;display:flex;align-items:center}.login .card{width:100%}
+.toolbar{position:sticky;bottom:12px;z-index:20;margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px;background:rgba(255,255,255,.82);padding:10px;border:1px solid #fff;border-radius:20px;backdrop-filter:blur(16px);box-shadow:var(--shadow)}
+.tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 6px}.tab{white-space:nowrap;border:0;border-radius:999px;padding:9px 13px;background:#eef8ff;color:#4d7899;font-weight:750;cursor:pointer}.tab.active{background:linear-gradient(135deg,var(--sky),var(--pink));color:#fff}
+.panel{display:none}.panel.active{display:block}.subcard{padding:14px;border-radius:20px;background:rgba(255,255,255,.62);border:1px solid #fff;margin-top:10px}
+.slots{display:grid;gap:12px}.slot{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px;border-radius:20px;background:rgba(255,255,255,.62);border:1px solid #fff}.preview{width:120px;height:145px;border-radius:16px;background:linear-gradient(145deg,#dff4ff,#fff1f6);display:grid;place-items:center;overflow:hidden;color:#7ba2bf}.preview img{width:100%;height:100%;object-fit:cover}.slot-actions{display:flex;gap:8px;margin-top:8px}.slot-actions button{flex:1;padding:10px;border:0;border-radius:12px;font-weight:750}
+.switchline{display:flex;align-items:center;gap:9px;margin-top:8px;font-size:13px;color:#5e7890}.colorrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.colorInput{height:48px;padding:5px}
+.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.45);border-top-color:white;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-left:6px}@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.row,.colorrow{grid-template-columns:1fr}.slot{grid-template-columns:92px 1fr}.preview{width:92px;height:122px}.toolbar{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>أضف صورك من الموبايل، وسيتم تحديث الموقع على GitHub Pages.</p></div>
+  <div class="top"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>من هنا تقدر تعدّل كل النصوص والصور والتواريخ والألوان بدون لمس الكود.</p></div>
 
   <div id="loginBox" class="login">
     <div class="card">
@@ -22,145 +32,252 @@
       <div class="field"><label>باسورد لوحة الإدارة</label><input id="adminPass" class="input" type="password" inputmode="numeric" placeholder="••••"></div>
       <button class="btn" onclick="adminLogin()">دخول</button>
       <div id="loginStatus" class="status"></div>
-      <div class="hint">الباسورد المبدئي للوحة الإدارة: <b>2580</b>. غيّره داخل ملف admin.html قبل النشر لو حابب.</div>
     </div>
   </div>
 
   <div id="dashboard" class="hidden">
     <div class="card">
-      <h2>1) ربط GitHub</h2>
+      <h2>اتصال GitHub</h2>
       <div class="row">
-        <div class="field"><label>GitHub username</label><input id="owner" class="input" placeholder="مثال: omarelgendy"></div>
+        <div class="field"><label>GitHub username</label><input id="owner" class="input"></div>
         <div class="field"><label>Repository</label><input id="repo" class="input" value="birthday-gift"></div>
       </div>
       <div class="row">
         <div class="field"><label>Branch</label><input id="branch" class="input" value="main"></div>
         <div class="field"><label>Fine-grained token</label><input id="token" class="input" type="password" placeholder="github_pat_..."></div>
       </div>
-      <button id="connectBtn" class="btn" onclick="connectRepo()">اتصال وجلب الصور الحالية</button>
+      <label class="switchline"><input id="rememberToken" type="checkbox"> حفظ التوكن على هذا الجهاز فقط</label>
+      <button id="connectBtn" class="btn" onclick="connectRepo()">اتصال وجلب بيانات الموقع</button>
       <div id="connectStatus" class="status"></div>
-      <div class="hint">التوكن لا يتم رفعه للموقع ولا حفظه داخل الملفات. استخدم Fine-grained token بصلاحية <b>Contents: Read and write</b> لهذا الريبو فقط.</div>
+      <div class="hint">فعّل حفظ التوكن فقط على جهازك الشخصي. التوكن يعطي صلاحية تعديل هذا الريبو.</div>
     </div>
 
-    <div id="galleryCard" class="card hidden">
-      <h2>2) صور الموقع</h2>
-      <div class="slots" id="slots"></div>
-      <div class="hint">الصور يتم ضغطها تلقائيًا قبل الرفع لتكون سريعة على الموبايل. بعد الحفظ قد تحتاج GitHub Pages من ثوانٍ إلى دقائق بسيطة ليظهر التحديث.</div>
+    <div id="editor" class="hidden">
+      <div class="card">
+        <div class="tabs" id="tabs">
+          <button class="tab active" data-tab="general">عام</button>
+          <button class="tab" data-tab="story">القصة</button>
+          <button class="tab" data-tab="reasons">أسباب الحب</button>
+          <button class="tab" data-tab="gallery">الصور</button>
+          <button class="tab" data-tab="surprises">المفاجآت</button>
+          <button class="tab" data-tab="counter">العداد</button>
+          <button class="tab" data-tab="letter">الرسالة</button>
+          <button class="tab" data-tab="final">النهاية والألوان</button>
+        </div>
+      </div>
+
+      <div class="panel active" id="panel-general">
+        <div class="card">
+          <h2>شاشة البداية والباسورد</h2>
+          <div class="row">
+            <div class="field"><label>عنوان الصفحة</label><input id="pageTitle" class="input"></div>
+            <div class="field"><label>باسورد الموقع</label><input id="sitePassword" class="input"></div>
+          </div>
+          <div class="field"><label>الباسورد الظاهر تحت الخانة</label><input id="passwordHint" class="input"></div>
+          <div class="row">
+            <div class="field"><label>عنوان شاشة القفل</label><input id="lockTitleF" class="input"></div>
+            <div class="field"><label>زر فتح الهدية</label><input id="lockButtonF" class="input"></div>
+          </div>
+          <div class="field"><label>كلام شاشة القفل</label><textarea id="lockTextF" class="input"></textarea></div>
+          <h3>الأنيميشن الافتتاحي</h3>
+          <div class="row">
+            <div class="field"><label>عنوان الأنيميشن</label><input id="introTitleF" class="input"></div>
+            <div class="field"><label>السطر الصغير</label><input id="introSubtitleF" class="input"></div>
+          </div>
+          <h3>أول شاشة بعد الدخول</h3>
+          <div class="field"><label>Badge</label><input id="heroBadgeF" class="input"></div>
+          <div class="field"><label>العنوان (اكتب سطر جديد لو عايزه سطرين)</label><textarea id="heroTitleF" class="input" style="min-height:75px"></textarea></div>
+          <div class="field"><label>النص الرئيسي</label><textarea id="heroTextF" class="input"></textarea></div>
+          <div class="row">
+            <div class="field"><label>نص الزر</label><input id="heroButtonF" class="input"></div>
+            <div class="field"><label>الملاحظة تحت الزر</label><input id="heroNoteF" class="input"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-story">
+        <div class="card"><h2>Our Story</h2>
+          <div class="row"><div class="field"><label>عنوان القسم</label><input id="storyTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="storySubtitleF" class="input"></div></div>
+          <div id="storyItems"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-reasons">
+        <div class="card"><h2>Reasons I Love You</h2>
+          <div class="row"><div class="field"><label>عنوان القسم</label><input id="reasonsTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="reasonsSubtitleF" class="input"></div></div>
+          <div id="reasonItems"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-gallery">
+        <div class="card"><h2>معرض الصور</h2>
+          <div class="row"><div class="field"><label>عنوان القسم</label><input id="galleryTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="gallerySubtitleF" class="input"></div></div>
+          <div class="slots" id="slots"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-surprises">
+        <div class="card"><h2>المفاجآت</h2>
+          <div class="row"><div class="field"><label>عنوان القسم</label><input id="surprisesTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="surprisesSubtitleF" class="input"></div></div>
+          <div id="surpriseItems"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-counter">
+        <div class="card"><h2>العداد</h2>
+          <div class="row"><div class="field"><label>عنوان القسم</label><input id="counterTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="counterSubtitleF" class="input"></div></div>
+          <div class="field"><label>تاريخ بداية العلاقة</label><input id="counterStartF" class="input" type="datetime-local"></div>
+          <div class="field"><label>النص تحت العداد</label><input id="counterFooterF" class="input"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-letter">
+        <div class="card"><h2>رسالة عيد الميلاد</h2>
+          <div class="row"><div class="field"><label>عنوان القسم</label><input id="letterTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="letterSubtitleF" class="input"></div></div>
+          <div class="field"><label>عنوان داخل الرسالة</label><input id="letterLabelF" class="input"></div>
+          <div class="field"><label>نص الرسالة بالكامل</label><textarea id="letterBodyF" class="input" style="min-height:260px"></textarea></div>
+          <div class="field"><label>التوقيع</label><input id="letterSignatureF" class="input"></div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-final">
+        <div class="card"><h2>النهاية</h2>
+          <div class="field"><label>العنوان</label><input id="finalHeadingF" class="input"></div>
+          <div class="field"><label>السطر التالي</label><input id="finalTextF" class="input"></div>
+          <div class="field"><label>سطر عيد الميلاد</label><input id="finalBirthdayF" class="input"></div>
+          <h3>ألوان الموقع</h3>
+          <div class="colorrow">
+            <div class="field"><label>السماوي</label><input id="skyColorF" class="input colorInput" type="color"></div>
+            <div class="field"><label>الوردي</label><input id="pinkColorF" class="input colorInput" type="color"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <button id="saveAllBtn" class="btn" onclick="saveAll()">حفظ كل التعديلات</button>
+        <button class="btn dark" onclick="openSite()">فتح الموقع للمراجعة</button>
+      </div>
+      <div id="saveStatus" class="status"></div>
     </div>
   </div>
 </div>
 <script>
 const ADMIN_PASSWORD='2580';
-let cfg={gallery:[{src:'',caption:'الصورة المفضلة عندي 🩷'},{src:'',caption:'ذكرى مستحيل أنساها'},{src:'',caption:'أحلى لحظة'}]};
+let cfg={};
 let gh={owner:'',repo:'',branch:'main',token:''};
 
+const $=id=>document.getElementById(id);
 function adminLogin(){
-  const p=document.getElementById('adminPass').value;
-  const s=document.getElementById('loginStatus');
-  if(p!==ADMIN_PASSWORD){s.textContent='الباسورد غير صحيح';s.className='status err';return}
-  document.getElementById('loginBox').classList.add('hidden');
-  document.getElementById('dashboard').classList.remove('hidden');
-  document.getElementById('owner').value=localStorage.getItem('gift_owner')||'';
-  document.getElementById('repo').value=localStorage.getItem('gift_repo')||'birthday-gift';
-  document.getElementById('branch').value=localStorage.getItem('gift_branch')||'main';
+  if($('adminPass').value!==ADMIN_PASSWORD){$('loginStatus').textContent='الباسورد غير صحيح';$('loginStatus').className='status err';return}
+  $('loginBox').classList.add('hidden');$('dashboard').classList.remove('hidden');
+  $('owner').value=localStorage.getItem('gift_owner')||'1xbet13277-ai';
+  $('repo').value=localStorage.getItem('gift_repo')||'birthday-gift';
+  $('branch').value=localStorage.getItem('gift_branch')||'main';
+  const saved=localStorage.getItem('gift_token')||'';
+  if(saved){$('token').value=saved;$('rememberToken').checked=true}
 }
+$('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')adminLogin()});
 
-document.getElementById('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')adminLogin()});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');$('panel-'+b.dataset.tab).classList.add('active');
+});
 
 function headers(){return {'Accept':'application/vnd.github+json','Authorization':'Bearer '+gh.token,'X-GitHub-Api-Version':'2022-11-28','Content-Type':'application/json'}}
 function api(path){return `https://api.github.com/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${path}`}
 function decodeB64(s){const bin=atob(s.replace(/\n/g,''));const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));return new TextDecoder().decode(bytes)}
 function encodeB64(s){const bytes=new TextEncoder().encode(s);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin)}
-
-async function ghGet(path){
-  const r=await fetch(api(path)+'?ref='+encodeURIComponent(gh.branch)+'&t='+Date.now(),{headers:headers()});
-  if(r.status===404)return null;
-  if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('GitHub error '+r.status));
-  return r.json();
-}
-async function ghPut(path,contentBase64,message,sha){
-  const body={message,content:contentBase64,branch:gh.branch};if(sha)body.sha=sha;
-  const r=await fetch(api(path),{method:'PUT',headers:headers(),body:JSON.stringify(body)});
-  if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('GitHub error '+r.status));
-  return r.json();
-}
+async function ghGet(path){const r=await fetch(api(path)+'?ref='+encodeURIComponent(gh.branch)+'&t='+Date.now(),{headers:headers()});if(r.status===404)return null;if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('GitHub error '+r.status));return r.json()}
+async function ghPut(path,contentBase64,message,sha){const body={message,content:contentBase64,branch:gh.branch};if(sha)body.sha=sha;const r=await fetch(api(path),{method:'PUT',headers:headers(),body:JSON.stringify(body)});if(!r.ok)throw new Error((await r.json().catch(()=>({}))).message||('GitHub error '+r.status));return r.json()}
 
 async function connectRepo(){
-  const status=document.getElementById('connectStatus');const btn=document.getElementById('connectBtn');
-  gh.owner=document.getElementById('owner').value.trim();gh.repo=document.getElementById('repo').value.trim();gh.branch=document.getElementById('branch').value.trim()||'main';gh.token=document.getElementById('token').value.trim();
-  if(!gh.owner||!gh.repo||!gh.token){status.textContent='اكتب اسم الحساب والريبو والتوكن';status.className='status err';return}
-  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الاتصال';
+  gh.owner=$('owner').value.trim();gh.repo=$('repo').value.trim();gh.branch=$('branch').value.trim()||'main';gh.token=$('token').value.trim();
+  if(!gh.owner||!gh.repo||!gh.token){$('connectStatus').textContent='اكتب اسم الحساب والريبو والتوكن';$('connectStatus').className='status err';return}
+  const btn=$('connectBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الاتصال';
   try{
     const file=await ghGet('config.json');
-    if(file&&file.content){cfg=JSON.parse(decodeB64(file.content));}
-    if(!Array.isArray(cfg.gallery))cfg.gallery=[];
-    while(cfg.gallery.length<3)cfg.gallery.push({src:'',caption:''});
+    if(!file||!file.content)throw new Error('config.json غير موجود');
+    cfg=JSON.parse(decodeB64(file.content));
     localStorage.setItem('gift_owner',gh.owner);localStorage.setItem('gift_repo',gh.repo);localStorage.setItem('gift_branch',gh.branch);
-    renderSlots();document.getElementById('galleryCard').classList.remove('hidden');
-    status.textContent='تم الاتصال بنجاح';status.className='status ok';
-  }catch(e){status.textContent='فشل الاتصال: '+e.message;status.className='status err'}
-  finally{btn.disabled=false;btn.textContent='اتصال وجلب الصور الحالية'}
+    if($('rememberToken').checked)localStorage.setItem('gift_token',gh.token);else localStorage.removeItem('gift_token');
+    renderAll();$('editor').classList.remove('hidden');$('connectStatus').textContent='تم الاتصال. كل أقسام الموقع جاهزة للتعديل.';$('connectStatus').className='status ok';
+  }catch(e){$('connectStatus').textContent='فشل الاتصال: '+e.message;$('connectStatus').className='status err'}
+  finally{btn.disabled=false;btn.textContent='اتصال وجلب بيانات الموقع'}
 }
 
-function previewUrl(src){
-  if(!src)return '';
-  return `https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${src}?v=${Date.now()}`;
+function val(id,v=''){if($(id))$(id).value=v??''}
+function renderAll(){
+  const site=cfg.site||{};
+  val('pageTitle',site.pageTitle);val('sitePassword',site.password);val('passwordHint',site.passwordHint);val('lockTitleF',site.lockTitle);val('lockButtonF',site.lockButton);val('lockTextF',site.lockText);
+  val('introTitleF',site.introTitle);val('introSubtitleF',site.introSubtitle);val('heroBadgeF',site.heroBadge);val('heroTitleF',site.heroTitle);val('heroTextF',site.heroText);val('heroButtonF',site.heroButton);val('heroNoteF',site.heroNote);
+  const story=cfg.story||{};val('storyTitleF',story.title);val('storySubtitleF',story.subtitle);renderStory(story.items||[]);
+  const reasons=cfg.reasons||{};val('reasonsTitleF',reasons.title);val('reasonsSubtitleF',reasons.subtitle);renderReasons(reasons.items||[]);
+  const gs=cfg.gallerySection||{};val('galleryTitleF',gs.title);val('gallerySubtitleF',gs.subtitle);renderGallery();
+  const sp=cfg.surprises||{};val('surprisesTitleF',sp.title);val('surprisesSubtitleF',sp.subtitle);renderSurprises(sp.items||[]);
+  const c=cfg.counter||{};val('counterTitleF',c.title);val('counterSubtitleF',c.subtitle);val('counterStartF',(c.startDate||'').slice(0,16));val('counterFooterF',c.footer);
+  const l=cfg.letter||{};val('letterTitleF',l.title);val('letterSubtitleF',l.subtitle);val('letterLabelF',l.label);val('letterBodyF',l.body);val('letterSignatureF',l.signature);
+  const f=cfg.final||{};val('finalHeadingF',f.heading);val('finalTextF',f.text);val('finalBirthdayF',f.birthdayLine);
+  const t=cfg.theme||{};val('skyColorF',t.sky||'#78c8ff');val('pinkColorF',t.pink||'#ff92b9');
 }
-function renderSlots(){
-  const root=document.getElementById('slots');root.innerHTML='';
+function esc(v){return String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+function renderStory(items){
+  const root=$('storyItems');root.innerHTML='';
+  for(let i=0;i<4;i++){const x=items[i]||{};root.innerHTML+=`<div class="subcard"><h3>المحطة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="st${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>التاريخ</label><input id="st${i}d" class="input" value="${esc(x.date)}"></div></div><div class="field"><label>الوصف</label><textarea id="st${i}x" class="input">${x.text||''}</textarea></div></div>`}
+}
+function renderReasons(items){
+  const root=$('reasonItems');root.innerHTML='';
+  for(let i=0;i<4;i++){root.innerHTML+=`<div class="field"><label>السبب ${i+1}</label><textarea id="rs${i}" class="input" style="min-height:75px">${items[i]||''}</textarea></div>`}
+}
+function previewUrl(src){return src?`https://raw.githubusercontent.com/${gh.owner}/${gh.repo}/${gh.branch}/${src}?v=${Date.now()}`:''}
+function renderGallery(){
+  if(!Array.isArray(cfg.gallery))cfg.gallery=[];
+  while(cfg.gallery.length<3)cfg.gallery.push({src:'',caption:''});
+  const root=$('slots');root.innerHTML='';
   cfg.gallery.slice(0,3).forEach((item,i)=>{
     const el=document.createElement('div');el.className='slot';
-    el.innerHTML=`
-      <div class="preview" id="preview${i}">${item.src?`<img src="${previewUrl(item.src)}" alt="">`:'صورة '+(i+1)}</div>
-      <div>
-        <div class="field"><label>اختيار صورة</label><input id="file${i}" class="input" type="file" accept="image/*"></div>
-        <div class="field"><label>الكلام تحت الصورة</label><input id="caption${i}" class="input" value="${(item.caption||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;')}"></div>
-        <div class="slot-actions"><button class="btn secondary" onclick="saveSlot(${i},this)">رفع وحفظ</button><button class="btn danger" onclick="removeSlot(${i},this)">حذف من الموقع</button></div>
-        <div id="slotStatus${i}" class="status"></div>
-      </div>`;
-    root.appendChild(el);
-    document.getElementById('file'+i).addEventListener('change',ev=>localPreview(i,ev.target.files[0]));
-  });
+    el.innerHTML=`<div class="preview" id="preview${i}">${item.src?`<img src="${previewUrl(item.src)}">`:'صورة '+(i+1)}</div><div><div class="field"><label>اختيار صورة جديدة</label><input id="file${i}" class="input" type="file" accept="image/*"></div><div class="field"><label>الكلام تحت الصورة</label><input id="caption${i}" class="input" value="${esc(item.caption)}"></div><div class="slot-actions"><button class="btn secondary" onclick="uploadPhoto(${i},this)">رفع الصورة</button><button class="btn danger" onclick="removePhoto(${i})">إخفاء الصورة</button></div><div id="slotStatus${i}" class="status"></div></div>`;
+    root.appendChild(el);$('file'+i).addEventListener('change',e=>{const f=e.target.files[0];if(f){$('preview'+i).innerHTML=`<img src="${URL.createObjectURL(f)}">`}})
+  })
 }
-function localPreview(i,file){if(!file)return;const u=URL.createObjectURL(file);document.getElementById('preview'+i).innerHTML=`<img src="${u}" alt="">`}
-
+function renderSurprises(items){
+  const root=$('surpriseItems');root.innerHTML='';
+  for(let i=0;i<4;i++){const x=items[i]||{};root.innerHTML+=`<div class="subcard"><h3>المفاجأة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="su${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>نص الزر</label><input id="su${i}b" class="input" value="${esc(x.button)}"></div></div><div class="field"><label>الوصف القصير</label><input id="su${i}d" class="input" value="${esc(x.description)}"></div><div class="field"><label>عنوان الرسالة بعد الضغط</label><input id="su${i}mt" class="input" value="${esc(x.modalTitle)}"></div><div class="field"><label>الرسالة بعد الضغط</label><textarea id="su${i}mx" class="input">${x.modalText||''}</textarea></div></div>`}
+}
 async function compressImage(file){
-  const bmp=await createImageBitmap(file);const max=1600;let w=bmp.width,h=bmp.height;
-  if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}
-  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;const ctx=canvas.getContext('2d');ctx.drawImage(bmp,0,0,w,h);
+  const bmp=await createImageBitmap(file);const max=1600;let w=bmp.width,h=bmp.height;if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}
+  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(bmp,0,0,w,h);
   const blob=await new Promise(res=>canvas.toBlob(res,'image/jpeg',.84));
-  const data=await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(blob)});
-  return data.split(',')[1];
+  const data=await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(blob)});return data.split(',')[1]
 }
-async function saveConfig(){
-  const old=await ghGet('config.json');
-  const b64=encodeB64(JSON.stringify(cfg,null,2));
-  await ghPut('config.json',b64,'Update birthday gallery',old&&old.sha);
+async function uploadPhoto(i,btn){
+  const file=$('file'+i).files[0];if(!file){$('slotStatus'+i).textContent='اختار صورة أولًا';$('slotStatus'+i).className='status err';return}
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الرفع';
+  try{const b64=await compressImage(file);const path=`images/photo-${i+1}-${Date.now()}.jpg`;await ghPut(path,b64,`Upload birthday photo ${i+1}`);cfg.gallery[i].src=path;$('slotStatus'+i).textContent='تم رفع الصورة. اضغط حفظ كل التعديلات.';$('slotStatus'+i).className='status ok';renderGallery()}
+  catch(e){$('slotStatus'+i).textContent='خطأ: '+e.message;$('slotStatus'+i).className='status err'}
+  finally{btn.disabled=false;btn.textContent='رفع الصورة'}
 }
-async function saveSlot(i,btn){
-  const status=document.getElementById('slotStatus'+i);const file=document.getElementById('file'+i).files[0];const caption=document.getElementById('caption'+i).value.trim();
-  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الحفظ';status.textContent='';
-  try{
-    let src=cfg.gallery[i]?.src||'';
-    if(file){
-      const b64=await compressImage(file);
-      const path=`images/photo-${i+1}-${Date.now()}.jpg`;
-      await ghPut(path,b64,`Upload birthday photo ${i+1}`);
-      src=path;
-    }
-    cfg.gallery[i]={src,caption};
-    await saveConfig();
-    status.textContent='تم الحفظ. التغيير سيظهر على الموقع قريبًا.';status.className='status ok';
-    renderSlots();
-  }catch(e){status.textContent='حصل خطأ: '+e.message;status.className='status err'}
-  finally{btn.disabled=false;btn.textContent='رفع وحفظ'}
+function removePhoto(i){cfg.gallery[i].src='';renderGallery()}
+
+function collect(){
+  cfg.site={pageTitle:$('pageTitle').value,password:$('sitePassword').value,passwordHint:$('passwordHint').value,lockTitle:$('lockTitleF').value,lockText:$('lockTextF').value,lockButton:$('lockButtonF').value,introTitle:$('introTitleF').value,introSubtitle:$('introSubtitleF').value,heroBadge:$('heroBadgeF').value,heroTitle:$('heroTitleF').value,heroText:$('heroTextF').value,heroButton:$('heroButtonF').value,heroNote:$('heroNoteF').value};
+  cfg.story={title:$('storyTitleF').value,subtitle:$('storySubtitleF').value,items:Array.from({length:4},(_,i)=>({title:$('st'+i+'t').value,date:$('st'+i+'d').value,text:$('st'+i+'x').value}))};
+  cfg.reasons={title:$('reasonsTitleF').value,subtitle:$('reasonsSubtitleF').value,items:Array.from({length:4},(_,i)=>$('rs'+i).value)};
+  cfg.gallerySection={title:$('galleryTitleF').value,subtitle:$('gallerySubtitleF').value};
+  for(let i=0;i<3;i++)cfg.gallery[i].caption=$('caption'+i).value;
+  const oldTypes=((cfg.surprises||{}).items||[]).map(x=>x.type);
+  cfg.surprises={title:$('surprisesTitleF').value,subtitle:$('surprisesSubtitleF').value,items:Array.from({length:4},(_,i)=>({title:$('su'+i+'t').value,description:$('su'+i+'d').value,button:$('su'+i+'b').value,modalTitle:$('su'+i+'mt').value,modalText:$('su'+i+'mx').value,type:oldTypes[i]||['heart','heart','gift','headphones'][i]}))};
+  cfg.counter={title:$('counterTitleF').value,subtitle:$('counterSubtitleF').value,startDate:$('counterStartF').value?$('counterStartF').value+':00':'2024-01-01T00:00:00',footer:$('counterFooterF').value};
+  cfg.letter={title:$('letterTitleF').value,subtitle:$('letterSubtitleF').value,label:$('letterLabelF').value,body:$('letterBodyF').value,signature:$('letterSignatureF').value};
+  cfg.final={heading:$('finalHeadingF').value,text:$('finalTextF').value,birthdayLine:$('finalBirthdayF').value};
+  cfg.theme={sky:$('skyColorF').value,pink:$('pinkColorF').value};
 }
-async function removeSlot(i,btn){
-  if(!confirm('حذف الصورة من عرض الموقع؟'))return;
-  const status=document.getElementById('slotStatus'+i);btn.disabled=true;
-  try{cfg.gallery[i]={src:'',caption:cfg.gallery[i]?.caption||''};await saveConfig();renderSlots();}
-  catch(e){status.textContent='حصل خطأ: '+e.message;status.className='status err'}
-  finally{btn.disabled=false}
+async function saveAll(){
+  collect();const btn=$('saveAllBtn');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الحفظ';$('saveStatus').textContent='';
+  try{const old=await ghGet('config.json');await ghPut('config.json',encodeB64(JSON.stringify(cfg,null,2)),'Update birthday website content',old&&old.sha);$('saveStatus').textContent='تم الحفظ بنجاح ✅ انتظر ثوانٍ وافتح الموقع للمراجعة.';$('saveStatus').className='status ok'}
+  catch(e){$('saveStatus').textContent='حصل خطأ: '+e.message;$('saveStatus').className='status err'}
+  finally{btn.disabled=false;btn.textContent='حفظ كل التعديلات'}
 }
+function openSite(){window.open(`https://${gh.owner}.github.io/${gh.repo}/?v=${Date.now()}`,'_blank')}
 </script>
 </body></html>

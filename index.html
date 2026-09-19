@@ -392,8 +392,8 @@ section{padding:30px 18px}
         <path d="M20.8 4.6c-2-2-5.3-1.8-7.3.3L12 6.4l-1.5-1.5C8.5 2.8 5.2 2.6 3.2 4.6c-2.3 2.3-2.2 6 .2 8.3L12 21l8.6-8.1c2.4-2.3 2.5-6 .2-8.3Z"/>
       </svg>
     </div>
-    <h1 class="intro-title">For My Love</h1>
-    <p class="intro-sub">A little surprise is waiting for you</p>
+    <h1 class="intro-title" id="introTitle">For My Love</h1>
+    <p class="intro-sub" id="introSubtitle">A little surprise is waiting for you</p>
   </div>
 </div>
 
@@ -426,15 +426,15 @@ section{padding:30px 18px}
     <div class="lock-symbol">
       <svg class="icon lg"><use href="#i-lock"></use></svg>
     </div>
-    <h2>Just For You</h2>
-    <p>الموقع ده معمول لشخص واحد بس.<br>اكتبي الباسورد علشان تبدأ المفاجأة.</p>
+    <h2 id="lockTitle">Just For You</h2>
+    <p id="lockText">الموقع ده معمول لشخص واحد بس.<br>اكتبي الباسورد علشان تبدأ المفاجأة.</p>
     <input id="passwordInput" class="lock-input" type="text" inputmode="text" placeholder="20/9/2003" autocomplete="off">
     <button class="lock-btn" onclick="unlockSite()">
       <svg class="icon sm"><use href="#i-gift"></use></svg>
-      فتح الهدية
+      <span id="lockButtonLabel">فتح الهدية</span>
     </button>
     <div id="lockError"></div>
-    <div class="lock-hint" style="font-size:13px;color:#d96f9a;font-weight:800">الباسورد: 20/9/2003 🎂</div>
+    <div class="lock-hint" id="lockHint">الباسورد: 20/9/2003 🎂</div>
   </div>
 </div>
 
@@ -453,15 +453,15 @@ section{padding:30px 18px}
   <div class="hero-card">
     <div class="hero-badge">
       <svg class="icon sm"><use href="#i-heart"></use></svg>
-      Birthday surprise
+      <span id="heroBadgeText">Birthday surprise</span>
     </div>
-    <h1>Happy Birthday<br>My Love ♡</h1>
-    <p>في يومك الحلو، حبيت أسيب لكِ مكان صغير على الإنترنت… مليان ذكريات، رسائل، ومفاجآت كلها ليكِ أنتِ.</p>
+    <h1 id="heroTitle">Happy Birthday<br>My Love ♡</h1>
+    <p id="heroText">في يومك الحلو، حبيت أسيب لكِ مكان صغير على الإنترنت… مليان ذكريات، رسائل، ومفاجآت كلها ليكِ أنتِ.</p>
     <button class="cta" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">
-      ابدئي المفاجأة
+      <span id="heroButtonText">ابدئي المفاجأة</span>
       <svg class="icon sm"><use href="#i-gift"></use></svg>
     </button>
-    <div class="note">مصنوع بحب… ليكِ وحدك <span class="emoji">🩷</span></div>
+    <div class="note" id="heroNote">مصنوع بحب… ليكِ وحدك 🩷</div>
     <div class="scroll"><svg class="icon"><use href="#i-chevron-down"></use></svg></div>
   </div>
 </section>
@@ -470,44 +470,44 @@ section{padding:30px 18px}
 
 <section id="story">
   <div class="section-head">
-    <h2>Our Story</h2>
-    <p>كل لحظة صغيرة… عملت حكاية كبيرة</p>
+    <h2 id="storyTitle">Our Story</h2>
+    <p id="storySubtitle">كل لحظة صغيرة… عملت حكاية كبيرة</p>
   </div>
 
   <div class="timeline">
     <div class="event">
       <div class="event-icon"><svg class="icon"><use href="#i-message"></use></svg></div>
       <div class="event-card">
-        <h3>أول مرة اتكلمنا</h3>
-        <div class="date">ضع التاريخ هنا</div>
-        <p>كلام بسيط جدًا… لكنه كان بداية حاجة ما كنتش أعرف قد إيه هتبقى غالية.</p>
+        <h3 id="storyItemTitle0">أول مرة اتكلمنا</h3>
+        <div class="date" id="storyItemDate0">ضع التاريخ هنا</div>
+        <p id="storyItemText0">كلام بسيط جدًا… لكنه كان بداية حاجة ما كنتش أعرف قد إيه هتبقى غالية.</p>
       </div>
     </div>
 
     <div class="event">
       <div class="event-icon"><svg class="icon"><use href="#i-camera"></use></svg></div>
       <div class="event-card">
-        <h3>أول صورة</h3>
-        <div class="date">ضع التاريخ هنا</div>
-        <p>صورة واحدة بس، وفيها ذكرى كل ما أشوفها أبتسم من غير ما أحس.</p>
+        <h3 id="storyItemTitle1">أول صورة</h3>
+        <div class="date" id="storyItemDate1">ضع التاريخ هنا</div>
+        <p id="storyItemText1">صورة واحدة بس، وفيها ذكرى كل ما أشوفها أبتسم من غير ما أحس.</p>
       </div>
     </div>
 
     <div class="event">
       <div class="event-icon"><svg class="icon"><use href="#i-coffee"></use></svg></div>
       <div class="event-card">
-        <h3>أول خروجة</h3>
-        <div class="date">ضع التاريخ هنا</div>
-        <p>ضحك، كلام، وتفاصيل صغيرة خلت اليوم ده يفضل مميز.</p>
+        <h3 id="storyItemTitle2">أول خروجة</h3>
+        <div class="date" id="storyItemDate2">ضع التاريخ هنا</div>
+        <p id="storyItemText2">ضحك، كلام، وتفاصيل صغيرة خلت اليوم ده يفضل مميز.</p>
       </div>
     </div>
 
     <div class="event">
       <div class="event-icon"><svg class="icon"><use href="#i-sparkles"></use></svg></div>
       <div class="event-card">
-        <h3>وما زال القادم أجمل</h3>
-        <div class="date">Always</div>
-        <p>لأن أجمل جزء في الحكاية… لسه بيتكتب.</p>
+        <h3 id="storyItemTitle3">وما زال القادم أجمل</h3>
+        <div class="date" id="storyItemDate3">Always</div>
+        <p id="storyItemText3">لأن أجمل جزء في الحكاية… لسه بيتكتب.</p>
       </div>
     </div>
   </div>
@@ -517,26 +517,26 @@ section{padding:30px 18px}
 
 <section>
   <div class="section-head">
-    <h2>Reasons I Love You</h2>
-    <p>وده مجرد جزء صغير من الأسباب</p>
+    <h2 id="reasonsTitle">Reasons I Love You</h2>
+    <p id="reasonsSubtitle">وده مجرد جزء صغير من الأسباب</p>
   </div>
 
   <div class="grid2">
     <div class="love-card">
       <div class="love-icon"><svg class="icon md"><use href="#i-heart"></use></svg></div>
-      <b>لأن قلبك طيب، ووجودك بيخلّي كل حاجة أهدى.</b>
+      <b id="reasonText0">لأن قلبك طيب، ووجودك بيخلّي كل حاجة أهدى.</b>
     </div>
     <div class="love-card">
       <div class="love-icon"><svg class="icon md"><use href="#i-smile"></use></svg></div>
-      <b>لأن ضحكتك من الحاجات اللي بتغيّر يوم كامل.</b>
+      <b id="reasonText1">لأن ضحكتك من الحاجات اللي بتغيّر يوم كامل.</b>
     </div>
     <div class="love-card">
       <div class="love-icon"><svg class="icon md"><use href="#i-flower"></use></svg></div>
-      <b>لأنك جميلة في التفاصيل اللي يمكن أنتِ مش واخدة بالك منها.</b>
+      <b id="reasonText2">لأنك جميلة في التفاصيل اللي يمكن أنتِ مش واخدة بالك منها.</b>
     </div>
     <div class="love-card">
       <div class="love-icon"><svg class="icon md"><use href="#i-infinity"></use></svg></div>
-      <b>ولأنك ببساطة… أنتِ، وده سبب كفاية.</b>
+      <b id="reasonText3">ولأنك ببساطة… أنتِ، وده سبب كفاية.</b>
     </div>
   </div>
 </section>
@@ -545,8 +545,8 @@ section{padding:30px 18px}
 
 <section>
   <div class="section-head">
-    <h2>Our Gallery</h2>
-    <p>هنبدّل الأماكن دي بصوركم الحقيقية</p>
+    <h2 id="galleryTitle">Our Gallery</h2>
+    <p id="gallerySubtitle">أجمل لحظاتنا سوا</p>
   </div>
 
   <div class="gallery">
@@ -573,8 +573,8 @@ section{padding:30px 18px}
 
 <section>
   <div class="section-head">
-    <h2>Little Surprises</h2>
-    <p>اضغطي على أي واحدة</p>
+    <h2 id="surprisesTitle">Little Surprises</h2>
+    <p id="surprisesSubtitle">اضغطي على أي واحدة</p>
   </div>
 
   <div class="grid2">
@@ -582,12 +582,12 @@ section{padding:30px 18px}
       <div class="surprise-top">
         <div class="surprise-title">
           <div class="surprise-icon"><svg class="icon"><use href="#i-cloud"></use></svg></div>
-          <b>لما تكوني زعلانة</b>
+          <b id="surpriseTitle0">لما تكوني زعلانة</b>
         </div>
       </div>
-      <p>رسالة صغيرة مخصوص علشان اليوم التقيل.</p>
-      <button class="small-btn" onclick="showMsg('heart','لما تكوني زعلانة','افتكري إن في حد شايفك أجمل جزء في يومه، ومهما اليوم كان صعب… ابتسامتك تستاهل ترجع تاني. 🩷')">
-        افتحي الرسالة
+      <p id="surpriseDesc0">رسالة صغيرة مخصوص علشان اليوم التقيل.</p>
+      <button class="small-btn" onclick="openSurprise(0)">
+        <span id="surpriseButton0">افتحي الرسالة</span>
         <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
       </button>
     </div>
@@ -596,12 +596,12 @@ section{padding:30px 18px}
       <div class="surprise-top">
         <div class="surprise-title">
           <div class="surprise-icon"><svg class="icon"><use href="#i-heart"></use></svg></div>
-          <b>لما تشتاقيلي</b>
+          <b id="surpriseTitle1">لما تشتاقيلي</b>
         </div>
       </div>
-      <p>ودي تتفتح وقت الاشتياق بس.</p>
-      <button class="small-btn" onclick="showMsg('heart','وأنا كمان','لو فتحتي دي لأنك مشتاقالي… غالبًا في نفس اللحظة أنا مشتاق لك أكتر. 🩷')">
-        افتحي الرسالة
+      <p id="surpriseDesc1">ودي تتفتح وقت الاشتياق بس.</p>
+      <button class="small-btn" onclick="openSurprise(1)">
+        <span id="surpriseButton1">افتحي الرسالة</span>
         <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
       </button>
     </div>
@@ -610,12 +610,12 @@ section{padding:30px 18px}
       <div class="surprise-top">
         <div class="surprise-title">
           <div class="surprise-icon"><svg class="icon"><use href="#i-gift"></use></svg></div>
-          <b>صندوق المفاجأة</b>
+          <b id="surpriseTitle2">صندوق المفاجأة</b>
         </div>
       </div>
-      <p>في حاجة حلوة مستخبية جواه.</p>
-      <button class="small-btn" onclick="showMsg('gift','Surprise!','المفاجأة الحقيقية مش مكتوبة هنا… دي هتاخديها مني بنفسك. 😉')">
-        افتحي الصندوق
+      <p id="surpriseDesc2">في حاجة حلوة مستخبية جواه.</p>
+      <button class="small-btn" onclick="openSurprise(2)">
+        <span id="surpriseButton2">افتحي الصندوق</span>
         <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
       </button>
     </div>
@@ -624,12 +624,12 @@ section{padding:30px 18px}
       <div class="surprise-top">
         <div class="surprise-title">
           <div class="surprise-icon"><svg class="icon"><use href="#i-headphones"></use></svg></div>
-          <b>أغنيتنا</b>
+          <b id="surpriseTitle3">أغنيتنا</b>
         </div>
       </div>
-      <p>هنا نحط الأغنية اللي بينكم.</p>
-      <button class="small-btn" onclick="showMsg('headphones','Our Song','هنضيف هنا الأغنية بتاعتكم ونخليها تبدأ بعد الضغط علشان المتصفح يسمح بالصوت.')">
-        تشغيل
+      <p id="surpriseDesc3">هنا نحط الأغنية اللي بينكم.</p>
+      <button class="small-btn" onclick="openSurprise(3)">
+        <span id="surpriseButton3">تشغيل</span>
         <svg class="icon sm"><use href="#i-arrow-right"></use></svg>
       </button>
     </div>
@@ -640,8 +640,8 @@ section{padding:30px 18px}
 
 <section>
   <div class="section-head">
-    <h2>Still Counting</h2>
-    <p>من يوم ما بدأت الحكاية</p>
+    <h2 id="counterTitle">Still Counting</h2>
+    <p id="counterSubtitle">من يوم ما بدأت الحكاية</p>
   </div>
 
   <div class="count-wrap">
@@ -654,7 +654,7 @@ section{padding:30px 18px}
       <div class="c"><strong id="mins">00</strong><small>دقيقة</small></div>
       <div class="c"><strong id="secs">00</strong><small>ثانية</small></div>
     </div>
-    <p style="text-align:center;color:#7d93a7;font-size:12px;margin:14px 0 0">هنحط تاريخ بداية علاقتكم الحقيقي هنا</p>
+    <p id="counterFooter" style="text-align:center;color:#7d93a7;font-size:12px;margin:14px 0 0">من أول يوم لحد دلوقتي… ولسه بنعد 🩷</p>
   </div>
 </section>
 
@@ -662,30 +662,31 @@ section{padding:30px 18px}
 
 <section>
   <div class="section-head">
-    <h2>A Birthday Letter</h2>
-    <p>من قلبي… لقلبك</p>
+    <h2 id="letterTitle">A Birthday Letter</h2>
+    <p id="letterSubtitle">من قلبي… لقلبك</p>
   </div>
 
   <div class="letter">
     <div class="letter-head">
       <div class="letter-icon"><svg class="icon"><use href="#i-envelope"></use></svg></div>
-      <b>رسالة مخصوص ليكِ</b>
+      <b id="letterLabel">رسالة مخصوص ليكِ</b>
     </div>
-    <p>
-      حبيبتي…<br><br>
-      كل سنة وأنتِ أجمل حاجة حصلت في حياتي. وجودك مش مجرد جزء من يومي، أنتِ من الحاجات اللي خلت الأيام نفسها يبقى ليها طعم مختلف.<br><br>
-      أتمنى السنة الجديدة من عمرك تكون مليانة راحة، ضحك، نجاح، وحاجات حلوة كتير تستاهليها. وأتمنى أفضل موجود في كل لحظة فرح جاية لكِ، وأكون أول حد مبسوط علشانك.<br><br>
-      مهما كتبت، مش هعرف أوصف مكانتك عندي بالكامل… لكن أتمنى الموقع ده يفضل يذكّرك بحاجة واحدة: إنك غالية جدًا عليّ.
-    </p>
-    <div class="sign">Forever yours ♡</div>
+    <p id="letterBody" style="white-space:pre-line">حبيبتي…
+
+كل سنة وأنتِ أجمل حاجة حصلت في حياتي. وجودك مش مجرد جزء من يومي، أنتِ من الحاجات اللي خلت الأيام نفسها يبقى ليها طعم مختلف.
+
+أتمنى السنة الجديدة من عمرك تكون مليانة راحة، ضحك، نجاح، وحاجات حلوة كتير تستاهليها. وأتمنى أفضل موجود في كل لحظة فرح جاية لكِ، وأكون أول حد مبسوط علشانك.
+
+مهما كتبت، مش هعرف أوصف مكانتك عندي بالكامل… لكن أتمنى الموقع ده يفضل يذكّرك بحاجة واحدة: إنك غالية جدًا عليّ.</p>
+    <div class="sign" id="letterSignature">Forever yours ♡</div>
   </div>
 </section>
 
 <section class="final">
   <div class="final-card">
     <div class="final-mark"><svg class="icon lg"><use href="#i-heart"></use></svg></div>
-    <h2>This website ends here…</h2>
-    <p>but our story doesn’t.<br><br><b style="color:#4b7fac">Happy Birthday, My Love</b> <span class="emoji">🩷</span></p>
+    <h2 id="finalHeading">This website ends here…</h2>
+    <p><span id="finalText">but our story doesn’t.</span><br><br><b id="finalBirthdayLine" style="color:#4b7fac">Happy Birthday, My Love</b> <span class="emoji">🩷</span></p>
   </div>
 </section>
 
@@ -701,7 +702,7 @@ section{padding:30px 18px}
 </div>
 
 <script>
-const SITE_PASSWORD="20/9/2003";
+let SITE_PASSWORD="20/9/2003";
 
 function unlockSite(){
   const input=document.getElementById("passwordInput");
@@ -731,6 +732,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   input.addEventListener("keydown",e=>{if(e.key==="Enter")unlockSite()});
 });
 
+let surpriseConfig=[];
 const iconMap={
   heart:"i-heart",
   gift:"i-gift",
@@ -744,10 +746,15 @@ function showMsg(type,title,text){
   document.getElementById("modal").classList.add("show");
 }
 function closeModal(){document.getElementById("modal").classList.remove("show")}
+function openSurprise(i){
+  const item=surpriseConfig[i]||{};
+  showMsg(item.type||"heart",item.modalTitle||item.title||"رسالة",item.modalText||"");
+}
 
-const start=new Date("2024-01-01T00:00:00");
+let relationshipStart="2024-01-01T00:00:00";
+function getStart(){return new Date(relationshipStart)}
 function tick(){
-  let d=Math.max(0,Date.now()-start.getTime());
+  let d=Math.max(0,Date.now()-getStart().getTime());
   let D=Math.floor(d/86400000);d%=86400000;
   let H=Math.floor(d/3600000);d%=3600000;
   let M=Math.floor(d/60000);d%=60000;
@@ -806,6 +813,97 @@ setInterval(floatingHeart,1600);
 })();
 </script>
 
-\n<script id="site-config-script">\n(async function loadSiteConfig(){\n  try{\n    const res=await fetch('config.json?v='+Date.now(),{cache:'no-store'});\n    if(!res.ok) return;\n    const cfg=await res.json();\n    const gallery=Array.isArray(cfg.gallery)?cfg.gallery:[];\n    for(let i=0;i<3;i++){\n      const item=gallery[i]||{};\n      const pic=document.getElementById('galleryPic'+i);\n      const cap=document.getElementById('galleryCaption'+i);\n      if(pic && item.src){\n        pic.style.backgroundImage=`linear-gradient(180deg,transparent 45%,rgba(31,62,88,.24)),url("${encodeURI(item.src)}")`;\n        pic.classList.add('has-image');\n      }\n      if(cap && item.caption) cap.textContent=item.caption;\n    }\n  }catch(e){console.warn('Config not loaded',e)}\n})();\n</script>\n
+
+
+<script id="site-config-script">
+function setText(id,v){
+  const el=document.getElementById(id);
+  if(el && v!==undefined && v!==null) el.textContent=String(v);
+}
+function setMultiLineTitle(id,v){
+  const el=document.getElementById(id);
+  if(!el || v===undefined || v===null) return;
+  el.innerHTML=String(v).split("\n").map(x=>x.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))).join("<br>");
+}
+(async function loadSiteConfig(){
+  try{
+    const res=await fetch('config.json?v='+Date.now(),{cache:'no-store'});
+    if(!res.ok) return;
+    const cfg=await res.json();
+
+    if(cfg.theme){
+      if(cfg.theme.sky) document.documentElement.style.setProperty('--sky',cfg.theme.sky);
+      if(cfg.theme.pink) document.documentElement.style.setProperty('--pink',cfg.theme.pink);
+    }
+
+    const site=cfg.site||{};
+    if(site.pageTitle) document.title=site.pageTitle;
+    if(site.password) SITE_PASSWORD=String(site.password);
+    setText('lockTitle',site.lockTitle);
+    if(site.lockText){
+      const el=document.getElementById('lockText');
+      if(el){el.textContent=site.lockText;el.style.whiteSpace='pre-line'}
+    }
+    setText('lockButtonLabel',site.lockButton);
+    setText('lockHint',site.passwordHint);
+    if(site.password){
+      const pi=document.getElementById('passwordInput');
+      if(pi) pi.placeholder=site.password;
+    }
+    setText('introTitle',site.introTitle);
+    setText('introSubtitle',site.introSubtitle);
+    setText('heroBadgeText',site.heroBadge);
+    setMultiLineTitle('heroTitle',site.heroTitle);
+    setText('heroText',site.heroText);
+    setText('heroButtonText',site.heroButton);
+    setText('heroNote',site.heroNote);
+
+    const story=cfg.story||{};
+    setText('storyTitle',story.title); setText('storySubtitle',story.subtitle);
+    (story.items||[]).slice(0,4).forEach((it,i)=>{
+      setText('storyItemTitle'+i,it.title); setText('storyItemDate'+i,it.date); setText('storyItemText'+i,it.text);
+    });
+
+    const reasons=cfg.reasons||{};
+    setText('reasonsTitle',reasons.title); setText('reasonsSubtitle',reasons.subtitle);
+    (reasons.items||[]).slice(0,4).forEach((t,i)=>setText('reasonText'+i,t));
+
+    const gs=cfg.gallerySection||{};
+    setText('galleryTitle',gs.title); setText('gallerySubtitle',gs.subtitle);
+    const gallery=Array.isArray(cfg.gallery)?cfg.gallery:[];
+    for(let i=0;i<3;i++){
+      const item=gallery[i]||{};
+      const pic=document.getElementById('galleryPic'+i);
+      const cap=document.getElementById('galleryCaption'+i);
+      const ph=document.getElementById('galleryPlaceholder'+i);
+      if(pic && item.src){
+        pic.style.backgroundImage=`linear-gradient(180deg,transparent 45%,rgba(31,62,88,.24)),url("${encodeURI(item.src)}")`;
+        pic.style.backgroundSize='cover';pic.style.backgroundPosition='center';
+        if(ph) ph.style.display='none';
+      }
+      if(cap && item.caption!==undefined) cap.textContent=item.caption;
+    }
+
+    const surprises=cfg.surprises||{};
+    setText('surprisesTitle',surprises.title); setText('surprisesSubtitle',surprises.subtitle);
+    surpriseConfig=Array.isArray(surprises.items)?surprises.items:[];
+    surpriseConfig.slice(0,4).forEach((it,i)=>{
+      setText('surpriseTitle'+i,it.title); setText('surpriseDesc'+i,it.description); setText('surpriseButton'+i,it.button);
+    });
+
+    const counter=cfg.counter||{};
+    setText('counterTitle',counter.title); setText('counterSubtitle',counter.subtitle); setText('counterFooter',counter.footer);
+    if(counter.startDate) relationshipStart=counter.startDate;
+
+    const letter=cfg.letter||{};
+    setText('letterTitle',letter.title); setText('letterSubtitle',letter.subtitle); setText('letterLabel',letter.label);
+    setText('letterBody',letter.body); setText('letterSignature',letter.signature);
+
+    const final=cfg.final||{};
+    setText('finalHeading',final.heading); setText('finalText',final.text); setText('finalBirthdayLine',final.birthdayLine);
+  }catch(e){console.warn('Config not loaded',e)}
+})();
+</script>
+
 </body>
 </html>
