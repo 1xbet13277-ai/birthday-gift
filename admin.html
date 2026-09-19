@@ -1,306 +1,41 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eff9ff">
-<title>لوحة إدارة الهدية</title>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>لوحة الأدمن</title>
 <style>
-:root{--sky:#78c8ff;--pink:#ff92b9;--ink:#29455e;--muted:#72889c;--shadow:0 18px 45px rgba(64,128,177,.15)}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 8%,rgba(255,146,185,.24),transparent 24%),radial-gradient(circle at 90% 12%,rgba(120,200,255,.3),transparent 26%),linear-gradient(180deg,#fbfeff,#eef8ff 58%,#fff8fb);min-height:100vh}
-.wrap{max-width:860px;margin:auto;padding:24px 16px 80px}
-.hero{text-align:center;padding:14px 0 12px}
-.mark{width:70px;height:70px;border-radius:24px;margin:auto;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#e8f7ff,#fff0f5);border:1px solid white;box-shadow:var(--shadow)}
-.hero h1{margin:12px 0 5px;font-size:28px}.hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
-.card{margin-top:14px;padding:18px;border-radius:26px;background:rgba(255,255,255,.82);border:1px solid white;box-shadow:var(--shadow);backdrop-filter:blur(16px)}
-.card h2{margin:0 0 13px;font-size:19px}.card h3{margin:16px 0 10px;font-size:14px;color:#537b9d}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:11px}
-label{display:block;font-size:12px;color:#647e94;margin-bottom:6px}
-.input{width:100%;padding:13px 14px;border:1px solid rgba(104,177,229,.3);border-radius:14px;background:white;color:#2c4962;outline:none;font-size:15px}
-.input:focus{border-color:#78c8ff;box-shadow:0 0 0 4px rgba(120,200,255,.1)}
-textarea.input{min-height:105px;resize:vertical;line-height:1.7}
-.btn{width:100%;border:0;border-radius:14px;padding:13px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--sky),var(--pink));color:white}
-.btn.alt{background:#e8f6ff;color:#4c7698}.btn.dark{background:#3f627e}
-.status{min-height:20px;margin-top:9px;font-size:13px;font-weight:700}.ok{color:#31926c}.err{color:#d45d82}
-.hidden{display:none!important}.login{min-height:74vh;display:flex;align-items:center}.login>.card{width:100%}
-.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 7px}
-.tab{white-space:nowrap;border:0;border-radius:999px;padding:9px 13px;background:#edf8ff;color:#527a9b;font-weight:800;cursor:pointer}
-.tab.active{color:white;background:linear-gradient(135deg,var(--sky),var(--pink))}
-.panel{display:none}.panel.active{display:block}
-.sub{padding:14px;border-radius:20px;background:rgba(255,255,255,.64);border:1px solid white;margin-top:10px}
-.toolbar{position:sticky;bottom:12px;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;padding:10px;border-radius:20px;background:rgba(255,255,255,.84);border:1px solid white;box-shadow:var(--shadow);backdrop-filter:blur(16px)}
-.slots{display:grid;gap:12px}.slot{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px;border-radius:20px;background:rgba(255,255,255,.65);border:1px solid white}
-.preview{width:120px;height:145px;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#dff4ff,#fff1f6);display:grid;place-items:center;color:#799eba;text-align:center;padding:8px}
-.preview img{width:100%;height:100%;object-fit:cover}
-.smallrow{display:flex;gap:8px}.smallrow button{flex:1;border:0;border-radius:12px;padding:10px;font-weight:800;cursor:pointer}
-.note{font-size:12px;color:var(--muted);line-height:1.7}
-.colorrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.color{height:48px;padding:5px}
-@media(max-width:620px){.row,.colorrow{grid-template-columns:1fr}.slot{grid-template-columns:90px 1fr}.preview{width:90px;height:120px}.toolbar{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
-<div class="wrap">
-  <div class="hero"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>باسورد فقط — بدون GitHub Token. عدّل كل شيء ثم نزّل config.json وارفعه مكان القديم.</p></div>
-
-  <div id="login" class="login">
-    <div class="card">
-      <h2>دخول لوحة الأدمن</h2>
-      <div class="field"><label>الباسورد</label><input id="adminPass" class="input" type="password" inputmode="numeric" placeholder="••••"></div>
-      <button class="btn" onclick="login()">دخول</button>
-      <div id="loginStatus" class="status"></div>
-    </div>
-  </div>
-
-  <div id="dashboard" class="hidden">
-    <div class="card">
-      <h2>الإعدادات الحالية</h2>
-      <p class="note">اللوحة بتحاول تقرأ config.json المنشور تلقائيًا. ولو فشل، بتفتح بالبيانات الافتراضية بدل ما تتعطل.</p>
-      <div class="field"><label>اختياري: افتح config.json من جهازك</label><input id="configPicker" class="input" type="file" accept=".json,application/json"></div>
-      <button class="btn alt" onclick="loadPickedConfig()">فتح ملف config.json من الجهاز</button>
-      <div id="loadStatus" class="status"></div>
-    </div>
-
-    <div class="card">
-      <div class="tabs">
-        <button class="tab active" data-panel="general">عام</button>
-        <button class="tab" data-panel="story">القصة</button>
-        <button class="tab" data-panel="reasons">أسباب الحب</button>
-        <button class="tab" data-panel="gallery">الصور</button>
-        <button class="tab" data-panel="surprises">المفاجآت</button>
-        <button class="tab" data-panel="counter">العداد</button>
-        <button class="tab" data-panel="letter">الرسالة</button>
-        <button class="tab" data-panel="final">النهاية والألوان</button>
-      </div>
-    </div>
-
-    <div id="p-general" class="panel active">
-      <div class="card"><h2>الشاشة الرئيسية والباسورد</h2>
-        <div class="row"><div class="field"><label>عنوان الصفحة</label><input id="pageTitle" class="input"></div><div class="field"><label>باسورد الموقع</label><input id="sitePassword" class="input"></div></div>
-        <div class="field"><label>الباسورد الظاهر للزائرة</label><input id="passwordHint" class="input"></div>
-        <div class="row"><div class="field"><label>عنوان شاشة القفل</label><input id="lockTitle" class="input"></div><div class="field"><label>زر الفتح</label><input id="lockButton" class="input"></div></div>
-        <div class="field"><label>كلام شاشة القفل</label><textarea id="lockText" class="input"></textarea></div>
-        <h3>الافتتاحية</h3>
-        <div class="row"><div class="field"><label>العنوان</label><input id="introTitle" class="input"></div><div class="field"><label>السطر الصغير</label><input id="introSubtitle" class="input"></div></div>
-        <h3>أول شاشة</h3>
-        <div class="field"><label>Badge</label><input id="heroBadge" class="input"></div>
-        <div class="field"><label>العنوان</label><textarea id="heroTitle" class="input" style="min-height:75px"></textarea></div>
-        <div class="field"><label>النص</label><textarea id="heroText" class="input"></textarea></div>
-        <div class="row"><div class="field"><label>نص الزر</label><input id="heroButton" class="input"></div><div class="field"><label>الملاحظة</label><input id="heroNote" class="input"></div></div>
-      </div>
-    </div>
-
-    <div id="p-story" class="panel"><div class="card"><h2>القصة</h2>
-      <div class="row"><div class="field"><label>عنوان القسم</label><input id="storyTitle" class="input"></div><div class="field"><label>الوصف</label><input id="storySubtitle" class="input"></div></div>
-      <div id="storyItems"></div>
-    </div></div>
-
-    <div id="p-reasons" class="panel"><div class="card"><h2>أسباب الحب</h2>
-      <div class="row"><div class="field"><label>عنوان القسم</label><input id="reasonsTitle" class="input"></div><div class="field"><label>الوصف</label><input id="reasonsSubtitle" class="input"></div></div>
-      <div id="reasonItems"></div>
-    </div></div>
-
-    <div id="p-gallery" class="panel"><div class="card"><h2>الصور</h2>
-      <div class="row"><div class="field"><label>عنوان القسم</label><input id="galleryTitle" class="input"></div><div class="field"><label>الوصف</label><input id="gallerySubtitle" class="input"></div></div>
-      <div id="gallerySlots" class="slots"></div>
-      <p class="note">الصور تتضغط وتتخزن داخل config.json نفسه. لو الصور كبيرة جدًا خليك في 3 صور أساسية.</p>
-    </div></div>
-
-    <div id="p-surprises" class="panel"><div class="card"><h2>المفاجآت</h2>
-      <div class="row"><div class="field"><label>عنوان القسم</label><input id="surprisesTitle" class="input"></div><div class="field"><label>الوصف</label><input id="surprisesSubtitle" class="input"></div></div>
-      <div id="surpriseItems"></div>
-    </div></div>
-
-    <div id="p-counter" class="panel"><div class="card"><h2>العداد</h2>
-      <div class="row"><div class="field"><label>العنوان</label><input id="counterTitle" class="input"></div><div class="field"><label>الوصف</label><input id="counterSubtitle" class="input"></div></div>
-      <div class="field"><label>تاريخ بداية العلاقة</label><input id="counterStart" type="datetime-local" class="input"></div>
-      <div class="field"><label>النص تحت العداد</label><input id="counterFooter" class="input"></div>
-    </div></div>
-
-    <div id="p-letter" class="panel"><div class="card"><h2>رسالة عيد الميلاد</h2>
-      <div class="row"><div class="field"><label>عنوان القسم</label><input id="letterTitle" class="input"></div><div class="field"><label>الوصف</label><input id="letterSubtitle" class="input"></div></div>
-      <div class="field"><label>عنوان داخل الرسالة</label><input id="letterLabel" class="input"></div>
-      <div class="field"><label>الرسالة كاملة</label><textarea id="letterBody" class="input" style="min-height:260px"></textarea></div>
-      <div class="field"><label>التوقيع</label><input id="letterSignature" class="input"></div>
-    </div></div>
-
-    <div id="p-final" class="panel"><div class="card"><h2>النهاية والألوان</h2>
-      <div class="field"><label>عنوان النهاية</label><input id="finalHeading" class="input"></div>
-      <div class="field"><label>السطر الثاني</label><input id="finalText" class="input"></div>
-      <div class="field"><label>سطر عيد الميلاد</label><input id="finalBirthday" class="input"></div>
-      <div class="colorrow"><div class="field"><label>السماوي</label><input id="skyColor" type="color" class="input color"></div><div class="field"><label>الوردي</label><input id="pinkColor" type="color" class="input color"></div></div>
-    </div></div>
-
-    <div class="toolbar">
-      <button class="btn" onclick="downloadConfig()">تحميل config.json</button>
-      <button class="btn dark" onclick="window.open('./?v='+Date.now(),'_blank')">فتح الموقع للمراجعة</button>
-    </div>
-    <div id="saveStatus" class="status"></div>
-  </div>
-</div>
-
+:root{--sky:#78c8ff;--pink:#ff92b9;--ink:#29445c;--muted:#71879a;--shadow:0 18px 45px rgba(63,128,178,.14)}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 8%,rgba(255,146,185,.24),transparent 24%),radial-gradient(circle at 90% 12%,rgba(120,200,255,.3),transparent 26%),linear-gradient(180deg,#fbfeff,#eef8ff 58%,#fff8fb);min-height:100vh}.wrap{max-width:860px;margin:auto;padding:22px 16px 70px}.top{text-align:center}.mark{width:68px;height:68px;margin:auto;border-radius:24px;display:grid;place-items:center;background:linear-gradient(145deg,#e8f7ff,#fff0f5);box-shadow:var(--shadow);font-size:30px}h1{font-size:27px;margin:12px 0 5px}.top p,.note{color:var(--muted);font-size:13px;line-height:1.7}.card{margin-top:14px;padding:18px;border-radius:26px;background:rgba(255,255,255,.82);border:1px solid #fff;box-shadow:var(--shadow)}.login{min-height:72vh;display:flex;align-items:center}.login .card{width:100%}.hidden{display:none!important}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}label{display:block;font-size:12px;color:#647e94;margin-bottom:6px}.input{width:100%;padding:13px 14px;border:1px solid rgba(104,177,229,.3);border-radius:14px;background:#fff;color:#2c4962;outline:none;font-size:15px}textarea.input{min-height:105px;resize:vertical;line-height:1.7}.btn{width:100%;border:0;border-radius:14px;padding:13px 15px;font-weight:800;background:linear-gradient(135deg,var(--sky),var(--pink));color:#fff;cursor:pointer}.btn.alt{background:#e9f6ff;color:#4d7899}.tabs{display:flex;gap:8px;overflow:auto}.tab{white-space:nowrap;border:0;border-radius:999px;padding:9px 13px;background:#edf8ff;color:#527a9b;font-weight:800}.tab.active{color:#fff;background:linear-gradient(135deg,var(--sky),var(--pink))}.panel{display:none}.panel.active{display:block}.sub{padding:14px;border-radius:20px;background:rgba(255,255,255,.64);border:1px solid #fff;margin-top:10px}.gallery{display:grid;gap:12px}.slot{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px;background:rgba(255,255,255,.64);border:1px solid #fff;border-radius:20px}.preview{width:110px;height:135px;border-radius:16px;background:linear-gradient(145deg,#dff4ff,#fff1f6);display:grid;place-items:center;overflow:hidden;color:#769bb8}.preview img{width:100%;height:100%;object-fit:cover}.tools{position:sticky;bottom:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;padding:10px;border-radius:20px;background:rgba(255,255,255,.86);border:1px solid #fff;box-shadow:var(--shadow);backdrop-filter:blur(15px)}.status{min-height:20px;margin-top:9px;font-size:13px;font-weight:700}.ok{color:#32926c}.err{color:#d45e82}.color{height:48px;padding:4px}@media(max-width:620px){.row,.tools{grid-template-columns:1fr}.slot{grid-template-columns:90px 1fr}.preview{width:90px;height:115px}}
+</style></head>
+<body><div class="wrap"><div class="top"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>باسورد فقط. عدّل كل شيء واضغط تحميل index.html الجديد.</p></div>
+<div id="login" class="login"><div class="card"><h2>دخول الأدمن</h2><div class="field"><label>الباسورد</label><input id="ap" class="input" type="password" inputmode="numeric"></div><button class="btn" onclick="go()">دخول</button><div id="ls" class="status"></div></div></div>
+<div id="dash" class="hidden">
+<div class="card"><div class="tabs"><button class="tab active" data-p="general">عام</button><button class="tab" data-p="story">القصة</button><button class="tab" data-p="reasons">أسباب الحب</button><button class="tab" data-p="gallery">الصور</button><button class="tab" data-p="surprises">المفاجآت</button><button class="tab" data-p="counter">العداد</button><button class="tab" data-p="letter">الرسالة</button><button class="tab" data-p="final">النهاية</button></div></div>
+<div id="p-general" class="panel active"><div class="card"><h2>عام والباسورد</h2><div class="row"><div class="field"><label>عنوان الصفحة</label><input id="pageTitle" class="input"></div><div class="field"><label>باسورد الموقع</label><input id="password" class="input"></div></div><div class="field"><label>الباسورد الظاهر</label><input id="passwordHint" class="input"></div><div class="row"><div class="field"><label>عنوان شاشة القفل</label><input id="lockTitle" class="input"></div><div class="field"><label>زر الفتح</label><input id="lockButton" class="input"></div></div><div class="field"><label>نص شاشة القفل</label><textarea id="lockText" class="input"></textarea></div><div class="row"><div class="field"><label>عنوان الافتتاحية</label><input id="introTitle" class="input"></div><div class="field"><label>وصف الافتتاحية</label><input id="introSubtitle" class="input"></div></div><div class="field"><label>Badge</label><input id="heroBadge" class="input"></div><div class="field"><label>العنوان الرئيسي</label><textarea id="heroTitle" class="input" style="min-height:75px"></textarea></div><div class="field"><label>الكلام الرئيسي</label><textarea id="heroText" class="input"></textarea></div><div class="row"><div class="field"><label>زر المفاجأة</label><input id="heroButton" class="input"></div><div class="field"><label>الملاحظة</label><input id="heroNote" class="input"></div></div></div></div>
+<div id="p-story" class="panel"><div class="card"><h2>القصة</h2><div class="row"><div class="field"><label>العنوان</label><input id="storyTitle" class="input"></div><div class="field"><label>الوصف</label><input id="storySubtitle" class="input"></div></div><div id="storyItems"></div></div></div>
+<div id="p-reasons" class="panel"><div class="card"><h2>أسباب الحب</h2><div class="row"><div class="field"><label>العنوان</label><input id="reasonsTitle" class="input"></div><div class="field"><label>الوصف</label><input id="reasonsSubtitle" class="input"></div></div><div id="reasonItems"></div></div></div>
+<div id="p-gallery" class="panel"><div class="card"><h2>الصور</h2><div class="row"><div class="field"><label>العنوان</label><input id="galleryTitle" class="input"></div><div class="field"><label>الوصف</label><input id="gallerySubtitle" class="input"></div></div><div id="gallerySlots" class="gallery"></div></div></div>
+<div id="p-surprises" class="panel"><div class="card"><h2>المفاجآت</h2><div class="row"><div class="field"><label>العنوان</label><input id="surprisesTitle" class="input"></div><div class="field"><label>الوصف</label><input id="surprisesSubtitle" class="input"></div></div><div id="surpriseItems"></div></div></div>
+<div id="p-counter" class="panel"><div class="card"><h2>العداد</h2><div class="row"><div class="field"><label>العنوان</label><input id="counterTitle" class="input"></div><div class="field"><label>الوصف</label><input id="counterSubtitle" class="input"></div></div><div class="field"><label>تاريخ البداية</label><input id="counterStart" class="input" type="datetime-local"></div><div class="field"><label>النص تحت العداد</label><input id="counterFooter" class="input"></div></div></div>
+<div id="p-letter" class="panel"><div class="card"><h2>الرسالة</h2><div class="row"><div class="field"><label>العنوان</label><input id="letterTitle" class="input"></div><div class="field"><label>الوصف</label><input id="letterSubtitle" class="input"></div></div><div class="field"><label>عنوان داخل الرسالة</label><input id="letterLabel" class="input"></div><div class="field"><label>نص الرسالة</label><textarea id="letterBody" class="input" style="min-height:250px"></textarea></div><div class="field"><label>التوقيع</label><input id="letterSignature" class="input"></div></div></div>
+<div id="p-final" class="panel"><div class="card"><h2>النهاية والألوان</h2><div class="field"><label>العنوان</label><input id="finalHeading" class="input"></div><div class="field"><label>النص</label><input id="finalText" class="input"></div><div class="field"><label>سطر عيد الميلاد</label><input id="finalBirthday" class="input"></div><div class="row"><div class="field"><label>السماوي</label><input id="sky" class="input color" type="color"></div><div class="field"><label>الوردي</label><input id="pink" class="input color" type="color"></div></div></div></div>
+<div class="tools"><button class="btn" onclick="downloadSite()">تحميل index.html الجديد</button><button class="btn alt" onclick="resetData()">رجوع للنسخة الأصلية</button></div><div id="saveStatus" class="status"></div>
+</div></div>
 <script>
-const ADMIN_PASSWORD="2580";
-const DEFAULT_CONFIG={"site": {"pageTitle": "For My Love", "password": "20/9/2003", "passwordHint": "الباسورد: 20/9/2003 🎂", "lockTitle": "Just For You", "lockText": "الموقع ده معمول لشخص واحد بس.\nاكتبي الباسورد علشان تبدأ المفاجأة.", "lockButton": "فتح الهدية", "introTitle": "For My Love", "introSubtitle": "A little surprise is waiting for you", "heroBadge": "Birthday surprise", "heroTitle": "Happy Birthday\nMy Love ♡", "heroText": "في يومك الحلو، حبيت أسيب لكِ مكان صغير على الإنترنت… مليان ذكريات، رسائل، ومفاجآت كلها ليكِ أنتِ.", "heroButton": "ابدئي المفاجأة", "heroNote": "مصنوع بحب… ليكِ وحدك 🩷"}, "story": {"title": "Our Story", "subtitle": "كل لحظة صغيرة… عملت حكاية كبيرة", "items": [{"title": "أول مرة اتكلمنا", "date": "ضع التاريخ هنا", "text": "كلام بسيط جدًا… لكنه كان بداية حاجة ما كنتش أعرف قد إيه هتبقى غالية."}, {"title": "أول صورة", "date": "ضع التاريخ هنا", "text": "صورة واحدة بس، وفيها ذكرى كل ما أشوفها أبتسم من غير ما أحس."}, {"title": "أول خروجة", "date": "ضع التاريخ هنا", "text": "ضحك، كلام، وتفاصيل صغيرة خلت اليوم ده يفضل مميز."}, {"title": "وما زال القادم أجمل", "date": "Always", "text": "لأن أجمل جزء في الحكاية… لسه بيتكتب."}]}, "reasons": {"title": "Reasons I Love You", "subtitle": "وده مجرد جزء صغير من الأسباب", "items": ["لأن قلبك طيب، ووجودك بيخلّي كل حاجة أهدى.", "لأن ضحكتك من الحاجات اللي بتغيّر يوم كامل.", "لأنك جميلة في التفاصيل اللي يمكن أنتِ مش واخدة بالك منها.", "ولأنك ببساطة… أنتِ، وده سبب كفاية."]}, "gallerySection": {"title": "Our Gallery", "subtitle": "أجمل لحظاتنا سوا"}, "gallery": [{"src": "", "caption": "الصورة المفضلة عندي 🩷"}, {"src": "", "caption": "ذكرى مستحيل أنساها"}, {"src": "", "caption": "أحلى لحظة"}], "surprises": {"title": "Little Surprises", "subtitle": "اضغطي على أي واحدة", "items": [{"title": "لما تكوني زعلانة", "description": "رسالة صغيرة مخصوص علشان اليوم التقيل.", "button": "افتحي الرسالة", "modalTitle": "لما تكوني زعلانة", "modalText": "افتكري إن في حد شايفك أجمل جزء في يومه، ومهما اليوم كان صعب… ابتسامتك تستاهل ترجع تاني. 🩷", "type": "heart"}, {"title": "لما تشتاقيلي", "description": "ودي تتفتح وقت الاشتياق بس.", "button": "افتحي الرسالة", "modalTitle": "وأنا كمان", "modalText": "لو فتحتي دي لأنك مشتاقالي… غالبًا في نفس اللحظة أنا مشتاق لك أكتر. 🩷", "type": "heart"}, {"title": "صندوق المفاجأة", "description": "في حاجة حلوة مستخبية جواه.", "button": "افتحي الصندوق", "modalTitle": "Surprise!", "modalText": "المفاجأة الحقيقية مش مكتوبة هنا… دي هتاخديها مني بنفسك. 😉", "type": "gift"}, {"title": "أغنيتنا", "description": "هنا نحط الأغنية اللي بينكم.", "button": "تشغيل", "modalTitle": "Our Song", "modalText": "هنضيف هنا الأغنية بتاعتكم ونخليها تبدأ بعد الضغط علشان المتصفح يسمح بالصوت.", "type": "headphones"}]}, "counter": {"title": "Still Counting", "subtitle": "من يوم ما بدأت الحكاية", "startDate": "2024-01-01T00:00:00", "footer": "من أول يوم لحد دلوقتي… ولسه بنعد 🩷"}, "letter": {"title": "A Birthday Letter", "subtitle": "من قلبي… لقلبك", "label": "رسالة مخصوص ليكِ", "body": "حبيبتي…\n\nكل سنة وأنتِ أجمل حاجة حصلت في حياتي. وجودك مش مجرد جزء من يومي، أنتِ من الحاجات اللي خلت الأيام نفسها يبقى ليها طعم مختلف.\n\nأتمنى السنة الجديدة من عمرك تكون مليانة راحة، ضحك، نجاح، وحاجات حلوة كتير تستاهليها. وأتمنى أفضل موجود في كل لحظة فرح جاية لكِ، وأكون أول حد مبسوط علشانك.\n\nمهما كتبت، مش هعرف أوصف مكانتك عندي بالكامل… لكن أتمنى الموقع ده يفضل يذكّرك بحاجة واحدة: إنك غالية جدًا عليّ.", "signature": "Forever yours ♡"}, "final": {"heading": "This website ends here…", "text": "but our story doesn’t.", "birthdayLine": "Happy Birthday, My Love"}, "theme": {"sky": "#78c8ff", "pink": "#ff92b9"}};
-let cfg=structuredClone(DEFAULT_CONFIG);
+const ADMIN="2580";
+const DEFAULT={"pageTitle": "For My Love", "password": "20/9/2003", "passwordHint": "الباسورد: 20/9/2003 🎂", "introTitle": "For My Love", "introSubtitle": "A little surprise is waiting for you", "lockTitle": "Just For You", "lockText": "الموقع ده معمول لشخص واحد بس… اكتبي تاريخ ميلادك علشان تبدأ المفاجأة.", "lockButton": "فتح الهدية", "heroBadge": "Birthday surprise", "heroTitle": "Happy Birthday\nMy Love ♡", "heroText": "في يومك الحلو، حبيت أسيب لكِ مكان صغير على الإنترنت… مليان ذكريات، رسائل، ومفاجآت كلها ليكِ أنتِ.", "heroButton": "ابدئي المفاجأة", "heroNote": "مصنوع بحب… ليكِ وحدك 🩷", "storyTitle": "Our Story", "storySubtitle": "كل لحظة صغيرة… عملت حكاية كبيرة", "story": [{"title": "أول مرة اتكلمنا", "date": "ضع التاريخ هنا", "text": "كلام بسيط جدًا… لكنه كان بداية حاجة ما كنتش أعرف قد إيه هتبقى غالية."}, {"title": "أول صورة", "date": "ضع التاريخ هنا", "text": "صورة واحدة بس، وفيها ذكرى كل ما أشوفها أبتسم من غير ما أحس."}, {"title": "أول خروجة", "date": "ضع التاريخ هنا", "text": "ضحك، كلام، وتفاصيل صغيرة خلت اليوم ده يفضل مميز."}, {"title": "وما زال القادم أجمل", "date": "Always", "text": "لأن أجمل جزء في الحكاية… لسه بيتكتب."}], "reasonsTitle": "Reasons I Love You", "reasonsSubtitle": "وده مجرد جزء صغير من الأسباب", "reasons": ["لأن قلبك طيب، ووجودك بيخلّي كل حاجة أهدى.", "لأن ضحكتك من الحاجات اللي بتغيّر يوم كامل.", "لأنك جميلة في التفاصيل اللي يمكن أنتِ مش واخدة بالك منها.", "ولأنك ببساطة… أنتِ، وده سبب كفاية."], "galleryTitle": "Our Gallery", "gallerySubtitle": "أجمل لحظاتنا سوا", "gallery": [{"src": "", "caption": "الصورة المفضلة عندي 🩷"}, {"src": "", "caption": "ذكرى مستحيل أنساها"}, {"src": "", "caption": "أحلى لحظة"}], "surprisesTitle": "Little Surprises", "surprisesSubtitle": "اضغطي على أي واحدة", "surprises": [{"title": "لما تكوني زعلانة", "description": "رسالة صغيرة مخصوص علشان اليوم التقيل.", "button": "افتحي الرسالة", "modalTitle": "لما تكوني زعلانة", "modalText": "افتكري إن في حد شايفك أجمل جزء في يومه، ومهما اليوم كان صعب… ابتسامتك تستاهل ترجع تاني. 🩷", "icon": "heart"}, {"title": "لما تشتاقيلي", "description": "ودي تتفتح وقت الاشتياق بس.", "button": "افتحي الرسالة", "modalTitle": "وأنا كمان", "modalText": "لو فتحتي دي لأنك مشتاقالي… غالبًا في نفس اللحظة أنا مشتاق لك أكتر. 🩷", "icon": "heart"}, {"title": "صندوق المفاجأة", "description": "في حاجة حلوة مستخبية جواه.", "button": "افتحي الصندوق", "modalTitle": "Surprise!", "modalText": "المفاجأة الحقيقية مش مكتوبة هنا… دي هتاخديها مني بنفسك. 😉", "icon": "gift"}, {"title": "أغنيتنا", "description": "مكان خاص لأغنيتكم.", "button": "افتحي", "modalTitle": "Our Song", "modalText": "اكتب هنا اسم الأغنية أو رسالة مرتبطة بيها.", "icon": "music"}], "counterTitle": "Still Counting", "counterSubtitle": "من يوم ما بدأت الحكاية", "counterStart": "2024-01-01T00:00:00", "counterFooter": "من أول يوم لحد دلوقتي… ولسه بنعد 🩷", "letterTitle": "A Birthday Letter", "letterSubtitle": "من قلبي… لقلبك", "letterLabel": "رسالة مخصوص ليكِ", "letterBody": "حبيبتي…\n\nكل سنة وأنتِ أجمل حاجة حصلت في حياتي. وجودك مش مجرد جزء من يومي، أنتِ من الحاجات اللي خلت الأيام نفسها يبقى ليها طعم مختلف.\n\nأتمنى السنة الجديدة من عمرك تكون مليانة راحة، ضحك، نجاح، وحاجات حلوة كتير تستاهليها. وأتمنى أفضل موجود في كل لحظة فرح جاية لكِ، وأكون أول حد مبسوط علشانك.\n\nمهما كتبت، مش هعرف أوصف مكانتك عندي بالكامل… لكن أتمنى الموقع ده يفضل يذكّرك بحاجة واحدة: إنك غالية جدًا عليّ.", "letterSignature": "Forever yours ♡", "finalHeading": "This website ends here…", "finalText": "but our story doesn’t.", "finalBirthday": "Happy Birthday, My Love", "sky": "#78c8ff", "pink": "#ff92b9"};
+const TEMPLATE_B64="PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImFyIiBkaXI9InJ0bCI+CjxoZWFkPgo8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CjxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsaW5pdGlhbC1zY2FsZT0xLHZpZXdwb3J0LWZpdD1jb3ZlciI+CjxtZXRhIG5hbWU9InRoZW1lLWNvbG9yIiBjb250ZW50PSIjZWZmOWZmIj4KPHRpdGxlPkZvciBNeSBMb3ZlPC90aXRsZT4KPHN0eWxlPgo6cm9vdHstLXNreTojNzhjOGZmOy0tcGluazojZmY5MmI5Oy0taW5rOiMyOTQ0NWM7LS1tdXRlZDojNzI4NzlhOy0tc2hhZG93OjAgMThweCA0NXB4IHJnYmEoNjMsMTI4LDE3OCwuMTQpfQoqe2JveC1zaXppbmc6Ym9yZGVyLWJveH1odG1se3Njcm9sbC1iZWhhdmlvcjpzbW9vdGh9CmJvZHl7bWFyZ2luOjA7Zm9udC1mYW1pbHk6LWFwcGxlLXN5c3RlbSxCbGlua01hY1N5c3RlbUZvbnQsIlNGIFBybyBEaXNwbGF5IiwiU0YgUHJvIFRleHQiLCJTZWdvZSBVSSIsVGFob21hLEFyaWFsLHNhbnMtc2VyaWY7Y29sb3I6dmFyKC0taW5rKTtiYWNrZ3JvdW5kOnJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgMTIlIDklLHJnYmEoMjU1LDE0NiwxODUsLjI1KSx0cmFuc3BhcmVudCAyMiUpLHJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgODglIDE2JSxyZ2JhKDEyMCwyMDAsMjU1LC4zMSksdHJhbnNwYXJlbnQgMjclKSxsaW5lYXItZ3JhZGllbnQoMTgwZGVnLCNmYmZlZmYsI2VlZjhmZiA1OCUsI2ZmZjhmYik7b3ZlcmZsb3cteDpoaWRkZW59Ci5lbW9qaXtmb250LWZhbWlseToiQXBwbGUgQ29sb3IgRW1vamkiLCJTZWdvZSBVSSBFbW9qaSIsIk5vdG8gQ29sb3IgRW1vamkiLHNhbnMtc2VyaWZ9LmFwcHttYXgtd2lkdGg6NTIwcHg7bWFyZ2luOmF1dG87b3ZlcmZsb3c6aGlkZGVufQpzdmd7ZGlzcGxheTpibG9ja30uaWNvbnt3aWR0aDoyMnB4O2hlaWdodDoyMnB4O3N0cm9rZTpjdXJyZW50Q29sb3I7ZmlsbDpub25lO3N0cm9rZS13aWR0aDoxLjk7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kfQouaGVyb3ttaW4taGVpZ2h0OjEwMHN2aDtwYWRkaW5nOjE4cHg7ZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmZsZXgtZW5kfS5nbGFzc3t3aWR0aDoxMDAlO3BhZGRpbmc6MjZweCAyMnB4O2JvcmRlci1yYWRpdXM6MzRweDtiYWNrZ3JvdW5kOnJnYmEoMjU1LDI1NSwyNTUsLjcyKTtib3JkZXI6MXB4IHNvbGlkICNmZmY7YmFja2Ryb3AtZmlsdGVyOmJsdXIoMThweCk7Ym94LXNoYWRvdzp2YXIoLS1zaGFkb3cpfQouYmFkZ2V7ZGlzcGxheTppbmxpbmUtZmxleDtnYXA6OHB4O2FsaWduLWl0ZW1zOmNlbnRlcjtwYWRkaW5nOjhweCAxMnB4O2JvcmRlci1yYWRpdXM6OTk5cHg7YmFja2dyb3VuZDpyZ2JhKDI1NSwyNTUsMjU1LC43OCk7Ym9yZGVyOjFweCBzb2xpZCAjZmZmO2NvbG9yOiM2NDgxOWE7Zm9udC1zaXplOjEycHg7Zm9udC13ZWlnaHQ6NzAwfQpoMXttYXJnaW46MThweCAwIDEycHg7Zm9udC1zaXplOjQzcHg7bGluZS1oZWlnaHQ6MS4wNjtjb2xvcjojNGI3ZGE4O2ZvbnQtZmFtaWx5OiJTZWdvZSBTY3JpcHQiLCJCcnVzaCBTY3JpcHQgTVQiLGN1cnNpdmU7Zm9udC13ZWlnaHQ6NTAwfQouaGVybyBwe2NvbG9yOiM2MTc4OGQ7bGluZS1oZWlnaHQ6MS45O2ZvbnQtc2l6ZToxNnB4fS5jdGF7d2lkdGg6MTAwJTttYXJnaW4tdG9wOjE4cHg7Ym9yZGVyOjA7Ym9yZGVyLXJhZGl1czoxOHB4O3BhZGRpbmc6MTZweDtjb2xvcjojZmZmO2ZvbnQtd2VpZ2h0OjgwMDtmb250LXNpemU6MTZweDtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxMzVkZWcsdmFyKC0tc2t5KSx2YXIoLS1waW5rKSl9Ci5ub3Rle3RleHQtYWxpZ246Y2VudGVyO2NvbG9yOiM4Mjk3YWE7Zm9udC1zaXplOjEycHg7bWFyZ2luLXRvcDoxMnB4fQpzZWN0aW9ue3BhZGRpbmc6MzBweCAxOHB4fS5zZXB7aGVpZ2h0OjFweDtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCg5MGRlZyx0cmFuc3BhcmVudCxyZ2JhKDEwMCwxNzUsMjMwLC4yOCksdHJhbnNwYXJlbnQpO21hcmdpbjowIDE4cHh9Ci5oZWFke3RleHQtYWxpZ246Y2VudGVyO21hcmdpbi1ib3R0b206MjBweH0uaGVhZCBoMntmb250LXNpemU6MzBweDttYXJnaW46MCAwIDZweDtjb2xvcjojNGQ3ZGE3O2ZvbnQtZmFtaWx5OiJTZWdvZSBTY3JpcHQiLCJCcnVzaCBTY3JpcHQgTVQiLGN1cnNpdmU7Zm9udC13ZWlnaHQ6NTAwfS5oZWFkIHB7bWFyZ2luOjA7Y29sb3I6dmFyKC0tbXV0ZWQpO2ZvbnQtc2l6ZToxM3B4fQoudGltZWxpbmV7cG9zaXRpb246cmVsYXRpdmV9LnRpbWVsaW5lOmJlZm9yZXtjb250ZW50OiIiO3Bvc2l0aW9uOmFic29sdXRlO3JpZ2h0OjIwcHg7dG9wOjEwcHg7Ym90dG9tOjhweDt3aWR0aDoycHg7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQodmFyKC0tc2t5KSx2YXIoLS1waW5rKSl9Ci5ldmVudHtwb3NpdGlvbjpyZWxhdGl2ZTtwYWRkaW5nOjAgNThweCAyNHB4IDB9LmRvdHtwb3NpdGlvbjphYnNvbHV0ZTtyaWdodDoycHg7dG9wOjA7d2lkdGg6MzhweDtoZWlnaHQ6MzhweDtib3JkZXItcmFkaXVzOjUwJTtkaXNwbGF5OmdyaWQ7cGxhY2UtaXRlbXM6Y2VudGVyO2JhY2tncm91bmQ6I2ZmZjtib3JkZXI6MXB4IHNvbGlkICNmZmY7Ym94LXNoYWRvdzowIDhweCAyMHB4IHJnYmEoNjMsMTI4LDE3OCwuMTMpO2NvbG9yOiM1YzkxYmJ9Ci5ldmVudC1jYXJkLC5jYXJke2JhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwuNzIpO2JvcmRlcjoxcHggc29saWQgI2ZmZjtib3JkZXItcmFkaXVzOjIycHg7cGFkZGluZzoxNnB4O2JveC1zaGFkb3c6dmFyKC0tc2hhZG93KX0KLmV2ZW50IGgze21hcmdpbjowIDAgNXB4O2ZvbnQtc2l6ZToxNnB4fS5kYXRle2ZvbnQtc2l6ZToxMnB4O2NvbG9yOiNlMTdiYTI7bWFyZ2luLWJvdHRvbTo2cHh9LmV2ZW50IHAsLmNhcmQgcHttYXJnaW46MDtjb2xvcjp2YXIoLS1tdXRlZCk7bGluZS1oZWlnaHQ6MS43O2ZvbnQtc2l6ZToxNHB4fQouZ3JpZDJ7ZGlzcGxheTpncmlkO2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnIgMWZyO2dhcDoxMnB4fS5yZWFzb257bWluLWhlaWdodDoxNDBweDtkaXNwbGF5OmZsZXg7ZmxleC1kaXJlY3Rpb246Y29sdW1uO2p1c3RpZnktY29udGVudDpzcGFjZS1iZXR3ZWVufS5yZWFzb24gLnJpe3dpZHRoOjQycHg7aGVpZ2h0OjQycHg7Ym9yZGVyLXJhZGl1czoxNHB4O2Rpc3BsYXk6Z3JpZDtwbGFjZS1pdGVtczpjZW50ZXI7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTQ1ZGVnLCNlOWY4ZmYsI2ZmZjBmNik7Y29sb3I6IzVlOTZiZn0ucmVhc29uIGJ7Zm9udC1zaXplOjE1cHg7bGluZS1oZWlnaHQ6MS41fQouZ2FsbGVyeXtkaXNwbGF5OmdyaWQ7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjEuMDhmciAuOTJmcjtnYXA6MTJweH0ucG9sYXJvaWR7YmFja2dyb3VuZDojZmZmO3BhZGRpbmc6OHB4O2JvcmRlci1yYWRpdXM6MjBweDtib3gtc2hhZG93OnZhcigtLXNoYWRvdyl9LnBob3Rve21pbi1oZWlnaHQ6MjAwcHg7Ym9yZGVyLXJhZGl1czoxNHB4O292ZXJmbG93OmhpZGRlbjtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxNDVkZWcsI2RmZjRmZiwjZmZmMWY2KTtiYWNrZ3JvdW5kLXBvc2l0aW9uOmNlbnRlcjtiYWNrZ3JvdW5kLXNpemU6Y292ZXI7ZGlzcGxheTpncmlkO3BsYWNlLWl0ZW1zOmNlbnRlcjtjb2xvcjojN2RhMmJkfS5iaWcgLnBob3Rve21pbi1oZWlnaHQ6NDIwcHh9LmNhcHt0ZXh0LWFsaWduOmNlbnRlcjtwYWRkaW5nOjlweCA1cHggM3B4O2NvbG9yOiM2ZDg0OTg7Zm9udC1zaXplOjEycHh9Ci5zdXJwcmlzZXttaW4taGVpZ2h0OjE3NXB4O2Rpc3BsYXk6ZmxleDtmbGV4LWRpcmVjdGlvbjpjb2x1bW47anVzdGlmeS1jb250ZW50OnNwYWNlLWJldHdlZW59LnNpY29ue3dpZHRoOjQycHg7aGVpZ2h0OjQycHg7Ym9yZGVyLXJhZGl1czoxNHB4O2Rpc3BsYXk6Z3JpZDtwbGFjZS1pdGVtczpjZW50ZXI7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTQ1ZGVnLCNlOGY3ZmYsI2ZmZjBmNSk7Y29sb3I6IzVhOTFiYn0uc3VycHJpc2UgaDN7Zm9udC1zaXplOjE1cHg7bWFyZ2luOjEwcHggMCA1cHh9LnNidG57Ym9yZGVyOjA7Ym9yZGVyLXJhZGl1czoxNHB4O3BhZGRpbmc6MTFweDtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxMzVkZWcsI2Q5ZjFmZiwjZmZkY2U4KTtjb2xvcjojNGQ3NTk3O2ZvbnQtd2VpZ2h0OjgwMH0KLmNvdW50ZXJ7ZGlzcGxheTpncmlkO2dyaWQtdGVtcGxhdGUtY29sdW1uczpyZXBlYXQoNCwxZnIpO2dhcDo4cHh9LmN7dGV4dC1hbGlnbjpjZW50ZXI7cGFkZGluZzoxNHB4IDNweDtib3JkZXItcmFkaXVzOjE4cHg7YmFja2dyb3VuZDojZmZmO2JvcmRlcjoxcHggc29saWQgI2ZmZn0uYyBzdHJvbmd7ZGlzcGxheTpibG9jaztmb250LXNpemU6MjNweDtjb2xvcjojNGM3ZGE4fS5jIHNtYWxse2ZvbnQtc2l6ZToxMHB4O2NvbG9yOnZhcigtLW11dGVkKX0KLmxldHRlcnt3aGl0ZS1zcGFjZTpwcmUtbGluZTtsaW5lLWhlaWdodDoyIWltcG9ydGFudH0uc2lnbnttYXJnaW4tdG9wOjE0cHg7Y29sb3I6I2RlNzg5Zjtmb250LWZhbWlseToiU2Vnb2UgU2NyaXB0IiwiQnJ1c2ggU2NyaXB0IE1UIixjdXJzaXZlO2ZvbnQtc2l6ZToxOHB4fQouZmluYWx7bWluLWhlaWdodDo3NXN2aDtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO3RleHQtYWxpZ246Y2VudGVyfS5maW5hbCAuY2FyZHt3aWR0aDoxMDAlfS5maW5hbEhlYXJ0e2ZvbnQtc2l6ZTo1MnB4fQoubW9kYWx7ZGlzcGxheTpub25lO3Bvc2l0aW9uOmZpeGVkO2luc2V0OjA7ei1pbmRleDo1MDA7YmFja2dyb3VuZDpyZ2JhKDM1LDYyLDg0LC4yNCk7YmFja2Ryb3AtZmlsdGVyOmJsdXIoMTBweCk7YWxpZ24taXRlbXM6ZmxleC1lbmQ7anVzdGlmeS1jb250ZW50OmNlbnRlcjtwYWRkaW5nOjE0cHh9Lm1vZGFsLnNob3d7ZGlzcGxheTpmbGV4fS5zaGVldHt3aWR0aDptaW4oMTAwJSw1MDBweCk7YmFja2dyb3VuZDojZmZmO2JvcmRlci1yYWRpdXM6MjhweDtwYWRkaW5nOjIycHg7Ym94LXNoYWRvdzowIDI1cHggNjBweCByZ2JhKDM5LDkyLDEzMywuMjIpfS5zaGVldCBoM3tjb2xvcjojNGM3ZGE4O21hcmdpbjowIDAgOHB4fS5zaGVldCBwe2NvbG9yOnZhcigtLW11dGVkKTtsaW5lLWhlaWdodDoxLjh9LmNsb3Nle3dpZHRoOjEwMCU7Ym9yZGVyOjA7Ym9yZGVyLXJhZGl1czoxNHB4O3BhZGRpbmc6MTJweDtiYWNrZ3JvdW5kOmxpbmVhci1ncmFkaWVudCgxMzVkZWcsdmFyKC0tc2t5KSx2YXIoLS1waW5rKSk7Y29sb3I6I2ZmZjtmb250LXdlaWdodDo4MDB9CiNsb2NrLCNpbnRyb3twb3NpdGlvbjpmaXhlZDtpbnNldDowO3otaW5kZXg6OTk5ODtkaXNwbGF5OmZsZXg7YWxpZ24taXRlbXM6Y2VudGVyO2p1c3RpZnktY29udGVudDpjZW50ZXI7cGFkZGluZzoyMnB4O2JhY2tncm91bmQ6cmFkaWFsLWdyYWRpZW50KGNpcmNsZSBhdCAxNSUgMTUlLHJnYmEoMjU1LDE0NiwxODUsLjI4KSx0cmFuc3BhcmVudCAyNCUpLHJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgODUlIDE4JSxyZ2JhKDEyMCwyMDAsMjU1LC4zNCksdHJhbnNwYXJlbnQgMjglKSxsaW5lYXItZ3JhZGllbnQoMTgwZGVnLCNmYmZlZmYsI2VlZjhmZiA2MCUsI2ZmZjhmYil9CiNpbnRyb3t6LWluZGV4Ojk5OTk7b3ZlcmZsb3c6aGlkZGVufS5pbnRyb2JveCwubG9ja2JveHt3aWR0aDptaW4oMTAwJSw0MjBweCk7dGV4dC1hbGlnbjpjZW50ZXI7cGFkZGluZzoyOHB4IDIycHg7Ym9yZGVyLXJhZGl1czozMnB4O2JhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwuNzYpO2JvcmRlcjoxcHggc29saWQgI2ZmZjtib3gtc2hhZG93OnZhcigtLXNoYWRvdyk7YmFja2Ryb3AtZmlsdGVyOmJsdXIoMThweCl9LmludHJvYm94IGgyLC5sb2NrYm94IGgye2ZvbnQtZmFtaWx5OiJTZWdvZSBTY3JpcHQiLCJCcnVzaCBTY3JpcHQgTVQiLGN1cnNpdmU7Y29sb3I6IzRkN2RhNztmb250LXNpemU6MzFweDttYXJnaW46OHB4IDB9LmludHJvYm94IHAsLmxvY2tib3ggcHtjb2xvcjp2YXIoLS1tdXRlZCk7bGluZS1oZWlnaHQ6MS44fQouaGVhcnRNYWlue2ZvbnQtc2l6ZTo1OHB4fS5mbG9hdHtwb3NpdGlvbjphYnNvbHV0ZTtib3R0b206LTM1cHg7Y29sb3I6I2VmODZhZDthbmltYXRpb246cmlzZSBsaW5lYXIgZm9yd2FyZHN9LmZsb2F0LmJsdWV7Y29sb3I6IzhlY2ZmZn1Aa2V5ZnJhbWVzIHJpc2V7dG97dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTExNXZoKSByb3RhdGUoMjJkZWcpO29wYWNpdHk6MH19LmZhZGV7YW5pbWF0aW9uOmZhZGUgLjdzIGZvcndhcmRzfUBrZXlmcmFtZXMgZmFkZXt0b3tvcGFjaXR5OjA7dmlzaWJpbGl0eTpoaWRkZW59fQoubG9ja2lucHV0e3dpZHRoOjEwMCU7cGFkZGluZzoxNXB4O3RleHQtYWxpZ246Y2VudGVyO2JvcmRlcjoxcHggc29saWQgcmdiYSgxMTAsMTgwLDIzMCwuMzUpO2JvcmRlci1yYWRpdXM6MTVweDtiYWNrZ3JvdW5kOiNmZmY7Zm9udC1zaXplOjE4cHg7b3V0bGluZTpub25lfS5sb2NrYnRue3dpZHRoOjEwMCU7bWFyZ2luLXRvcDoxMHB4O3BhZGRpbmc6MTRweDtib3JkZXI6MDtib3JkZXItcmFkaXVzOjE1cHg7YmFja2dyb3VuZDpsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLHZhcigtLXNreSksdmFyKC0tcGluaykpO2NvbG9yOiNmZmY7Zm9udC13ZWlnaHQ6ODAwfS5oaW50e2ZvbnQtc2l6ZToxM3B4O2NvbG9yOiNkOTZmOWE7Zm9udC13ZWlnaHQ6ODAwO21hcmdpbi10b3A6MTBweH0uZXJye21pbi1oZWlnaHQ6MjBweDtmb250LXNpemU6MTNweDtjb2xvcjojZDQ1ZTgyO21hcmdpbi10b3A6OHB4fQpAbWVkaWEobWF4LXdpZHRoOjM3MHB4KXsuZ3JpZDIsLmdhbGxlcnl7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOjFmcn0uYmlnIC5waG90b3ttaW4taGVpZ2h0OjI4MHB4fWgxe2ZvbnQtc2l6ZTozOHB4fX0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPHNjcmlwdD5jb25zdCBTSVRFX0RBVEE9X19TSVRFX0RBVEFfXzs8L3NjcmlwdD4KCjxkaXYgaWQ9ImludHJvIj48ZGl2IGNsYXNzPSJpbnRyb2JveCI+PGRpdiBjbGFzcz0iaGVhcnRNYWluIGVtb2ppIj7wn6m3PC9kaXY+PGgyIGlkPSJpbnRyb1QiPjwvaDI+PHAgaWQ9ImludHJvUyI+PC9wPjwvZGl2PjwvZGl2Pgo8ZGl2IGlkPSJsb2NrIj48ZGl2IGNsYXNzPSJsb2NrYm94Ij48ZGl2IGNsYXNzPSJoZWFydE1haW4iPuKZoTwvZGl2PjxoMiBpZD0ibG9ja1QiPjwvaDI+PHAgaWQ9ImxvY2tYIj48L3A+PGlucHV0IGlkPSJwdyIgY2xhc3M9ImxvY2tpbnB1dCIgdHlwZT0idGV4dCI+PGJ1dHRvbiBpZD0ibG9ja0IiIGNsYXNzPSJsb2NrYnRuIj48L2J1dHRvbj48ZGl2IGlkPSJsb2NrSGludCIgY2xhc3M9ImhpbnQiPjwvZGl2PjxkaXYgaWQ9ImxvY2tFcnIiIGNsYXNzPSJlcnIiPjwvZGl2PjwvZGl2PjwvZGl2PgoKPGRpdiBjbGFzcz0iYXBwIj4KPHNlY3Rpb24gY2xhc3M9Imhlcm8iPjxkaXYgY2xhc3M9ImdsYXNzIj48ZGl2IGNsYXNzPSJiYWRnZSI+4pmhIDxzcGFuIGlkPSJiYWRnZSI+PC9zcGFuPjwvZGl2PjxoMSBpZD0iaGVyb1RpdGxlIj48L2gxPjxwIGlkPSJoZXJvVGV4dCI+PC9wPjxidXR0b24gaWQ9Imhlcm9CdXR0b24iIGNsYXNzPSJjdGEiPjwvYnV0dG9uPjxkaXYgaWQ9Imhlcm9Ob3RlIiBjbGFzcz0ibm90ZSI+PC9kaXY+PC9kaXY+PC9zZWN0aW9uPgo8ZGl2IGNsYXNzPSJzZXAiPjwvZGl2Pgo8c2VjdGlvbj48ZGl2IGNsYXNzPSJoZWFkIj48aDIgaWQ9InN0b3J5VGl0bGUiPjwvaDI+PHAgaWQ9InN0b3J5U3VidGl0bGUiPjwvcD48L2Rpdj48ZGl2IGlkPSJzdG9yeSIgY2xhc3M9InRpbWVsaW5lIj48L2Rpdj48L3NlY3Rpb24+CjxkaXYgY2xhc3M9InNlcCI+PC9kaXY+CjxzZWN0aW9uPjxkaXYgY2xhc3M9ImhlYWQiPjxoMiBpZD0icmVhc29uc1RpdGxlIj48L2gyPjxwIGlkPSJyZWFzb25zU3VidGl0bGUiPjwvcD48L2Rpdj48ZGl2IGlkPSJyZWFzb25zIiBjbGFzcz0iZ3JpZDIiPjwvZGl2Pjwvc2VjdGlvbj4KPGRpdiBjbGFzcz0ic2VwIj48L2Rpdj4KPHNlY3Rpb24+PGRpdiBjbGFzcz0iaGVhZCI+PGgyIGlkPSJnYWxsZXJ5VGl0bGUiPjwvaDI+PHAgaWQ9ImdhbGxlcnlTdWJ0aXRsZSI+PC9wPjwvZGl2PjxkaXYgaWQ9ImdhbGxlcnkiIGNsYXNzPSJnYWxsZXJ5Ij48L2Rpdj48L3NlY3Rpb24+CjxkaXYgY2xhc3M9InNlcCI+PC9kaXY+CjxzZWN0aW9uPjxkaXYgY2xhc3M9ImhlYWQiPjxoMiBpZD0ic3VycHJpc2VzVGl0bGUiPjwvaDI+PHAgaWQ9InN1cnByaXNlc1N1YnRpdGxlIj48L3A+PC9kaXY+PGRpdiBpZD0ic3VycHJpc2VzIiBjbGFzcz0iZ3JpZDIiPjwvZGl2Pjwvc2VjdGlvbj4KPGRpdiBjbGFzcz0ic2VwIj48L2Rpdj4KPHNlY3Rpb24+PGRpdiBjbGFzcz0iaGVhZCI+PGgyIGlkPSJjb3VudGVyVGl0bGUiPjwvaDI+PHAgaWQ9ImNvdW50ZXJTdWJ0aXRsZSI+PC9wPjwvZGl2PjxkaXYgY2xhc3M9ImNhcmQiPjxkaXYgY2xhc3M9ImNvdW50ZXIiPjxkaXYgY2xhc3M9ImMiPjxzdHJvbmcgaWQ9ImQiPjA8L3N0cm9uZz48c21hbGw+2YrZiNmFPC9zbWFsbD48L2Rpdj48ZGl2IGNsYXNzPSJjIj48c3Ryb25nIGlkPSJoIj4wMDwvc3Ryb25nPjxzbWFsbD7Ys9in2LnYqTwvc21hbGw+PC9kaXY+PGRpdiBjbGFzcz0iYyI+PHN0cm9uZyBpZD0ibSI+MDA8L3N0cm9uZz48c21hbGw+2K/ZgtmK2YLYqTwvc21hbGw+PC9kaXY+PGRpdiBjbGFzcz0iYyI+PHN0cm9uZyBpZD0icyI+MDA8L3N0cm9uZz48c21hbGw+2KvYp9mG2YrYqTwvc21hbGw+PC9kaXY+PC9kaXY+PHAgaWQ9ImNvdW50ZXJGb290ZXIiIHN0eWxlPSJ0ZXh0LWFsaWduOmNlbnRlcjttYXJnaW4tdG9wOjE0cHgiPjwvcD48L2Rpdj48L3NlY3Rpb24+CjxkaXYgY2xhc3M9InNlcCI+PC9kaXY+CjxzZWN0aW9uPjxkaXYgY2xhc3M9ImhlYWQiPjxoMiBpZD0ibGV0dGVyVGl0bGUiPjwvaDI+PHAgaWQ9ImxldHRlclN1YnRpdGxlIj48L3A+PC9kaXY+PGRpdiBjbGFzcz0iY2FyZCI+PGIgaWQ9ImxldHRlckxhYmVsIj48L2I+PHAgaWQ9ImxldHRlckJvZHkiIGNsYXNzPSJsZXR0ZXIiPjwvcD48ZGl2IGlkPSJsZXR0ZXJTaWduYXR1cmUiIGNsYXNzPSJzaWduIj48L2Rpdj48L2Rpdj48L3NlY3Rpb24+CjxzZWN0aW9uIGNsYXNzPSJmaW5hbCI+PGRpdiBjbGFzcz0iY2FyZCI+PGRpdiBjbGFzcz0iZmluYWxIZWFydCBlbW9qaSI+8J+ptzwvZGl2PjxoMiBpZD0iZmluYWxIZWFkaW5nIiBzdHlsZT0iZm9udC1mYW1pbHk6J1NlZ29lIFNjcmlwdCcsJ0JydXNoIFNjcmlwdCBNVCcsY3Vyc2l2ZTtjb2xvcjojNGQ3ZGE3Ij48L2gyPjxwIGlkPSJmaW5hbFRleHQiPjwvcD48cD48YiBpZD0iZmluYWxCaXJ0aGRheSIgc3R5bGU9ImNvbG9yOiM0YzdkYTgiPjwvYj48L3A+PC9kaXY+PC9zZWN0aW9uPgo8L2Rpdj4KCjxkaXYgaWQ9Im1vZGFsIiBjbGFzcz0ibW9kYWwiPjxkaXYgY2xhc3M9InNoZWV0Ij48aDMgaWQ9Im1vZGFsVGl0bGUiPjwvaDM+PHAgaWQ9Im1vZGFsVGV4dCI+PC9wPjxidXR0b24gY2xhc3M9ImNsb3NlIiBvbmNsaWNrPSJtb2RhbC5jbGFzc0xpc3QucmVtb3ZlKCdzaG93JykiPtil2LrZhNin2YI8L2J1dHRvbj48L2Rpdj48L2Rpdj4KCjxzY3JpcHQ+CmNvbnN0ICQ9aWQ9PmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGlkKTsKZG9jdW1lbnQudGl0bGU9U0lURV9EQVRBLnBhZ2VUaXRsZXx8IkZvciBNeSBMb3ZlIjsKZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KCItLXNreSIsU0lURV9EQVRBLnNreXx8IiM3OGM4ZmYiKTsKZG9jdW1lbnQuZG9jdW1lbnRFbGVtZW50LnN0eWxlLnNldFByb3BlcnR5KCItLXBpbmsiLFNJVEVfREFUQS5waW5rfHwiI2ZmOTJiOSIpOwoKJCgiaW50cm9UIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmludHJvVGl0bGU7JCgiaW50cm9TIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmludHJvU3VidGl0bGU7CiQoImxvY2tUIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmxvY2tUaXRsZTskKCJsb2NrWCIpLnRleHRDb250ZW50PVNJVEVfREFUQS5sb2NrVGV4dDskKCJsb2NrQiIpLnRleHRDb250ZW50PVNJVEVfREFUQS5sb2NrQnV0dG9uOyQoImxvY2tIaW50IikudGV4dENvbnRlbnQ9U0lURV9EQVRBLnBhc3N3b3JkSGludDskKCJwdyIpLnBsYWNlaG9sZGVyPVNJVEVfREFUQS5wYXNzd29yZDsKJCgiYmFkZ2UiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEuaGVyb0JhZGdlOyQoImhlcm9UaXRsZSIpLmlubmVySFRNTD0oU0lURV9EQVRBLmhlcm9UaXRsZXx8IiIpLnNwbGl0KCJcbiIpLm1hcCh4PT54LnJlcGxhY2UoLzwvZywiJmx0OyIpKS5qb2luKCI8YnI+Iik7JCgiaGVyb1RleHQiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEuaGVyb1RleHQ7JCgiaGVyb0J1dHRvbiIpLnRleHRDb250ZW50PVNJVEVfREFUQS5oZXJvQnV0dG9uOyQoImhlcm9Ob3RlIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmhlcm9Ob3RlOwokKCJzdG9yeVRpdGxlIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLnN0b3J5VGl0bGU7JCgic3RvcnlTdWJ0aXRsZSIpLnRleHRDb250ZW50PVNJVEVfREFUQS5zdG9yeVN1YnRpdGxlOwokKCJyZWFzb25zVGl0bGUiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEucmVhc29uc1RpdGxlOyQoInJlYXNvbnNTdWJ0aXRsZSIpLnRleHRDb250ZW50PVNJVEVfREFUQS5yZWFzb25zU3VidGl0bGU7CiQoImdhbGxlcnlUaXRsZSIpLnRleHRDb250ZW50PVNJVEVfREFUQS5nYWxsZXJ5VGl0bGU7JCgiZ2FsbGVyeVN1YnRpdGxlIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmdhbGxlcnlTdWJ0aXRsZTsKJCgic3VycHJpc2VzVGl0bGUiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEuc3VycHJpc2VzVGl0bGU7JCgic3VycHJpc2VzU3VidGl0bGUiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEuc3VycHJpc2VzU3VidGl0bGU7CiQoImNvdW50ZXJUaXRsZSIpLnRleHRDb250ZW50PVNJVEVfREFUQS5jb3VudGVyVGl0bGU7JCgiY291bnRlclN1YnRpdGxlIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmNvdW50ZXJTdWJ0aXRsZTskKCJjb3VudGVyRm9vdGVyIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmNvdW50ZXJGb290ZXI7CiQoImxldHRlclRpdGxlIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmxldHRlclRpdGxlOyQoImxldHRlclN1YnRpdGxlIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmxldHRlclN1YnRpdGxlOyQoImxldHRlckxhYmVsIikudGV4dENvbnRlbnQ9U0lURV9EQVRBLmxldHRlckxhYmVsOyQoImxldHRlckJvZHkiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEubGV0dGVyQm9keTskKCJsZXR0ZXJTaWduYXR1cmUiKS50ZXh0Q29udGVudD1TSVRFX0RBVEEubGV0dGVyU2lnbmF0dXJlOwokKCJmaW5hbEhlYWRpbmciKS50ZXh0Q29udGVudD1TSVRFX0RBVEEuZmluYWxIZWFkaW5nOyQoImZpbmFsVGV4dCIpLnRleHRDb250ZW50PVNJVEVfREFUQS5maW5hbFRleHQ7JCgiZmluYWxCaXJ0aGRheSIpLnRleHRDb250ZW50PVNJVEVfREFUQS5maW5hbEJpcnRoZGF5OwoKY29uc3QgaWNvbnM9WyLimaEiLCLil68iLCLijIEiLCLinKYiXTsKJCgic3RvcnkiKS5pbm5lckhUTUw9U0lURV9EQVRBLnN0b3J5Lm1hcCgoeCxpKT0+YDxkaXYgY2xhc3M9ImV2ZW50Ij48ZGl2IGNsYXNzPSJkb3QiPiR7aWNvbnNbaV18fCLimaEifTwvZGl2PjxkaXYgY2xhc3M9ImV2ZW50LWNhcmQiPjxoMz4ke2VzYyh4LnRpdGxlKX08L2gzPjxkaXYgY2xhc3M9ImRhdGUiPiR7ZXNjKHguZGF0ZSl9PC9kaXY+PHA+JHtlc2MoeC50ZXh0KX08L3A+PC9kaXY+PC9kaXY+YCkuam9pbigiIik7CiQoInJlYXNvbnMiKS5pbm5lckhUTUw9U0lURV9EQVRBLnJlYXNvbnMubWFwKCh4LGkpPT5gPGRpdiBjbGFzcz0iY2FyZCByZWFzb24iPjxkaXYgY2xhc3M9InJpIj7imaE8L2Rpdj48Yj4ke2VzYyh4KX08L2I+PC9kaXY+YCkuam9pbigiIik7CiQoImdhbGxlcnkiKS5pbm5lckhUTUw9U0lURV9EQVRBLmdhbGxlcnkubWFwKCh4LGkpPT5gPGRpdiBjbGFzcz0icG9sYXJvaWQgJHtpPT09MD8iYmlnIjoiIn0iPjxkaXYgY2xhc3M9InBob3RvIiBzdHlsZT0iJHt4LnNyYz9gYmFja2dyb3VuZC1pbWFnZTp1cmwoJyR7eC5zcmN9JylgOiIifSI+JHt4LnNyYz8iIjoi4pmhIn08L2Rpdj48ZGl2IGNsYXNzPSJjYXAiPiR7ZXNjKHguY2FwdGlvbil9PC9kaXY+PC9kaXY+YCkuam9pbigiIik7CiQoInN1cnByaXNlcyIpLmlubmVySFRNTD1TSVRFX0RBVEEuc3VycHJpc2VzLm1hcCgoeCxpKT0+YDxkaXYgY2xhc3M9ImNhcmQgc3VycHJpc2UiPjxkaXY+PGRpdiBjbGFzcz0ic2ljb24iPuKZoTwvZGl2PjxoMz4ke2VzYyh4LnRpdGxlKX08L2gzPjxwPiR7ZXNjKHguZGVzY3JpcHRpb24pfTwvcD48L2Rpdj48YnV0dG9uIGNsYXNzPSJzYnRuIiBvbmNsaWNrPSJzaG93U3VycHJpc2UoJHtpfSkiPiR7ZXNjKHguYnV0dG9uKX08L2J1dHRvbj48L2Rpdj5gKS5qb2luKCIiKTsKZnVuY3Rpb24gc2hvd1N1cnByaXNlKGkpe2NvbnN0IHg9U0lURV9EQVRBLnN1cnByaXNlc1tpXTskKCJtb2RhbFRpdGxlIikudGV4dENvbnRlbnQ9eC5tb2RhbFRpdGxlOyQoIm1vZGFsVGV4dCIpLnRleHRDb250ZW50PXgubW9kYWxUZXh0OyQoIm1vZGFsIikuY2xhc3NMaXN0LmFkZCgic2hvdyIpfQpmdW5jdGlvbiBlc2Modil7cmV0dXJuIFN0cmluZyh2Pz8iIikucmVwbGFjZSgvJi9nLCImYW1wOyIpLnJlcGxhY2UoLzwvZywiJmx0OyIpLnJlcGxhY2UoLz4vZywiJmd0OyIpLnJlcGxhY2UoLyIvZywiJnF1b3Q7Iil9CgokKCJsb2NrQiIpLm9uY2xpY2s9KCk9PntpZigkKCJwdyIpLnZhbHVlPT09U3RyaW5nKFNJVEVfREFUQS5wYXNzd29yZCkpeyQoImxvY2siKS5jbGFzc0xpc3QuYWRkKCJmYWRlIik7c2V0VGltZW91dCgoKT0+JCgibG9jayIpLnN0eWxlLmRpc3BsYXk9Im5vbmUiLDcwMCl9ZWxzZXskKCJsb2NrRXJyIikudGV4dENvbnRlbnQ9Itin2YTYqNin2LPZiNix2K8g2YXYtCDYtditIn19OwokKCJwdyIpLmFkZEV2ZW50TGlzdGVuZXIoImtleWRvd24iLGU9PntpZihlLmtleT09PSJFbnRlciIpJCgibG9ja0IiKS5jbGljaygpfSk7CiQoImhlcm9CdXR0b24iKS5vbmNsaWNrPSgpPT5kb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJzZWN0aW9uIilbMV0uc2Nyb2xsSW50b1ZpZXcoe2JlaGF2aW9yOiJzbW9vdGgifSk7CgpsZXQgaW50cm9UaW1lcj1zZXRJbnRlcnZhbCgoKT0+e2NvbnN0IGU9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgiZGl2Iik7ZS5jbGFzc05hbWU9ImZsb2F0IisoTWF0aC5yYW5kb20oKT4uNzU/IiBibHVlIjoiIik7ZS50ZXh0Q29udGVudD0i4pmlIjtlLnN0eWxlLmxlZnQ9KE1hdGgucmFuZG9tKCkqOTYpKyJ2dyI7ZS5zdHlsZS5mb250U2l6ZT0oMTIrTWF0aC5yYW5kb20oKSoyMikrInB4IjtlLnN0eWxlLmFuaW1hdGlvbkR1cmF0aW9uPSgyLjgrTWF0aC5yYW5kb20oKSoyLjgpKyJzIjskKCJpbnRybyIpLmFwcGVuZENoaWxkKGUpO3NldFRpbWVvdXQoKCk9PmUucmVtb3ZlKCksNjUwMCl9LDEyMCk7CnNldFRpbWVvdXQoKCk9PntjbGVhckludGVydmFsKGludHJvVGltZXIpOyQoImludHJvIikuY2xhc3NMaXN0LmFkZCgiZmFkZSIpO3NldFRpbWVvdXQoKCk9PiQoImludHJvIikuc3R5bGUuZGlzcGxheT0ibm9uZSIsNzAwKX0sMjQwMCk7CgpmdW5jdGlvbiB0aWNrKCl7bGV0IG49TWF0aC5tYXgoMCxEYXRlLm5vdygpLW5ldyBEYXRlKFNJVEVfREFUQS5jb3VudGVyU3RhcnQpLmdldFRpbWUoKSk7bGV0IEQ9TWF0aC5mbG9vcihuLzg2NDAwMDAwKTtuJT04NjQwMDAwMDtsZXQgSD1NYXRoLmZsb29yKG4vMzYwMDAwMCk7biU9MzYwMDAwMDtsZXQgTT1NYXRoLmZsb29yKG4vNjAwMDApO24lPTYwMDAwO2xldCBTPU1hdGguZmxvb3Iobi8xMDAwKTskKCJkIikudGV4dENvbnRlbnQ9RDskKCJoIikudGV4dENvbnRlbnQ9U3RyaW5nKEgpLnBhZFN0YXJ0KDIsIjAiKTskKCJtIikudGV4dENvbnRlbnQ9U3RyaW5nKE0pLnBhZFN0YXJ0KDIsIjAiKTskKCJzIikudGV4dENvbnRlbnQ9U3RyaW5nKFMpLnBhZFN0YXJ0KDIsIjAiKX0KdGljaygpO3NldEludGVydmFsKHRpY2ssMTAwMCk7Cjwvc2NyaXB0Pgo8L2JvZHk+PC9odG1sPg==";
+let data=JSON.parse(localStorage.getItem("gift_admin_data")||"null")||structuredClone(DEFAULT);
 const $=id=>document.getElementById(id);
-
-function login(){
-  if($("adminPass").value!==ADMIN_PASSWORD){
-    $("loginStatus").textContent="الباسورد غير صحيح";
-    $("loginStatus").className="status err";
-    return;
-  }
-  $("login").classList.add("hidden");
-  $("dashboard").classList.remove("hidden");
-  boot();
+function go(){if($("ap").value!==ADMIN){$("ls").textContent="الباسورد غلط";$("ls").className="status err";return}$("login").classList.add("hidden");$("dash").classList.remove("hidden");render()}
+$("ap").addEventListener("keydown",e=>{if(e.key==="Enter")go()});
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("p-"+b.dataset.p).classList.add("active")});
+function v(id,x){if($(id))$(id).value=x??""}function esc(x){return String(x??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
+function render(){["pageTitle","password","passwordHint","lockTitle","lockText","lockButton","introTitle","introSubtitle","heroBadge","heroTitle","heroText","heroButton","heroNote","storyTitle","storySubtitle","reasonsTitle","reasonsSubtitle","galleryTitle","gallerySubtitle","surprisesTitle","surprisesSubtitle","counterTitle","counterSubtitle","counterFooter","letterTitle","letterSubtitle","letterLabel","letterBody","letterSignature","finalHeading","finalText","finalBirthday","sky","pink"].forEach(k=>v(k,data[k]));v("counterStart",(data.counterStart||"").slice(0,16));
+$("storyItems").innerHTML=data.story.map((x,i)=>`<div class="sub"><h3>المحطة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="st${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>التاريخ</label><input id="st${i}d" class="input" value="${esc(x.date)}"></div></div><div class="field"><label>الوصف</label><textarea id="st${i}x" class="input">${x.text}</textarea></div></div>`).join("");
+$("reasonItems").innerHTML=data.reasons.map((x,i)=>`<div class="field"><label>السبب ${i+1}</label><textarea id="rs${i}" class="input" style="min-height:78px">${x}</textarea></div>`).join("");
+$("gallerySlots").innerHTML=data.gallery.map((x,i)=>`<div class="slot"><div class="preview" id="prev${i}">${x.src?`<img src="${x.src}">`:"صورة "+(i+1)}</div><div><div class="field"><label>اختيار صورة</label><input id="img${i}" class="input" type="file" accept="image/*"></div><div class="field"><label>الكلام تحت الصورة</label><input id="cap${i}" class="input" value="${esc(x.caption)}"></div><button class="btn alt" onclick="addImg(${i})">إضافة الصورة</button></div></div>`).join("");
+$("surpriseItems").innerHTML=data.surprises.map((x,i)=>`<div class="sub"><h3>المفاجأة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="su${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>نص الزر</label><input id="su${i}b" class="input" value="${esc(x.button)}"></div></div><div class="field"><label>الوصف</label><input id="su${i}d" class="input" value="${esc(x.description)}"></div><div class="field"><label>عنوان الرسالة</label><input id="su${i}mt" class="input" value="${esc(x.modalTitle)}"></div><div class="field"><label>نص الرسالة</label><textarea id="su${i}mx" class="input">${x.modalText}</textarea></div></div>`).join("");
 }
-$("adminPass").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
-
-document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
-  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
-  btn.classList.add("active");
-  $("p-"+btn.dataset.panel).classList.add("active");
-}));
-
-async function boot(){
-  try{
-    const r=await fetch("config.json?v="+Date.now(),{cache:"no-store"});
-    if(r.ok){
-      cfg=await r.json();
-      $("loadStatus").textContent="تم تحميل بيانات الموقع الحالية.";
-      $("loadStatus").className="status ok";
-    }else throw new Error();
-  }catch(e){
-    cfg=structuredClone(DEFAULT_CONFIG);
-    $("loadStatus").textContent="فتحت بالبيانات الافتراضية. تقدر تعدّل عادي.";
-    $("loadStatus").className="status ok";
-  }
-  normalize();
-  render();
-}
-
-function normalize(){
-  cfg.site=cfg.site||{};
-  cfg.story=cfg.story||{title:"",subtitle:"",items:[]};
-  cfg.story.items=Array.isArray(cfg.story.items)?cfg.story.items:[];
-  while(cfg.story.items.length<4)cfg.story.items.push({title:"",date:"",text:""});
-  cfg.reasons=cfg.reasons||{title:"",subtitle:"",items:[]};
-  cfg.reasons.items=Array.isArray(cfg.reasons.items)?cfg.reasons.items:[];
-  while(cfg.reasons.items.length<4)cfg.reasons.items.push("");
-  cfg.gallerySection=cfg.gallerySection||{title:"",subtitle:""};
-  cfg.gallery=Array.isArray(cfg.gallery)?cfg.gallery:[];
-  while(cfg.gallery.length<3)cfg.gallery.push({src:"",caption:""});
-  cfg.surprises=cfg.surprises||{title:"",subtitle:"",items:[]};
-  cfg.surprises.items=Array.isArray(cfg.surprises.items)?cfg.surprises.items:[];
-  const types=["heart","heart","gift","headphones"];
-  while(cfg.surprises.items.length<4)cfg.surprises.items.push({title:"",description:"",button:"",modalTitle:"",modalText:"",type:types[cfg.surprises.items.length]});
-  cfg.counter=cfg.counter||{};
-  cfg.letter=cfg.letter||{};
-  cfg.final=cfg.final||{};
-  cfg.theme=cfg.theme||{sky:"#78c8ff",pink:"#ff92b9"};
-}
-
-function setv(id,v){if($(id))$(id).value=v??""}
-function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
-
-function render(){
-  const s=cfg.site;
-  setv("pageTitle",s.pageTitle);setv("sitePassword",s.password);setv("passwordHint",s.passwordHint);setv("lockTitle",s.lockTitle);setv("lockButton",s.lockButton);setv("lockText",s.lockText);
-  setv("introTitle",s.introTitle);setv("introSubtitle",s.introSubtitle);setv("heroBadge",s.heroBadge);setv("heroTitle",s.heroTitle);setv("heroText",s.heroText);setv("heroButton",s.heroButton);setv("heroNote",s.heroNote);
-
-  setv("storyTitle",cfg.story.title);setv("storySubtitle",cfg.story.subtitle);
-  $("storyItems").innerHTML=cfg.story.items.slice(0,4).map((x,i)=>`<div class="sub"><h3>المحطة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="st${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>التاريخ</label><input id="st${i}d" class="input" value="${esc(x.date)}"></div></div><div class="field"><label>الوصف</label><textarea id="st${i}x" class="input">${x.text||""}</textarea></div></div>`).join("");
-
-  setv("reasonsTitle",cfg.reasons.title);setv("reasonsSubtitle",cfg.reasons.subtitle);
-  $("reasonItems").innerHTML=cfg.reasons.items.slice(0,4).map((x,i)=>`<div class="field"><label>السبب ${i+1}</label><textarea id="rs${i}" class="input" style="min-height:78px">${x||""}</textarea></div>`).join("");
-
-  setv("galleryTitle",cfg.gallerySection.title);setv("gallerySubtitle",cfg.gallerySection.subtitle);
-  renderGallery();
-
-  setv("surprisesTitle",cfg.surprises.title);setv("surprisesSubtitle",cfg.surprises.subtitle);
-  $("surpriseItems").innerHTML=cfg.surprises.items.slice(0,4).map((x,i)=>`<div class="sub"><h3>المفاجأة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="su${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>نص الزر</label><input id="su${i}b" class="input" value="${esc(x.button)}"></div></div><div class="field"><label>الوصف</label><input id="su${i}d" class="input" value="${esc(x.description)}"></div><div class="field"><label>عنوان الرسالة بعد الضغط</label><input id="su${i}mt" class="input" value="${esc(x.modalTitle)}"></div><div class="field"><label>الرسالة</label><textarea id="su${i}mx" class="input">${x.modalText||""}</textarea></div></div>`).join("");
-
-  setv("counterTitle",cfg.counter.title);setv("counterSubtitle",cfg.counter.subtitle);setv("counterStart",(cfg.counter.startDate||"").slice(0,16));setv("counterFooter",cfg.counter.footer);
-  setv("letterTitle",cfg.letter.title);setv("letterSubtitle",cfg.letter.subtitle);setv("letterLabel",cfg.letter.label);setv("letterBody",cfg.letter.body);setv("letterSignature",cfg.letter.signature);
-  setv("finalHeading",cfg.final.heading);setv("finalText",cfg.final.text);setv("finalBirthday",cfg.final.birthdayLine);setv("skyColor",cfg.theme.sky||"#78c8ff");setv("pinkColor",cfg.theme.pink||"#ff92b9");
-}
-
-function renderGallery(){
-  $("gallerySlots").innerHTML="";
-  cfg.gallery.slice(0,3).forEach((item,i)=>{
-    const box=document.createElement("div");box.className="slot";
-    const preview=item.src?`<img src="${item.src}">`:`صورة ${i+1}`;
-    box.innerHTML=`<div class="preview" id="prev${i}">${preview}</div><div><div class="field"><label>اختيار صورة</label><input id="img${i}" class="input" type="file" accept="image/*"></div><div class="field"><label>الكلام تحت الصورة</label><input id="cap${i}" class="input" value="${esc(item.caption)}"></div><div class="smallrow"><button style="background:#e8f6ff;color:#4c7698" onclick="addImage(${i})">إضافة الصورة</button><button style="background:#fff0f5;color:#c85f86" onclick="removeImage(${i})">حذف</button></div><div id="imgStatus${i}" class="status"></div></div>`;
-    $("gallerySlots").appendChild(box);
-    $("img"+i).addEventListener("change",e=>{
-      const f=e.target.files[0];
-      if(f) $("prev"+i).innerHTML=`<img src="${URL.createObjectURL(f)}">`;
-    });
-  });
-}
-
-async function addImage(i){
-  const f=$("img"+i).files[0];
-  if(!f){$("imgStatus"+i).textContent="اختار صورة أولًا";$("imgStatus"+i).className="status err";return}
-  $("imgStatus"+i).textContent="جاري تجهيز الصورة…";$("imgStatus"+i).className="status";
-  try{
-    cfg.gallery[i].src=await compress(f);
-    $("imgStatus"+i).textContent="تمت إضافة الصورة ✅";$("imgStatus"+i).className="status ok";
-    renderGallery();
-  }catch(e){
-    $("imgStatus"+i).textContent="حصل خطأ في الصورة";$("imgStatus"+i).className="status err";
-  }
-}
-
-function removeImage(i){cfg.gallery[i].src="";renderGallery()}
-
-async function compress(file){
-  const bmp=await createImageBitmap(file);
-  const max=1000;
-  let w=bmp.width,h=bmp.height;
-  if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}
-  const c=document.createElement("canvas");c.width=w;c.height=h;
-  c.getContext("2d").drawImage(bmp,0,0,w,h);
-  return c.toDataURL("image/jpeg",0.72);
-}
-
-function collect(){
-  cfg.site={pageTitle:$("pageTitle").value,password:$("sitePassword").value,passwordHint:$("passwordHint").value,lockTitle:$("lockTitle").value,lockText:$("lockText").value,lockButton:$("lockButton").value,introTitle:$("introTitle").value,introSubtitle:$("introSubtitle").value,heroBadge:$("heroBadge").value,heroTitle:$("heroTitle").value,heroText:$("heroText").value,heroButton:$("heroButton").value,heroNote:$("heroNote").value};
-  cfg.story={title:$("storyTitle").value,subtitle:$("storySubtitle").value,items:Array.from({length:4},(_,i)=>({title:$("st"+i+"t").value,date:$("st"+i+"d").value,text:$("st"+i+"x").value}))};
-  cfg.reasons={title:$("reasonsTitle").value,subtitle:$("reasonsSubtitle").value,items:Array.from({length:4},(_,i)=>$("rs"+i).value)};
-  cfg.gallerySection={title:$("galleryTitle").value,subtitle:$("gallerySubtitle").value};
-  for(let i=0;i<3;i++)cfg.gallery[i].caption=$("cap"+i).value;
-  const old=cfg.surprises.items.map(x=>x.type);
-  cfg.surprises={title:$("surprisesTitle").value,subtitle:$("surprisesSubtitle").value,items:Array.from({length:4},(_,i)=>({title:$("su"+i+"t").value,description:$("su"+i+"d").value,button:$("su"+i+"b").value,modalTitle:$("su"+i+"mt").value,modalText:$("su"+i+"mx").value,type:old[i]||["heart","heart","gift","headphones"][i]}))};
-  cfg.counter={title:$("counterTitle").value,subtitle:$("counterSubtitle").value,startDate:$("counterStart").value?$("counterStart").value+":00":"2024-01-01T00:00:00",footer:$("counterFooter").value};
-  cfg.letter={title:$("letterTitle").value,subtitle:$("letterSubtitle").value,label:$("letterLabel").value,body:$("letterBody").value,signature:$("letterSignature").value};
-  cfg.final={heading:$("finalHeading").value,text:$("finalText").value,birthdayLine:$("finalBirthday").value};
-  cfg.theme={sky:$("skyColor").value,pink:$("pinkColor").value};
-}
-
-function downloadConfig(){
-  collect();
-  const blob=new Blob([JSON.stringify(cfg,null,2)],{type:"application/json;charset=utf-8"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");a.href=url;a.download="config.json";document.body.appendChild(a);a.click();a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  $("saveStatus").textContent="تم تحميل config.json ✅ ارفعه على GitHub مكان config.json القديم.";
-  $("saveStatus").className="status ok";
-}
-
-function loadPickedConfig(){
-  const f=$("configPicker").files[0];
-  if(!f){$("loadStatus").textContent="اختار config.json أولًا";$("loadStatus").className="status err";return}
-  const fr=new FileReader();
-  fr.onload=()=>{
-    try{cfg=JSON.parse(fr.result);normalize();render();$("loadStatus").textContent="تم فتح الملف بنجاح.";$("loadStatus").className="status ok"}
-    catch(e){$("loadStatus").textContent="الملف غير صالح.";$("loadStatus").className="status err"}
-  };
-  fr.readAsText(f);
-}
-</script>
-</body>
-</html>
+async function addImg(i){const f=$("img"+i).files[0];if(!f)return;const bmp=await createImageBitmap(f);const max=900;let w=bmp.width,h=bmp.height;if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(bmp,0,0,w,h);data.gallery[i].src=c.toDataURL("image/jpeg",.7);localStorage.setItem("gift_admin_data",JSON.stringify(data));render()}
+function collect(){["pageTitle","password","passwordHint","lockTitle","lockText","lockButton","introTitle","introSubtitle","heroBadge","heroTitle","heroText","heroButton","heroNote","storyTitle","storySubtitle","reasonsTitle","reasonsSubtitle","galleryTitle","gallerySubtitle","surprisesTitle","surprisesSubtitle","counterTitle","counterSubtitle","counterFooter","letterTitle","letterSubtitle","letterLabel","letterBody","letterSignature","finalHeading","finalText","finalBirthday","sky","pink"].forEach(k=>data[k]=$(k).value);data.counterStart=$("counterStart").value?$("counterStart").value+":00":"2024-01-01T00:00:00";data.story=data.story.map((x,i)=>({title:$("st"+i+"t").value,date:$("st"+i+"d").value,text:$("st"+i+"x").value}));data.reasons=data.reasons.map((x,i)=>$("rs"+i).value);data.gallery=data.gallery.map((x,i)=>({src:x.src,caption:$("cap"+i).value}));data.surprises=data.surprises.map((x,i)=>({...x,title:$("su"+i+"t").value,description:$("su"+i+"d").value,button:$("su"+i+"b").value,modalTitle:$("su"+i+"mt").value,modalText:$("su"+i+"mx").value}));localStorage.setItem("gift_admin_data",JSON.stringify(data))}
+function downloadSite(){collect();const tpl=decodeURIComponent(escape(atob(TEMPLATE_B64)));const safe=JSON.stringify(data).replace(/<\//g,"<\\/");const html=tpl.replace("__SITE_DATA__",safe);const blob=new Blob([html],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="index.html";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);$("saveStatus").textContent="تم تحميل index.html ✅ ارفعه مكان الملف القديم فقط.";$("saveStatus").className="status ok"}
+function resetData(){if(confirm("ترجع للنسخة الأصلية؟")){data=structuredClone(DEFAULT);localStorage.setItem("gift_admin_data",JSON.stringify(data));render()}}
+</script></body></html>
