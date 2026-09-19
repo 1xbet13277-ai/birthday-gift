@@ -3,325 +3,304 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#eef8ff">
+<meta name="theme-color" content="#eff9ff">
 <title>لوحة إدارة الهدية</title>
 <style>
-:root{--sky:#75c8ff;--pink:#ff91ba;--ink:#274158;--muted:#70869a;--shadow:0 18px 45px rgba(65,129,178,.14)}
+:root{--sky:#78c8ff;--pink:#ff92b9;--ink:#29455e;--muted:#72889c;--shadow:0 18px 45px rgba(64,128,177,.15)}
 *{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 10%,rgba(255,145,186,.25),transparent 24%),radial-gradient(circle at 90% 12%,rgba(117,200,255,.32),transparent 26%),linear-gradient(180deg,#fbfeff,#eef8ff 60%,#fff8fb);min-height:100vh}
-.wrap{max-width:820px;margin:auto;padding:22px 16px 60px}.top{text-align:center;padding:18px 0 8px}.mark{width:68px;height:68px;border-radius:24px;margin:auto;display:grid;place-items:center;background:linear-gradient(145deg,#e8f7ff,#fff0f5);border:1px solid #fff;box-shadow:var(--shadow);font-size:30px}.top h1{font-size:27px;margin:12px 0 5px}.top p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
-.card{background:rgba(255,255,255,.8);border:1px solid #fff;border-radius:26px;padding:18px;box-shadow:var(--shadow);margin-top:14px;backdrop-filter:blur(16px)}.card h2{font-size:18px;margin:0 0 12px}.card h3{font-size:14px;margin:16px 0 10px;color:#4e789b}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field label{display:block;font-size:12px;color:#617b92;margin:0 0 6px}.input{width:100%;padding:13px 14px;border:1px solid rgba(105,177,229,.3);border-radius:14px;background:#fff;color:#2d4962;outline:none;font-size:15px}.input:focus{border-color:#76c8ff;box-shadow:0 0 0 4px rgba(118,200,255,.11)}textarea.input{min-height:105px;resize:vertical;line-height:1.7}
-button{font-family:inherit}.btn{width:100%;padding:13px 15px;border:0;border-radius:14px;font-weight:800;color:white;background:linear-gradient(135deg,var(--sky),var(--pink));cursor:pointer}.btn.secondary{background:#e9f6ff;color:#4b789c}.btn.danger{background:#fff0f4;color:#cf5d86}.btn.dark{background:#385d79}.hint{font-size:12px;color:var(--muted);line-height:1.7;margin-top:10px}.status{margin-top:10px;min-height:20px;font-size:13px;font-weight:700}.ok{color:#3d9a73}.err{color:#d45e83}.hidden{display:none!important}.login{min-height:76vh;display:flex;align-items:center}.login .card{width:100%}
-.toolbar{position:sticky;bottom:12px;z-index:20;margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px;background:rgba(255,255,255,.82);padding:10px;border:1px solid #fff;border-radius:20px;backdrop-filter:blur(16px);box-shadow:var(--shadow)}
-.tabs{display:flex;gap:8px;overflow:auto;padding:3px 0 6px}.tab{white-space:nowrap;border:0;border-radius:999px;padding:9px 13px;background:#eef8ff;color:#4d7899;font-weight:750;cursor:pointer}.tab.active{background:linear-gradient(135deg,var(--sky),var(--pink));color:#fff}
-.panel{display:none}.panel.active{display:block}.subcard{padding:14px;border-radius:20px;background:rgba(255,255,255,.62);border:1px solid #fff;margin-top:10px}
-.slots{display:grid;gap:12px}.slot{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px;border-radius:20px;background:rgba(255,255,255,.62);border:1px solid #fff}.preview{width:120px;height:145px;border-radius:16px;background:linear-gradient(145deg,#dff4ff,#fff1f6);display:grid;place-items:center;overflow:hidden;color:#7ba2bf}.preview img{width:100%;height:100%;object-fit:cover}.slot-actions{display:flex;gap:8px;margin-top:8px}.slot-actions button{flex:1;padding:10px;border:0;border-radius:12px;font-weight:750}
-.switchline{display:flex;align-items:center;gap:9px;margin-top:8px;font-size:13px;color:#5e7890}.colorrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.colorInput{height:48px;padding:5px}
-.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.45);border-top-color:white;border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-left:6px}@keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:600px){.row,.colorrow{grid-template-columns:1fr}.slot{grid-template-columns:92px 1fr}.preview{width:92px;height:122px}.toolbar{grid-template-columns:1fr}}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 8%,rgba(255,146,185,.24),transparent 24%),radial-gradient(circle at 90% 12%,rgba(120,200,255,.3),transparent 26%),linear-gradient(180deg,#fbfeff,#eef8ff 58%,#fff8fb);min-height:100vh}
+.wrap{max-width:860px;margin:auto;padding:24px 16px 80px}
+.hero{text-align:center;padding:14px 0 12px}
+.mark{width:70px;height:70px;border-radius:24px;margin:auto;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#e8f7ff,#fff0f5);border:1px solid white;box-shadow:var(--shadow)}
+.hero h1{margin:12px 0 5px;font-size:28px}.hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.7}
+.card{margin-top:14px;padding:18px;border-radius:26px;background:rgba(255,255,255,.82);border:1px solid white;box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+.card h2{margin:0 0 13px;font-size:19px}.card h3{margin:16px 0 10px;font-size:14px;color:#537b9d}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:11px}
+label{display:block;font-size:12px;color:#647e94;margin-bottom:6px}
+.input{width:100%;padding:13px 14px;border:1px solid rgba(104,177,229,.3);border-radius:14px;background:white;color:#2c4962;outline:none;font-size:15px}
+.input:focus{border-color:#78c8ff;box-shadow:0 0 0 4px rgba(120,200,255,.1)}
+textarea.input{min-height:105px;resize:vertical;line-height:1.7}
+.btn{width:100%;border:0;border-radius:14px;padding:13px 15px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,var(--sky),var(--pink));color:white}
+.btn.alt{background:#e8f6ff;color:#4c7698}.btn.dark{background:#3f627e}
+.status{min-height:20px;margin-top:9px;font-size:13px;font-weight:700}.ok{color:#31926c}.err{color:#d45d82}
+.hidden{display:none!important}.login{min-height:74vh;display:flex;align-items:center}.login>.card{width:100%}
+.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 7px}
+.tab{white-space:nowrap;border:0;border-radius:999px;padding:9px 13px;background:#edf8ff;color:#527a9b;font-weight:800;cursor:pointer}
+.tab.active{color:white;background:linear-gradient(135deg,var(--sky),var(--pink))}
+.panel{display:none}.panel.active{display:block}
+.sub{padding:14px;border-radius:20px;background:rgba(255,255,255,.64);border:1px solid white;margin-top:10px}
+.toolbar{position:sticky;bottom:12px;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;padding:10px;border-radius:20px;background:rgba(255,255,255,.84);border:1px solid white;box-shadow:var(--shadow);backdrop-filter:blur(16px)}
+.slots{display:grid;gap:12px}.slot{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:12px;border-radius:20px;background:rgba(255,255,255,.65);border:1px solid white}
+.preview{width:120px;height:145px;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#dff4ff,#fff1f6);display:grid;place-items:center;color:#799eba;text-align:center;padding:8px}
+.preview img{width:100%;height:100%;object-fit:cover}
+.smallrow{display:flex;gap:8px}.smallrow button{flex:1;border:0;border-radius:12px;padding:10px;font-weight:800;cursor:pointer}
+.note{font-size:12px;color:var(--muted);line-height:1.7}
+.colorrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.color{height:48px;padding:5px}
+@media(max-width:620px){.row,.colorrow{grid-template-columns:1fr}.slot{grid-template-columns:90px 1fr}.preview{width:90px;height:120px}.toolbar{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>من هنا تقدر تعدّل كل النصوص والصور والتواريخ والألوان بباسورد فقط، بدون Token.</p></div>
+  <div class="hero"><div class="mark">♡</div><h1>لوحة إدارة الهدية</h1><p>باسورد فقط — بدون GitHub Token. عدّل كل شيء ثم نزّل config.json وارفعه مكان القديم.</p></div>
 
-  <div id="loginBox" class="login">
+  <div id="login" class="login">
     <div class="card">
-      <h2>دخول الأدمن</h2>
-      <div class="field"><label>باسورد لوحة الإدارة</label><input id="adminPass" class="input" type="password" inputmode="numeric" placeholder="••••"></div>
-      <button class="btn" onclick="adminLogin()">دخول</button>
+      <h2>دخول لوحة الأدمن</h2>
+      <div class="field"><label>الباسورد</label><input id="adminPass" class="input" type="password" inputmode="numeric" placeholder="••••"></div>
+      <button class="btn" onclick="login()">دخول</button>
       <div id="loginStatus" class="status"></div>
     </div>
   </div>
 
   <div id="dashboard" class="hidden">
     <div class="card">
-      <h2>لوحة التعديل</h2>
-      <p class="hint">عدّل كل شيء من هنا، وبعدها اضغط "تحميل config.json" وارفع الملف مكان config.json القديم على GitHub.</p>
-      <div class="field">
-        <label>تحميل ملف config.json الحالي من جهازك (اختياري)</label>
-        <input id="configFileInput" class="input" type="file" accept=".json,application/json">
-      </div>
-      <button class="btn secondary" onclick="loadLocalConfig()">تحميل الإعدادات من الملف</button>
-      <div id="connectStatus" class="status"></div>
+      <h2>الإعدادات الحالية</h2>
+      <p class="note">اللوحة بتحاول تقرأ config.json المنشور تلقائيًا. ولو فشل، بتفتح بالبيانات الافتراضية بدل ما تتعطل.</p>
+      <div class="field"><label>اختياري: افتح config.json من جهازك</label><input id="configPicker" class="input" type="file" accept=".json,application/json"></div>
+      <button class="btn alt" onclick="loadPickedConfig()">فتح ملف config.json من الجهاز</button>
+      <div id="loadStatus" class="status"></div>
     </div>
-<div id="editor" class="hidden">
-      <div class="card">
-        <div class="tabs" id="tabs">
-          <button class="tab active" data-tab="general">عام</button>
-          <button class="tab" data-tab="story">القصة</button>
-          <button class="tab" data-tab="reasons">أسباب الحب</button>
-          <button class="tab" data-tab="gallery">الصور</button>
-          <button class="tab" data-tab="surprises">المفاجآت</button>
-          <button class="tab" data-tab="counter">العداد</button>
-          <button class="tab" data-tab="letter">الرسالة</button>
-          <button class="tab" data-tab="final">النهاية والألوان</button>
-        </div>
-      </div>
 
-      <div class="panel active" id="panel-general">
-        <div class="card">
-          <h2>شاشة البداية والباسورد</h2>
-          <div class="row">
-            <div class="field"><label>عنوان الصفحة</label><input id="pageTitle" class="input"></div>
-            <div class="field"><label>باسورد الموقع</label><input id="sitePassword" class="input"></div>
-          </div>
-          <div class="field"><label>الباسورد الظاهر تحت الخانة</label><input id="passwordHint" class="input"></div>
-          <div class="row">
-            <div class="field"><label>عنوان شاشة القفل</label><input id="lockTitleF" class="input"></div>
-            <div class="field"><label>زر فتح الهدية</label><input id="lockButtonF" class="input"></div>
-          </div>
-          <div class="field"><label>كلام شاشة القفل</label><textarea id="lockTextF" class="input"></textarea></div>
-          <h3>الأنيميشن الافتتاحي</h3>
-          <div class="row">
-            <div class="field"><label>عنوان الأنيميشن</label><input id="introTitleF" class="input"></div>
-            <div class="field"><label>السطر الصغير</label><input id="introSubtitleF" class="input"></div>
-          </div>
-          <h3>أول شاشة بعد الدخول</h3>
-          <div class="field"><label>Badge</label><input id="heroBadgeF" class="input"></div>
-          <div class="field"><label>العنوان (اكتب سطر جديد لو عايزه سطرين)</label><textarea id="heroTitleF" class="input" style="min-height:75px"></textarea></div>
-          <div class="field"><label>النص الرئيسي</label><textarea id="heroTextF" class="input"></textarea></div>
-          <div class="row">
-            <div class="field"><label>نص الزر</label><input id="heroButtonF" class="input"></div>
-            <div class="field"><label>الملاحظة تحت الزر</label><input id="heroNoteF" class="input"></div>
-          </div>
-        </div>
+    <div class="card">
+      <div class="tabs">
+        <button class="tab active" data-panel="general">عام</button>
+        <button class="tab" data-panel="story">القصة</button>
+        <button class="tab" data-panel="reasons">أسباب الحب</button>
+        <button class="tab" data-panel="gallery">الصور</button>
+        <button class="tab" data-panel="surprises">المفاجآت</button>
+        <button class="tab" data-panel="counter">العداد</button>
+        <button class="tab" data-panel="letter">الرسالة</button>
+        <button class="tab" data-panel="final">النهاية والألوان</button>
       </div>
-
-      <div class="panel" id="panel-story">
-        <div class="card"><h2>Our Story</h2>
-          <div class="row"><div class="field"><label>عنوان القسم</label><input id="storyTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="storySubtitleF" class="input"></div></div>
-          <div id="storyItems"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="panel-reasons">
-        <div class="card"><h2>Reasons I Love You</h2>
-          <div class="row"><div class="field"><label>عنوان القسم</label><input id="reasonsTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="reasonsSubtitleF" class="input"></div></div>
-          <div id="reasonItems"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="panel-gallery">
-        <div class="card"><h2>معرض الصور</h2>
-          <div class="row"><div class="field"><label>عنوان القسم</label><input id="galleryTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="gallerySubtitleF" class="input"></div></div>
-          <div class="slots" id="slots"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="panel-surprises">
-        <div class="card"><h2>المفاجآت</h2>
-          <div class="row"><div class="field"><label>عنوان القسم</label><input id="surprisesTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="surprisesSubtitleF" class="input"></div></div>
-          <div id="surpriseItems"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="panel-counter">
-        <div class="card"><h2>العداد</h2>
-          <div class="row"><div class="field"><label>عنوان القسم</label><input id="counterTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="counterSubtitleF" class="input"></div></div>
-          <div class="field"><label>تاريخ بداية العلاقة</label><input id="counterStartF" class="input" type="datetime-local"></div>
-          <div class="field"><label>النص تحت العداد</label><input id="counterFooterF" class="input"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="panel-letter">
-        <div class="card"><h2>رسالة عيد الميلاد</h2>
-          <div class="row"><div class="field"><label>عنوان القسم</label><input id="letterTitleF" class="input"></div><div class="field"><label>الوصف</label><input id="letterSubtitleF" class="input"></div></div>
-          <div class="field"><label>عنوان داخل الرسالة</label><input id="letterLabelF" class="input"></div>
-          <div class="field"><label>نص الرسالة بالكامل</label><textarea id="letterBodyF" class="input" style="min-height:260px"></textarea></div>
-          <div class="field"><label>التوقيع</label><input id="letterSignatureF" class="input"></div>
-        </div>
-      </div>
-
-      <div class="panel" id="panel-final">
-        <div class="card"><h2>النهاية</h2>
-          <div class="field"><label>العنوان</label><input id="finalHeadingF" class="input"></div>
-          <div class="field"><label>السطر التالي</label><input id="finalTextF" class="input"></div>
-          <div class="field"><label>سطر عيد الميلاد</label><input id="finalBirthdayF" class="input"></div>
-          <h3>ألوان الموقع</h3>
-          <div class="colorrow">
-            <div class="field"><label>السماوي</label><input id="skyColorF" class="input colorInput" type="color"></div>
-            <div class="field"><label>الوردي</label><input id="pinkColorF" class="input colorInput" type="color"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="toolbar">
-        <button id="saveAllBtn" class="btn" onclick="saveAll()">تحميل config.json</button>
-        <button class="btn dark" onclick="openSite()">فتح الموقع للمراجعة</button>
-      </div>
-      <div id="saveStatus" class="status"></div>
     </div>
+
+    <div id="p-general" class="panel active">
+      <div class="card"><h2>الشاشة الرئيسية والباسورد</h2>
+        <div class="row"><div class="field"><label>عنوان الصفحة</label><input id="pageTitle" class="input"></div><div class="field"><label>باسورد الموقع</label><input id="sitePassword" class="input"></div></div>
+        <div class="field"><label>الباسورد الظاهر للزائرة</label><input id="passwordHint" class="input"></div>
+        <div class="row"><div class="field"><label>عنوان شاشة القفل</label><input id="lockTitle" class="input"></div><div class="field"><label>زر الفتح</label><input id="lockButton" class="input"></div></div>
+        <div class="field"><label>كلام شاشة القفل</label><textarea id="lockText" class="input"></textarea></div>
+        <h3>الافتتاحية</h3>
+        <div class="row"><div class="field"><label>العنوان</label><input id="introTitle" class="input"></div><div class="field"><label>السطر الصغير</label><input id="introSubtitle" class="input"></div></div>
+        <h3>أول شاشة</h3>
+        <div class="field"><label>Badge</label><input id="heroBadge" class="input"></div>
+        <div class="field"><label>العنوان</label><textarea id="heroTitle" class="input" style="min-height:75px"></textarea></div>
+        <div class="field"><label>النص</label><textarea id="heroText" class="input"></textarea></div>
+        <div class="row"><div class="field"><label>نص الزر</label><input id="heroButton" class="input"></div><div class="field"><label>الملاحظة</label><input id="heroNote" class="input"></div></div>
+      </div>
+    </div>
+
+    <div id="p-story" class="panel"><div class="card"><h2>القصة</h2>
+      <div class="row"><div class="field"><label>عنوان القسم</label><input id="storyTitle" class="input"></div><div class="field"><label>الوصف</label><input id="storySubtitle" class="input"></div></div>
+      <div id="storyItems"></div>
+    </div></div>
+
+    <div id="p-reasons" class="panel"><div class="card"><h2>أسباب الحب</h2>
+      <div class="row"><div class="field"><label>عنوان القسم</label><input id="reasonsTitle" class="input"></div><div class="field"><label>الوصف</label><input id="reasonsSubtitle" class="input"></div></div>
+      <div id="reasonItems"></div>
+    </div></div>
+
+    <div id="p-gallery" class="panel"><div class="card"><h2>الصور</h2>
+      <div class="row"><div class="field"><label>عنوان القسم</label><input id="galleryTitle" class="input"></div><div class="field"><label>الوصف</label><input id="gallerySubtitle" class="input"></div></div>
+      <div id="gallerySlots" class="slots"></div>
+      <p class="note">الصور تتضغط وتتخزن داخل config.json نفسه. لو الصور كبيرة جدًا خليك في 3 صور أساسية.</p>
+    </div></div>
+
+    <div id="p-surprises" class="panel"><div class="card"><h2>المفاجآت</h2>
+      <div class="row"><div class="field"><label>عنوان القسم</label><input id="surprisesTitle" class="input"></div><div class="field"><label>الوصف</label><input id="surprisesSubtitle" class="input"></div></div>
+      <div id="surpriseItems"></div>
+    </div></div>
+
+    <div id="p-counter" class="panel"><div class="card"><h2>العداد</h2>
+      <div class="row"><div class="field"><label>العنوان</label><input id="counterTitle" class="input"></div><div class="field"><label>الوصف</label><input id="counterSubtitle" class="input"></div></div>
+      <div class="field"><label>تاريخ بداية العلاقة</label><input id="counterStart" type="datetime-local" class="input"></div>
+      <div class="field"><label>النص تحت العداد</label><input id="counterFooter" class="input"></div>
+    </div></div>
+
+    <div id="p-letter" class="panel"><div class="card"><h2>رسالة عيد الميلاد</h2>
+      <div class="row"><div class="field"><label>عنوان القسم</label><input id="letterTitle" class="input"></div><div class="field"><label>الوصف</label><input id="letterSubtitle" class="input"></div></div>
+      <div class="field"><label>عنوان داخل الرسالة</label><input id="letterLabel" class="input"></div>
+      <div class="field"><label>الرسالة كاملة</label><textarea id="letterBody" class="input" style="min-height:260px"></textarea></div>
+      <div class="field"><label>التوقيع</label><input id="letterSignature" class="input"></div>
+    </div></div>
+
+    <div id="p-final" class="panel"><div class="card"><h2>النهاية والألوان</h2>
+      <div class="field"><label>عنوان النهاية</label><input id="finalHeading" class="input"></div>
+      <div class="field"><label>السطر الثاني</label><input id="finalText" class="input"></div>
+      <div class="field"><label>سطر عيد الميلاد</label><input id="finalBirthday" class="input"></div>
+      <div class="colorrow"><div class="field"><label>السماوي</label><input id="skyColor" type="color" class="input color"></div><div class="field"><label>الوردي</label><input id="pinkColor" type="color" class="input color"></div></div>
+    </div></div>
+
+    <div class="toolbar">
+      <button class="btn" onclick="downloadConfig()">تحميل config.json</button>
+      <button class="btn dark" onclick="window.open('./?v='+Date.now(),'_blank')">فتح الموقع للمراجعة</button>
+    </div>
+    <div id="saveStatus" class="status"></div>
   </div>
 </div>
+
 <script>
-const ADMIN_PASSWORD='2580';
-let cfg={};
-let gh={owner:'',repo:'',branch:'main',token:''};
-
+const ADMIN_PASSWORD="2580";
+const DEFAULT_CONFIG={"site": {"pageTitle": "For My Love", "password": "20/9/2003", "passwordHint": "الباسورد: 20/9/2003 🎂", "lockTitle": "Just For You", "lockText": "الموقع ده معمول لشخص واحد بس.\nاكتبي الباسورد علشان تبدأ المفاجأة.", "lockButton": "فتح الهدية", "introTitle": "For My Love", "introSubtitle": "A little surprise is waiting for you", "heroBadge": "Birthday surprise", "heroTitle": "Happy Birthday\nMy Love ♡", "heroText": "في يومك الحلو، حبيت أسيب لكِ مكان صغير على الإنترنت… مليان ذكريات، رسائل، ومفاجآت كلها ليكِ أنتِ.", "heroButton": "ابدئي المفاجأة", "heroNote": "مصنوع بحب… ليكِ وحدك 🩷"}, "story": {"title": "Our Story", "subtitle": "كل لحظة صغيرة… عملت حكاية كبيرة", "items": [{"title": "أول مرة اتكلمنا", "date": "ضع التاريخ هنا", "text": "كلام بسيط جدًا… لكنه كان بداية حاجة ما كنتش أعرف قد إيه هتبقى غالية."}, {"title": "أول صورة", "date": "ضع التاريخ هنا", "text": "صورة واحدة بس، وفيها ذكرى كل ما أشوفها أبتسم من غير ما أحس."}, {"title": "أول خروجة", "date": "ضع التاريخ هنا", "text": "ضحك، كلام، وتفاصيل صغيرة خلت اليوم ده يفضل مميز."}, {"title": "وما زال القادم أجمل", "date": "Always", "text": "لأن أجمل جزء في الحكاية… لسه بيتكتب."}]}, "reasons": {"title": "Reasons I Love You", "subtitle": "وده مجرد جزء صغير من الأسباب", "items": ["لأن قلبك طيب، ووجودك بيخلّي كل حاجة أهدى.", "لأن ضحكتك من الحاجات اللي بتغيّر يوم كامل.", "لأنك جميلة في التفاصيل اللي يمكن أنتِ مش واخدة بالك منها.", "ولأنك ببساطة… أنتِ، وده سبب كفاية."]}, "gallerySection": {"title": "Our Gallery", "subtitle": "أجمل لحظاتنا سوا"}, "gallery": [{"src": "", "caption": "الصورة المفضلة عندي 🩷"}, {"src": "", "caption": "ذكرى مستحيل أنساها"}, {"src": "", "caption": "أحلى لحظة"}], "surprises": {"title": "Little Surprises", "subtitle": "اضغطي على أي واحدة", "items": [{"title": "لما تكوني زعلانة", "description": "رسالة صغيرة مخصوص علشان اليوم التقيل.", "button": "افتحي الرسالة", "modalTitle": "لما تكوني زعلانة", "modalText": "افتكري إن في حد شايفك أجمل جزء في يومه، ومهما اليوم كان صعب… ابتسامتك تستاهل ترجع تاني. 🩷", "type": "heart"}, {"title": "لما تشتاقيلي", "description": "ودي تتفتح وقت الاشتياق بس.", "button": "افتحي الرسالة", "modalTitle": "وأنا كمان", "modalText": "لو فتحتي دي لأنك مشتاقالي… غالبًا في نفس اللحظة أنا مشتاق لك أكتر. 🩷", "type": "heart"}, {"title": "صندوق المفاجأة", "description": "في حاجة حلوة مستخبية جواه.", "button": "افتحي الصندوق", "modalTitle": "Surprise!", "modalText": "المفاجأة الحقيقية مش مكتوبة هنا… دي هتاخديها مني بنفسك. 😉", "type": "gift"}, {"title": "أغنيتنا", "description": "هنا نحط الأغنية اللي بينكم.", "button": "تشغيل", "modalTitle": "Our Song", "modalText": "هنضيف هنا الأغنية بتاعتكم ونخليها تبدأ بعد الضغط علشان المتصفح يسمح بالصوت.", "type": "headphones"}]}, "counter": {"title": "Still Counting", "subtitle": "من يوم ما بدأت الحكاية", "startDate": "2024-01-01T00:00:00", "footer": "من أول يوم لحد دلوقتي… ولسه بنعد 🩷"}, "letter": {"title": "A Birthday Letter", "subtitle": "من قلبي… لقلبك", "label": "رسالة مخصوص ليكِ", "body": "حبيبتي…\n\nكل سنة وأنتِ أجمل حاجة حصلت في حياتي. وجودك مش مجرد جزء من يومي، أنتِ من الحاجات اللي خلت الأيام نفسها يبقى ليها طعم مختلف.\n\nأتمنى السنة الجديدة من عمرك تكون مليانة راحة، ضحك، نجاح، وحاجات حلوة كتير تستاهليها. وأتمنى أفضل موجود في كل لحظة فرح جاية لكِ، وأكون أول حد مبسوط علشانك.\n\nمهما كتبت، مش هعرف أوصف مكانتك عندي بالكامل… لكن أتمنى الموقع ده يفضل يذكّرك بحاجة واحدة: إنك غالية جدًا عليّ.", "signature": "Forever yours ♡"}, "final": {"heading": "This website ends here…", "text": "but our story doesn’t.", "birthdayLine": "Happy Birthday, My Love"}, "theme": {"sky": "#78c8ff", "pink": "#ff92b9"}};
+let cfg=structuredClone(DEFAULT_CONFIG);
 const $=id=>document.getElementById(id);
-function adminLogin(){
-  if($('adminPass').value!==ADMIN_PASSWORD){$('loginStatus').textContent='الباسورد غير صحيح';$('loginStatus').className='status err';return}
-  $('loginBox').classList.add('hidden');
-  $('dashboard').classList.remove('hidden');
-  loadDefaultConfig();
-}
-$('adminPass').addEventListener('keydown',e=>{if(e.key==='Enter')adminLogin()});
 
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');$('panel-'+b.dataset.tab).classList.add('active');
-});
-
-
-async function loadDefaultConfig(){
-  try{
-    const r=await fetch('config.json?v='+Date.now(),{cache:'no-store'});
-    if(!r.ok) throw new Error('تعذر تحميل config.json');
-    cfg=await r.json();
-    renderAll();
-    document.getElementById('editor').classList.remove('hidden');
-    document.getElementById('connectStatus').textContent='تم تحميل إعدادات الموقع الحالية.';
-    document.getElementById('connectStatus').className='status ok';
-  }catch(e){
-    document.getElementById('connectStatus').textContent='اختار config.json من جهازك أو افتح اللوحة من رابط الموقع المنشور.';
-    document.getElementById('connectStatus').className='status err';
-  }
-}
-function loadLocalConfig(){
-  const input=document.getElementById('configFileInput');
-  const f=input.files[0];
-  if(!f){
-    document.getElementById('connectStatus').textContent='اختار ملف config.json أولًا.';
-    document.getElementById('connectStatus').className='status err';
+function login(){
+  if($("adminPass").value!==ADMIN_PASSWORD){
+    $("loginStatus").textContent="الباسورد غير صحيح";
+    $("loginStatus").className="status err";
     return;
   }
+  $("login").classList.add("hidden");
+  $("dashboard").classList.remove("hidden");
+  boot();
+}
+$("adminPass").addEventListener("keydown",e=>{if(e.key==="Enter")login()});
+
+document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  $("p-"+btn.dataset.panel).classList.add("active");
+}));
+
+async function boot(){
+  try{
+    const r=await fetch("config.json?v="+Date.now(),{cache:"no-store"});
+    if(r.ok){
+      cfg=await r.json();
+      $("loadStatus").textContent="تم تحميل بيانات الموقع الحالية.";
+      $("loadStatus").className="status ok";
+    }else throw new Error();
+  }catch(e){
+    cfg=structuredClone(DEFAULT_CONFIG);
+    $("loadStatus").textContent="فتحت بالبيانات الافتراضية. تقدر تعدّل عادي.";
+    $("loadStatus").className="status ok";
+  }
+  normalize();
+  render();
+}
+
+function normalize(){
+  cfg.site=cfg.site||{};
+  cfg.story=cfg.story||{title:"",subtitle:"",items:[]};
+  cfg.story.items=Array.isArray(cfg.story.items)?cfg.story.items:[];
+  while(cfg.story.items.length<4)cfg.story.items.push({title:"",date:"",text:""});
+  cfg.reasons=cfg.reasons||{title:"",subtitle:"",items:[]};
+  cfg.reasons.items=Array.isArray(cfg.reasons.items)?cfg.reasons.items:[];
+  while(cfg.reasons.items.length<4)cfg.reasons.items.push("");
+  cfg.gallerySection=cfg.gallerySection||{title:"",subtitle:""};
+  cfg.gallery=Array.isArray(cfg.gallery)?cfg.gallery:[];
+  while(cfg.gallery.length<3)cfg.gallery.push({src:"",caption:""});
+  cfg.surprises=cfg.surprises||{title:"",subtitle:"",items:[]};
+  cfg.surprises.items=Array.isArray(cfg.surprises.items)?cfg.surprises.items:[];
+  const types=["heart","heart","gift","headphones"];
+  while(cfg.surprises.items.length<4)cfg.surprises.items.push({title:"",description:"",button:"",modalTitle:"",modalText:"",type:types[cfg.surprises.items.length]});
+  cfg.counter=cfg.counter||{};
+  cfg.letter=cfg.letter||{};
+  cfg.final=cfg.final||{};
+  cfg.theme=cfg.theme||{sky:"#78c8ff",pink:"#ff92b9"};
+}
+
+function setv(id,v){if($(id))$(id).value=v??""}
+function esc(v){return String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;")}
+
+function render(){
+  const s=cfg.site;
+  setv("pageTitle",s.pageTitle);setv("sitePassword",s.password);setv("passwordHint",s.passwordHint);setv("lockTitle",s.lockTitle);setv("lockButton",s.lockButton);setv("lockText",s.lockText);
+  setv("introTitle",s.introTitle);setv("introSubtitle",s.introSubtitle);setv("heroBadge",s.heroBadge);setv("heroTitle",s.heroTitle);setv("heroText",s.heroText);setv("heroButton",s.heroButton);setv("heroNote",s.heroNote);
+
+  setv("storyTitle",cfg.story.title);setv("storySubtitle",cfg.story.subtitle);
+  $("storyItems").innerHTML=cfg.story.items.slice(0,4).map((x,i)=>`<div class="sub"><h3>المحطة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="st${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>التاريخ</label><input id="st${i}d" class="input" value="${esc(x.date)}"></div></div><div class="field"><label>الوصف</label><textarea id="st${i}x" class="input">${x.text||""}</textarea></div></div>`).join("");
+
+  setv("reasonsTitle",cfg.reasons.title);setv("reasonsSubtitle",cfg.reasons.subtitle);
+  $("reasonItems").innerHTML=cfg.reasons.items.slice(0,4).map((x,i)=>`<div class="field"><label>السبب ${i+1}</label><textarea id="rs${i}" class="input" style="min-height:78px">${x||""}</textarea></div>`).join("");
+
+  setv("galleryTitle",cfg.gallerySection.title);setv("gallerySubtitle",cfg.gallerySection.subtitle);
+  renderGallery();
+
+  setv("surprisesTitle",cfg.surprises.title);setv("surprisesSubtitle",cfg.surprises.subtitle);
+  $("surpriseItems").innerHTML=cfg.surprises.items.slice(0,4).map((x,i)=>`<div class="sub"><h3>المفاجأة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="su${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>نص الزر</label><input id="su${i}b" class="input" value="${esc(x.button)}"></div></div><div class="field"><label>الوصف</label><input id="su${i}d" class="input" value="${esc(x.description)}"></div><div class="field"><label>عنوان الرسالة بعد الضغط</label><input id="su${i}mt" class="input" value="${esc(x.modalTitle)}"></div><div class="field"><label>الرسالة</label><textarea id="su${i}mx" class="input">${x.modalText||""}</textarea></div></div>`).join("");
+
+  setv("counterTitle",cfg.counter.title);setv("counterSubtitle",cfg.counter.subtitle);setv("counterStart",(cfg.counter.startDate||"").slice(0,16));setv("counterFooter",cfg.counter.footer);
+  setv("letterTitle",cfg.letter.title);setv("letterSubtitle",cfg.letter.subtitle);setv("letterLabel",cfg.letter.label);setv("letterBody",cfg.letter.body);setv("letterSignature",cfg.letter.signature);
+  setv("finalHeading",cfg.final.heading);setv("finalText",cfg.final.text);setv("finalBirthday",cfg.final.birthdayLine);setv("skyColor",cfg.theme.sky||"#78c8ff");setv("pinkColor",cfg.theme.pink||"#ff92b9");
+}
+
+function renderGallery(){
+  $("gallerySlots").innerHTML="";
+  cfg.gallery.slice(0,3).forEach((item,i)=>{
+    const box=document.createElement("div");box.className="slot";
+    const preview=item.src?`<img src="${item.src}">`:`صورة ${i+1}`;
+    box.innerHTML=`<div class="preview" id="prev${i}">${preview}</div><div><div class="field"><label>اختيار صورة</label><input id="img${i}" class="input" type="file" accept="image/*"></div><div class="field"><label>الكلام تحت الصورة</label><input id="cap${i}" class="input" value="${esc(item.caption)}"></div><div class="smallrow"><button style="background:#e8f6ff;color:#4c7698" onclick="addImage(${i})">إضافة الصورة</button><button style="background:#fff0f5;color:#c85f86" onclick="removeImage(${i})">حذف</button></div><div id="imgStatus${i}" class="status"></div></div>`;
+    $("gallerySlots").appendChild(box);
+    $("img"+i).addEventListener("change",e=>{
+      const f=e.target.files[0];
+      if(f) $("prev"+i).innerHTML=`<img src="${URL.createObjectURL(f)}">`;
+    });
+  });
+}
+
+async function addImage(i){
+  const f=$("img"+i).files[0];
+  if(!f){$("imgStatus"+i).textContent="اختار صورة أولًا";$("imgStatus"+i).className="status err";return}
+  $("imgStatus"+i).textContent="جاري تجهيز الصورة…";$("imgStatus"+i).className="status";
+  try{
+    cfg.gallery[i].src=await compress(f);
+    $("imgStatus"+i).textContent="تمت إضافة الصورة ✅";$("imgStatus"+i).className="status ok";
+    renderGallery();
+  }catch(e){
+    $("imgStatus"+i).textContent="حصل خطأ في الصورة";$("imgStatus"+i).className="status err";
+  }
+}
+
+function removeImage(i){cfg.gallery[i].src="";renderGallery()}
+
+async function compress(file){
+  const bmp=await createImageBitmap(file);
+  const max=1000;
+  let w=bmp.width,h=bmp.height;
+  if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}
+  const c=document.createElement("canvas");c.width=w;c.height=h;
+  c.getContext("2d").drawImage(bmp,0,0,w,h);
+  return c.toDataURL("image/jpeg",0.72);
+}
+
+function collect(){
+  cfg.site={pageTitle:$("pageTitle").value,password:$("sitePassword").value,passwordHint:$("passwordHint").value,lockTitle:$("lockTitle").value,lockText:$("lockText").value,lockButton:$("lockButton").value,introTitle:$("introTitle").value,introSubtitle:$("introSubtitle").value,heroBadge:$("heroBadge").value,heroTitle:$("heroTitle").value,heroText:$("heroText").value,heroButton:$("heroButton").value,heroNote:$("heroNote").value};
+  cfg.story={title:$("storyTitle").value,subtitle:$("storySubtitle").value,items:Array.from({length:4},(_,i)=>({title:$("st"+i+"t").value,date:$("st"+i+"d").value,text:$("st"+i+"x").value}))};
+  cfg.reasons={title:$("reasonsTitle").value,subtitle:$("reasonsSubtitle").value,items:Array.from({length:4},(_,i)=>$("rs"+i).value)};
+  cfg.gallerySection={title:$("galleryTitle").value,subtitle:$("gallerySubtitle").value};
+  for(let i=0;i<3;i++)cfg.gallery[i].caption=$("cap"+i).value;
+  const old=cfg.surprises.items.map(x=>x.type);
+  cfg.surprises={title:$("surprisesTitle").value,subtitle:$("surprisesSubtitle").value,items:Array.from({length:4},(_,i)=>({title:$("su"+i+"t").value,description:$("su"+i+"d").value,button:$("su"+i+"b").value,modalTitle:$("su"+i+"mt").value,modalText:$("su"+i+"mx").value,type:old[i]||["heart","heart","gift","headphones"][i]}))};
+  cfg.counter={title:$("counterTitle").value,subtitle:$("counterSubtitle").value,startDate:$("counterStart").value?$("counterStart").value+":00":"2024-01-01T00:00:00",footer:$("counterFooter").value};
+  cfg.letter={title:$("letterTitle").value,subtitle:$("letterSubtitle").value,label:$("letterLabel").value,body:$("letterBody").value,signature:$("letterSignature").value};
+  cfg.final={heading:$("finalHeading").value,text:$("finalText").value,birthdayLine:$("finalBirthday").value};
+  cfg.theme={sky:$("skyColor").value,pink:$("pinkColor").value};
+}
+
+function downloadConfig(){
+  collect();
+  const blob=new Blob([JSON.stringify(cfg,null,2)],{type:"application/json;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download="config.json";document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  $("saveStatus").textContent="تم تحميل config.json ✅ ارفعه على GitHub مكان config.json القديم.";
+  $("saveStatus").className="status ok";
+}
+
+function loadPickedConfig(){
+  const f=$("configPicker").files[0];
+  if(!f){$("loadStatus").textContent="اختار config.json أولًا";$("loadStatus").className="status err";return}
   const fr=new FileReader();
   fr.onload=()=>{
-    try{
-      cfg=JSON.parse(fr.result);
-      renderAll();
-      document.getElementById('editor').classList.remove('hidden');
-      document.getElementById('connectStatus').textContent='تم تحميل الإعدادات من الملف.';
-      document.getElementById('connectStatus').className='status ok';
-    }catch(e){
-      document.getElementById('connectStatus').textContent='ملف JSON غير صالح.';
-      document.getElementById('connectStatus').className='status err';
-    }
+    try{cfg=JSON.parse(fr.result);normalize();render();$("loadStatus").textContent="تم فتح الملف بنجاح.";$("loadStatus").className="status ok"}
+    catch(e){$("loadStatus").textContent="الملف غير صالح.";$("loadStatus").className="status err"}
   };
   fr.readAsText(f);
 }
-function val(id,v=''){if($(id))$(id).value=v??''}
-function renderAll(){
-  const site=cfg.site||{};
-  val('pageTitle',site.pageTitle);val('sitePassword',site.password);val('passwordHint',site.passwordHint);val('lockTitleF',site.lockTitle);val('lockButtonF',site.lockButton);val('lockTextF',site.lockText);
-  val('introTitleF',site.introTitle);val('introSubtitleF',site.introSubtitle);val('heroBadgeF',site.heroBadge);val('heroTitleF',site.heroTitle);val('heroTextF',site.heroText);val('heroButtonF',site.heroButton);val('heroNoteF',site.heroNote);
-  const story=cfg.story||{};val('storyTitleF',story.title);val('storySubtitleF',story.subtitle);renderStory(story.items||[]);
-  const reasons=cfg.reasons||{};val('reasonsTitleF',reasons.title);val('reasonsSubtitleF',reasons.subtitle);renderReasons(reasons.items||[]);
-  const gs=cfg.gallerySection||{};val('galleryTitleF',gs.title);val('gallerySubtitleF',gs.subtitle);renderGallery();
-  const sp=cfg.surprises||{};val('surprisesTitleF',sp.title);val('surprisesSubtitleF',sp.subtitle);renderSurprises(sp.items||[]);
-  const c=cfg.counter||{};val('counterTitleF',c.title);val('counterSubtitleF',c.subtitle);val('counterStartF',(c.startDate||'').slice(0,16));val('counterFooterF',c.footer);
-  const l=cfg.letter||{};val('letterTitleF',l.title);val('letterSubtitleF',l.subtitle);val('letterLabelF',l.label);val('letterBodyF',l.body);val('letterSignatureF',l.signature);
-  const f=cfg.final||{};val('finalHeadingF',f.heading);val('finalTextF',f.text);val('finalBirthdayF',f.birthdayLine);
-  const t=cfg.theme||{};val('skyColorF',t.sky||'#78c8ff');val('pinkColorF',t.pink||'#ff92b9');
-}
-function esc(v){return String(v??'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
-function renderStory(items){
-  const root=$('storyItems');root.innerHTML='';
-  for(let i=0;i<4;i++){const x=items[i]||{};root.innerHTML+=`<div class="subcard"><h3>المحطة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="st${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>التاريخ</label><input id="st${i}d" class="input" value="${esc(x.date)}"></div></div><div class="field"><label>الوصف</label><textarea id="st${i}x" class="input">${x.text||''}</textarea></div></div>`}
-}
-function renderReasons(items){
-  const root=$('reasonItems');root.innerHTML='';
-  for(let i=0;i<4;i++){root.innerHTML+=`<div class="field"><label>السبب ${i+1}</label><textarea id="rs${i}" class="input" style="min-height:75px">${items[i]||''}</textarea></div>`}
-}
-function previewUrl(src){return src||''}
-function renderGallery(){
-  if(!Array.isArray(cfg.gallery))cfg.gallery=[];
-  while(cfg.gallery.length<3)cfg.gallery.push({src:'',caption:''});
-  const root=$('slots');root.innerHTML='';
-  cfg.gallery.slice(0,3).forEach((item,i)=>{
-    const el=document.createElement('div');el.className='slot';
-    el.innerHTML=`<div class="preview" id="preview${i}">${item.src?`<img src="${previewUrl(item.src)}">`:'صورة '+(i+1)}</div><div><div class="field"><label>اختيار صورة جديدة</label><input id="file${i}" class="input" type="file" accept="image/*"></div><div class="field"><label>الكلام تحت الصورة</label><input id="caption${i}" class="input" value="${esc(item.caption)}"></div><div class="slot-actions"><button class="btn secondary" onclick="uploadPhoto(${i},this)">رفع الصورة</button><button class="btn danger" onclick="removePhoto(${i})">إخفاء الصورة</button></div><div id="slotStatus${i}" class="status"></div></div>`;
-    root.appendChild(el);$('file'+i).addEventListener('change',e=>{const f=e.target.files[0];if(f){$('preview'+i).innerHTML=`<img src="${URL.createObjectURL(f)}">`}})
-  })
-}
-function renderSurprises(items){
-  const root=$('surpriseItems');root.innerHTML='';
-  for(let i=0;i<4;i++){const x=items[i]||{};root.innerHTML+=`<div class="subcard"><h3>المفاجأة ${i+1}</h3><div class="row"><div class="field"><label>العنوان</label><input id="su${i}t" class="input" value="${esc(x.title)}"></div><div class="field"><label>نص الزر</label><input id="su${i}b" class="input" value="${esc(x.button)}"></div></div><div class="field"><label>الوصف القصير</label><input id="su${i}d" class="input" value="${esc(x.description)}"></div><div class="field"><label>عنوان الرسالة بعد الضغط</label><input id="su${i}mt" class="input" value="${esc(x.modalTitle)}"></div><div class="field"><label>الرسالة بعد الضغط</label><textarea id="su${i}mx" class="input">${x.modalText||''}</textarea></div></div>`}
-}
-async function compressImage(file){
-  const bmp=await createImageBitmap(file);const max=1600;let w=bmp.width,h=bmp.height;if(Math.max(w,h)>max){const r=max/Math.max(w,h);w=Math.round(w*r);h=Math.round(h*r)}
-  const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(bmp,0,0,w,h);
-  const blob=await new Promise(res=>canvas.toBlob(res,'image/jpeg',.84));
-  const data=await new Promise((res,rej)=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.onerror=rej;fr.readAsDataURL(blob)});return data.split(',')[1]
-}
-async function uploadPhoto(i,btn){
-  const file=$('file'+i).files[0];
-  if(!file){
-    $('slotStatus'+i).textContent='اختار صورة أولًا';
-    $('slotStatus'+i).className='status err';
-    return;
-  }
-  btn.disabled=true;btn.textContent='جاري تجهيز الصورة';
-  try{
-    const dataUrl=await fileToDataURLCompressed(file);
-    cfg.gallery[i].src=dataUrl;
-    $('slotStatus'+i).textContent='تم إضافة الصورة داخل الإعدادات. اضغط تحميل config.json.';
-    $('slotStatus'+i).className='status ok';
-    renderGallery();
-  }catch(e){
-    $('slotStatus'+i).textContent='خطأ: '+e.message;
-    $('slotStatus'+i).className='status err';
-  }finally{
-    btn.disabled=false;btn.textContent='إضافة الصورة';
-  }
-}
-async function fileToDataURLCompressed(file){
-  const bmp=await createImageBitmap(file);
-  const max=1200;
-  let w=bmp.width,h=bmp.height;
-  if(Math.max(w,h)>max){
-    const r=max/Math.max(w,h);
-    w=Math.round(w*r);h=Math.round(h*r);
-  }
-  const canvas=document.createElement('canvas');
-  canvas.width=w;canvas.height=h;
-  canvas.getContext('2d').drawImage(bmp,0,0,w,h);
-  return canvas.toDataURL('image/jpeg',0.78);
-}
-function removePhoto(i){cfg.gallery[i].src='';renderGallery()}
-
-function collect(){
-  cfg.site={pageTitle:$('pageTitle').value,password:$('sitePassword').value,passwordHint:$('passwordHint').value,lockTitle:$('lockTitleF').value,lockText:$('lockTextF').value,lockButton:$('lockButtonF').value,introTitle:$('introTitleF').value,introSubtitle:$('introSubtitleF').value,heroBadge:$('heroBadgeF').value,heroTitle:$('heroTitleF').value,heroText:$('heroTextF').value,heroButton:$('heroButtonF').value,heroNote:$('heroNoteF').value};
-  cfg.story={title:$('storyTitleF').value,subtitle:$('storySubtitleF').value,items:Array.from({length:4},(_,i)=>({title:$('st'+i+'t').value,date:$('st'+i+'d').value,text:$('st'+i+'x').value}))};
-  cfg.reasons={title:$('reasonsTitleF').value,subtitle:$('reasonsSubtitleF').value,items:Array.from({length:4},(_,i)=>$('rs'+i).value)};
-  cfg.gallerySection={title:$('galleryTitleF').value,subtitle:$('gallerySubtitleF').value};
-  for(let i=0;i<3;i++)cfg.gallery[i].caption=$('caption'+i).value;
-  const oldTypes=((cfg.surprises||{}).items||[]).map(x=>x.type);
-  cfg.surprises={title:$('surprisesTitleF').value,subtitle:$('surprisesSubtitleF').value,items:Array.from({length:4},(_,i)=>({title:$('su'+i+'t').value,description:$('su'+i+'d').value,button:$('su'+i+'b').value,modalTitle:$('su'+i+'mt').value,modalText:$('su'+i+'mx').value,type:oldTypes[i]||['heart','heart','gift','headphones'][i]}))};
-  cfg.counter={title:$('counterTitleF').value,subtitle:$('counterSubtitleF').value,startDate:$('counterStartF').value?$('counterStartF').value+':00':'2024-01-01T00:00:00',footer:$('counterFooterF').value};
-  cfg.letter={title:$('letterTitleF').value,subtitle:$('letterSubtitleF').value,label:$('letterLabelF').value,body:$('letterBodyF').value,signature:$('letterSignatureF').value};
-  cfg.final={heading:$('finalHeadingF').value,text:$('finalTextF').value,birthdayLine:$('finalBirthdayF').value};
-  cfg.theme={sky:$('skyColorF').value,pink:$('pinkColorF').value};
-}
-function saveAll(){
-  collect();
-  const blob=new Blob([JSON.stringify(cfg,null,2)],{type:'application/json;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='config.json';
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-  $('saveStatus').textContent='تم تجهيز config.json ✅ ارفعه على GitHub مكان الملف القديم.';
-  $('saveStatus').className='status ok';
-}
-function openSite(){
-  window.open('../birthday-gift/','_blank');
-}.github.io/${gh.repo}/?v=${Date.now()}`,'_blank')}
 </script>
-</body></html>
+</body>
+</html>

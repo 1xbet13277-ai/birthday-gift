@@ -1,4 +1,4 @@
-لوحة الأدمن بدون GitHub Token.
+ارفع الملفات الأربعة إلى جذر الريبو: index.html, admin.html, config.json, .nojekyll
+لوحة الأدمن: admin.html
 باسورد الأدمن: 2580
-عدّل من admin.html ثم اضغط تحميل config.json.
-بعدها ارفع config.json على GitHub مكان الملف القديم.
+بعد التعديل اضغط تحميل config.json ثم ارفعه مكان القديم.
