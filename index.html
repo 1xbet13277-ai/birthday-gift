@@ -428,13 +428,13 @@ section{padding:30px 18px}
     </div>
     <h2>Just For You</h2>
     <p>الموقع ده معمول لشخص واحد بس.<br>اكتبي الباسورد علشان تبدأ المفاجأة.</p>
-    <input id="passwordInput" class="lock-input" type="password" inputmode="numeric" placeholder="••••" autocomplete="off">
+    <input id="passwordInput" class="lock-input" type="text" inputmode="text" placeholder="20/9/2003" autocomplete="off">
     <button class="lock-btn" onclick="unlockSite()">
       <svg class="icon sm"><use href="#i-gift"></use></svg>
       فتح الهدية
     </button>
     <div id="lockError"></div>
-    <div class="lock-hint">Private birthday surprise</div>
+    <div class="lock-hint" style="font-size:13px;color:#d96f9a;font-weight:800">الباسورد: 20/9/2003 🎂</div>
   </div>
 </div>
 
@@ -701,7 +701,7 @@ section{padding:30px 18px}
 </div>
 
 <script>
-const SITE_PASSWORD="1234";
+const SITE_PASSWORD="20/9/2003";
 
 function unlockSite(){
   const input=document.getElementById("passwordInput");
